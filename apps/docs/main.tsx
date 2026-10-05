@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Button, Select, Sidebar, ThemeProvider, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui';
+import { Button, Select, SideNav, ThemeProvider, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName } from '@adrian-danciu/ink-ui-tokens';
 import { ComponentExample } from './examples';
 import { componentGroups, componentPages, type ComponentPage } from './pages';
@@ -93,7 +93,7 @@ function Overview() {
       <a href="/themes"><span>SYSTEM / 02</span><h2>Explore themes</h2><p>Three styles, two modes, shared tokens, and accent overrides.</p><b>VIEW TOKENS ↗</b></a>
       <a href="/components"><span>INDEX / 03</span><h2>Browse components</h2><p>Live examples and API details for every available web component.</p><b>OPEN INDEX ↗</b></a>
     </div>
-    <section className="docs-section"><div className="docs-section-heading"><h2>Component preview</h2><span>CORE COLLECTION</span></div><p className="docs-body-copy">The separate preview app shows the original seventeen components in one selected style. Open it at <a href="http://localhost:3000/?theme=poster">localhost:3000</a> when the preview server is running.</p></section>
+    <section className="docs-section"><div className="docs-section-heading"><h2>Component preview</h2><span>CORE COLLECTION</span></div><p className="docs-body-copy">The separate preview app shows the component collection in one selected style. Open it at <a href="http://localhost:3000/?theme=poster">localhost:3000</a> when the preview server is running.</p></section>
   </>;
 }
 
@@ -147,7 +147,7 @@ function App() {
     </header>
     <div className="docs-layout">
       <div id="docs-sidebar" className={['docs-sidebar-wrap', menuOpen && 'is-open'].filter(Boolean).join(' ')}>
-        <Sidebar groups={navigation} currentPath={path} label="Documentation" onNavigate={() => setMenuOpen(false)} header={<div className="docs-sidebar-intro"><strong>FIELD GUIDE</strong><span>01—18 / INDEX</span></div>} footer={<div className="docs-sidebar-foot">HARD LINES.<br />CLEAR ACTIONS.</div>} />
+        <SideNav groups={navigation} currentPath={path} label="Documentation" onNavigate={() => setMenuOpen(false)} header={<div className="docs-sidebar-intro"><strong>FIELD GUIDE</strong><span>{String(componentPages.length).padStart(2, '0')} / INDEX</span></div>} footer={<div className="docs-sidebar-foot">HARD LINES.<br />CLEAR ACTIONS.</div>} />
       </div>
       <main className="docs-main" id="main-content">
         <div className="docs-toolbar">

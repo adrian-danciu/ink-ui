@@ -238,7 +238,7 @@ export const componentPages: readonly ComponentPage[] = [
   },
   {
     slug: 'sidebar', name: 'Sidebar', category: 'Navigation',
-    description: 'Grouped navigation with a clear current-page state. Used by these docs.',
+    description: 'Grouped web navigation with a clear current-page state. SideNav is the cross-platform name.',
     code: `<Sidebar currentPath="/components/button"\n  groups={[{ title: 'Components', links: [\n    { label: 'Button', href: '/components/button' },\n    { label: 'Card', href: '/components/card' },\n  ]}]} />`,
     props: [
       { name: 'groups', type: '{ title; links: { label; href }[] }[]', description: 'Navigation sections and links.' },
@@ -246,6 +246,52 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'label', type: 'string', description: 'Accessible navigation label.' },
       { name: 'header / footer', type: 'ReactNode', description: 'Optional content above and below the links.' },
       { name: 'onNavigate', type: '() => void', description: 'Called when a link is activated; useful for mobile drawers.' },
+    ],
+  },
+  {
+    slug: 'side-nav', name: 'SideNav', category: 'Navigation',
+    description: 'Grouped side navigation with a current-page state. The docs use this component.',
+    code: `<SideNav currentPath="/projects" groups={[{ title: 'Workspace', links: [\n  { label: 'Projects', href: '/projects' },\n  { label: 'Settings', href: '/settings' },\n] }]} />`,
+    props: [
+      { name: 'groups', type: 'SideNavGroup[]', description: 'Titled groups of links.' },
+      { name: 'currentPath', type: 'string', description: 'Href marked as the current page.' },
+      { name: 'label', type: 'string', description: 'Accessible navigation label.' },
+      { name: 'header / footer', type: 'ReactNode', description: 'Optional content above and below links.' },
+      { name: 'onNavigate', type: 'callback', description: 'Called when a link is activated. React Native receives its href.' },
+    ],
+  },
+  {
+    slug: 'chip', name: 'Chip', category: 'Content',
+    description: 'A compact label that can be selected or removed.',
+    code: `<Chip label="Design" selected={selected}\n  onClick={() => setSelected(!selected)}\n  onRemove={() => removeFilter('design')} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Visible chip text.' },
+      { name: 'variant', type: "'filled' | 'outlined'", description: 'Appearance. Default: filled.' },
+      { name: 'selected', type: 'boolean', description: 'Selected state for interactive chips.' },
+      { name: 'onClick / onPress', type: 'callback', description: 'Selection action; native uses onPress.' },
+      { name: 'onRemove', type: '() => void', description: 'Shows a separate accessible remove action.' },
+      { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables actions or overrides the accent.' },
+    ],
+  },
+  {
+    slug: 'breadcrumbs', name: 'Breadcrumbs', category: 'Navigation',
+    description: 'A compact trail that shows the current location in a hierarchy.',
+    code: `<Breadcrumbs items={[\n  { label: 'Home', href: '/' },\n  { label: 'Library', href: '/library' },\n  { label: 'Components' },\n]} />`,
+    props: [
+      { name: 'items', type: 'BreadcrumbItem[]', description: 'Ordered destinations; the final item is current.' },
+      { name: 'label', type: 'string', description: 'Accessible trail label. Default: Breadcrumb.' },
+      { name: 'onNavigate', type: '(href: string) => void', description: 'Required for interactive native links.' },
+    ],
+  },
+  {
+    slug: 'pagination', name: 'Pagination', category: 'Navigation',
+    description: 'A controlled page selector with previous, next, and compact page links.',
+    code: `<Pagination page={page} count={12} onPageChange={setPage} />`,
+    props: [
+      { name: 'page', type: 'number', description: 'Current 1-based page.' },
+      { name: 'count', type: 'number', description: 'Total number of pages.' },
+      { name: 'onPageChange', type: '(page: number) => void', description: 'Called when another page is selected.' },
+      { name: 'label / accent', type: 'string / AccentName', description: 'Accessible label and accent override.' },
     ],
   },
 ];

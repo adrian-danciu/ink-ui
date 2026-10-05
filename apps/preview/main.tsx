@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Accordion, Alert, Avatar, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Separator, Skeleton, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, Pagination, ProgressBar, RadioGroup, Select, Separator, SideNav, Skeleton, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName, type ThemeMode } from '@adrian-danciu/ink-ui-tokens';
 import '@adrian-danciu/ink-ui/styles.css';
 import './preview.css';
@@ -27,6 +27,8 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [toastOpen, setToastOpen] = React.useState(true);
   const [favorites, setFavorites] = React.useState(0);
+  const [chipSelected, setChipSelected] = React.useState(false);
+  const [page, setPage] = React.useState(4);
   const colors = themes[id].modes[mode];
   const accent = selectedAccent === 'default' ? themes[id].defaultAccent as AccentName : selectedAccent;
   const swatches = [
@@ -125,7 +127,7 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
       </section>
       <div className="panel-rule" />
       <section aria-label={`${title} content components`}>
-        <div className="section-heading"><span>CONTENT + NAVIGATION</span><span>10—16</span></div>
+        <div className="section-heading"><span>CONTENT + NAVIGATION</span><span>10—20</span></div>
         <div className="component-block">
           <span className="sample-label">TEXT AREA</span>
           <TextArea label="Field notes" placeholder="Leave an observation..." value={note} onChange={event => setNote(event.currentTarget.value)} helperText="Keep it concise and useful." />
@@ -148,10 +150,23 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <Separator />
           <div className="field-stack" aria-busy="true"><Skeleton width="65%" /><Skeleton variant="block" /></div>
         </div>
+        <div className="component-block">
+          <span className="sample-label">CHIP</span>
+          <div className="button-row"><Chip label="Design" selected={chipSelected} onClick={() => setChipSelected(value => !value)} /><Chip label="Editorial" variant="outlined" onRemove={() => setChipSelected(false)} /></div>
+        </div>
+        <div className="component-block">
+          <span className="sample-label">BREADCRUMBS / PAGINATION</span>
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Library', href: '/components' }, { label: title }]} />
+          <Pagination page={page} count={12} onPageChange={setPage} accent={accent} />
+        </div>
+        <div className="component-block">
+          <span className="sample-label">SIDE NAV</span>
+          <SideNav currentPath="/library" groups={[{ title: 'Workspace', links: [{ label: 'Overview', href: '/' }, { label: 'Library', href: '/library' }, { label: 'Settings', href: '/settings' }] }]} />
+        </div>
       </section>
       <div className="panel-rule" />
       <section aria-label={`${title} actions and overlays`}>
-        <div className="section-heading"><span>ACTIONS + OVERLAYS</span><span>17—20</span></div>
+        <div className="section-heading"><span>ACTIONS + OVERLAYS</span><span>21—24</span></div>
         <div className="component-block">
           <span className="sample-label">SELECT</span>
           <Select label="Collection category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }]} value={category} onValueChange={setCategory} />

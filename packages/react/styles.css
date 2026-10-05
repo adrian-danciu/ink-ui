@@ -22,3 +22,6 @@
 @import './src/components/Avatar/style.css';
 @import './src/components/Separator/style.css';
 @import './src/components/Skeleton/style.css';
+@import './src/components/Chip/style.css';
+@import './src/components/Breadcrumbs/style.css';
+@import './src/components/Pagination/style.css';

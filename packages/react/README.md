@@ -27,6 +27,6 @@ export function Example() {
 
 ## Components
 
-Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Avatar, Separator, Skeleton, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, EmptyState, and Sidebar.
+Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, Breadcrumbs, Pagination, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, EmptyState, Sidebar, and SideNav. `SideNav` is the cross-platform name for the web `Sidebar` component.
 
 Styles are provided through one import: `@adrian-danciu/ink-ui/styles.css`. Tokens come from the `@adrian-danciu/ink-ui-tokens` dependency. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.
