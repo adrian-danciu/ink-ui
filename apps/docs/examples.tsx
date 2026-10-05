@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, Alert, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Sidebar, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Separator, Sidebar, Skeleton, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
 
 export function ComponentExample({ slug }: { slug: string }) {
   const [count, setCount] = React.useState(0);
@@ -30,6 +30,9 @@ export function ComponentExample({ slug }: { slug: string }) {
     case 'select': return <div className="demo-field"><Select label="Collection category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }]} value={category} onValueChange={setCategory} /></div>;
     case 'card': return <div className="demo-card"><Card eyebrow="FIELD NOTE / 001" title="A stronger signal" description="Bold surfaces, direct labels, and a clear action at every step."><Button size="sm">Explore</Button></Card></div>;
     case 'badge': return <div className="demo-row"><Badge>Featured</Badge><Badge tone="neutral">Draft</Badge><Badge tone="success">Live</Badge><Badge tone="danger">Error</Badge></div>;
+    case 'avatar': return <div className="demo-row"><Avatar name="Alex Morgan" size="sm" /><Avatar name="Alex Morgan" /><Avatar name="Alex Morgan" size="lg" accent="turquoise" /></div>;
+    case 'separator': return <div className="demo-stack demo-field"><span>Above the rule</span><Separator /><span>Below the rule</span></div>;
+    case 'skeleton': return <div className="demo-stack demo-field" aria-busy="true"><div className="demo-row"><Skeleton variant="circle" /><Skeleton width="65%" /></div><Skeleton variant="block" /></div>;
     case 'empty-state': return <div className="demo-card"><EmptyState title="Nothing here yet" description="Your next collection starts with one item."><Button size="sm">Create collection</Button></EmptyState></div>;
     case 'alert': return <div className="demo-stack demo-field"><Alert tone="info" title="Filed successfully" description="Your draft is ready for review." /><Alert tone="warning" title="Check your details" description="One field still needs attention." /></div>;
     case 'toast': return <div className="demo-field">{toastOpen ? <Toast open title="Collection saved" description="Your changes are ready." tone="success" onDismiss={() => setToastOpen(false)} /> : <Button size="sm" onClick={() => setToastOpen(true)}>Show toast</Button>}</div>;

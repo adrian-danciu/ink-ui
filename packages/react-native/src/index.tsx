@@ -18,3 +18,6 @@ export * from './components/Select/Select';
 export * from './components/IconButton/IconButton';
 export * from './components/Dialog/Dialog';
 export * from './components/Toast/Toast';
+export * from './components/Avatar/Avatar';
+export * from './components/Separator/Separator';
+export * from './components/Skeleton/Skeleton';

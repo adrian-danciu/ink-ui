@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Accordion, Alert, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Separator, Skeleton, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName, type ThemeMode } from '@adrian-danciu/ink-ui-tokens';
 import '@adrian-danciu/ink-ui/styles.css';
 import './preview.css';
@@ -125,7 +125,7 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
       </section>
       <div className="panel-rule" />
       <section aria-label={`${title} content components`}>
-        <div className="section-heading"><span>CONTENT + NAVIGATION</span><span>10—13</span></div>
+        <div className="section-heading"><span>CONTENT + NAVIGATION</span><span>10—16</span></div>
         <div className="component-block">
           <span className="sample-label">TEXT AREA</span>
           <TextArea label="Field notes" placeholder="Leave an observation..." value={note} onChange={event => setNote(event.currentTarget.value)} helperText="Keep it concise and useful." />
@@ -142,10 +142,16 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <span className="sample-label">EMPTY STATE</span>
           <EmptyState title="Nothing here yet" description="Your next collection starts with one item."><Button size="sm">Create collection</Button></EmptyState>
         </div>
+        <div className="component-block">
+          <span className="sample-label">AVATAR / SEPARATOR / SKELETON</span>
+          <div className="button-row"><Avatar name="Alex Morgan" size="sm" /><Avatar name="Alex Morgan" /><Avatar name="Alex Morgan" size="lg" accent="turquoise" /></div>
+          <Separator />
+          <div className="field-stack" aria-busy="true"><Skeleton width="65%" /><Skeleton variant="block" /></div>
+        </div>
       </section>
       <div className="panel-rule" />
       <section aria-label={`${title} actions and overlays`}>
-        <div className="section-heading"><span>ACTIONS + OVERLAYS</span><span>14—17</span></div>
+        <div className="section-heading"><span>ACTIONS + OVERLAYS</span><span>17—20</span></div>
         <div className="component-block">
           <span className="sample-label">SELECT</span>
           <Select label="Collection category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }]} value={category} onValueChange={setCategory} />

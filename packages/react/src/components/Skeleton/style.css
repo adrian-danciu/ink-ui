@@ -1,0 +1,14 @@
+.ui-skeleton {
+  background: var(--ui-color-surface-raised);
+  border: var(--ui-border-width-sm) solid var(--ui-color-border);
+  border-radius: var(--ui-radius-sm);
+  box-sizing: border-box;
+  display: inline-block;
+  height: var(--ui-line-height-body);
+  max-width: 100%;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.ui-skeleton[data-variant='block'] { height: var(--ui-component-size-lg); }
+.ui-skeleton[data-variant='circle'] { border-radius: var(--ui-radius-full); height: var(--ui-component-size-md); width: var(--ui-component-size-md); }

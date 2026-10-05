@@ -141,6 +141,35 @@ export const componentPages: readonly ComponentPage[] = [
     ],
   },
   {
+    slug: 'avatar', name: 'Avatar', category: 'Content',
+    description: 'An image or initials for a person, with three token-sized treatments.',
+    code: `<Avatar name="Alex Morgan" size="md" />`,
+    props: [
+      { name: 'name', type: 'string', description: 'Accessible name and source for fallback initials.' },
+      { name: 'src', type: 'string', description: 'Optional image URL; initials appear if it fails.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Avatar size. Default: md.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the fallback background accent.' },
+    ],
+  },
+  {
+    slug: 'separator', name: 'Separator', category: 'Content',
+    description: 'A token-colored rule between content groups.',
+    code: `<Separator />`,
+    props: [
+      { name: 'orientation', type: "'horizontal' | 'vertical'", description: 'Rule direction. Default: horizontal.' },
+    ],
+  },
+  {
+    slug: 'skeleton', name: 'Skeleton', category: 'Content',
+    description: 'A static loading placeholder. Mark the loading region as busy for assistive technology.',
+    code: `<div aria-busy="true"><Skeleton width="70%" /><Skeleton variant="block" /></div>`,
+    props: [
+      { name: 'variant', type: "'text' | 'block' | 'circle'", description: 'Placeholder shape. Default: text.' },
+      { name: 'width', type: 'number | percentage', description: 'Optional width override.' },
+      { name: 'height', type: 'number', description: 'Optional height override.' },
+    ],
+  },
+  {
     slug: 'alert', name: 'Alert', category: 'Feedback',
     description: 'An inline message for information, success, warning, or danger.',
     code: `<Alert tone="warning" title="Check your details"\n  description="One field needs attention." />`,

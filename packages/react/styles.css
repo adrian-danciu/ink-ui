@@ -19,3 +19,6 @@
 @import './src/components/Dialog/style.css';
 @import './src/components/Toast/style.css';
 @import './src/components/Sidebar/style.css';
+@import './src/components/Avatar/style.css';
+@import './src/components/Separator/style.css';
+@import './src/components/Skeleton/style.css';
