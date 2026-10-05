@@ -2,6 +2,10 @@
 
 A Bun workspace for a publishable React and React Native component library. It has three visual styles (`poster`, `paper`, `electric`), each with light and dark modes. Accent colors can be selected at the provider or Button level. Ink UI is the working brand name; the npm scope is still a placeholder.
 
+<img width="1173" height="630" alt="image" src="https://github.com/user-attachments/assets/5aa68edd-9b6d-4a2f-9c61-3889388be57a" />
+<img width="1720" height="598" alt="image" src="https://github.com/user-attachments/assets/907a30fb-cebf-4d60-a759-b9eb202549e9" />
+<img width="998" height="1299" alt="image" src="https://github.com/user-attachments/assets/058085f5-4f92-4a54-be17-07dfed25e9ae" />
+
 ## Start the documentation
 
 From the repository root:
