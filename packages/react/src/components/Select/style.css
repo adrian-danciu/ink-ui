@@ -1,0 +1,7 @@
+.ui-select-wrap { position: relative; }
+
+.ui-select { appearance: none; cursor: pointer; padding-right: var(--ui-space-8); }
+
+.ui-select-chevron { color: var(--ui-color-text); font-size: var(--ui-font-size-lg); font-weight: var(--ui-font-weight-black); pointer-events: none; position: absolute; right: var(--ui-space-3); top: 50%; transform: translateY(-50%); }
+
+.ui-select:disabled { cursor: not-allowed; }

@@ -1,0 +1,1 @@
+.ui-textarea { display: block; line-height: var(--ui-line-height-body); min-height: var(--ui-control-size-textarea-height); padding: var(--ui-space-3); resize: vertical; }

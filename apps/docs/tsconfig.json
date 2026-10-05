@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["bun", "react", "react-dom"],
+    "lib": ["DOM", "DOM.Iterable", "ES2022"]
+  },
+  "include": ["*.ts", "*.tsx", "*.d.ts"]
+}

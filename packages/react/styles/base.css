@@ -1,0 +1,11 @@
+.ui-button, .ui-input, .ui-card, .ui-badge, .ui-checkbox-mark, .ui-switch-track, .ui-radio-mark, .ui-alert, .ui-progress-track { box-sizing: border-box; }
+
+.ui-tabs, .ui-accordion, .ui-empty-state { color: var(--ui-color-text); font-family: var(--ui-font-family-body); }
+
+.ui-tab:focus-visible, .ui-accordion-trigger:focus-visible { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); position: relative; z-index: 1; }
+
+.ui-tab-panel[hidden], .ui-accordion-content[hidden] { display: none; }
+
+.ui-icon-button:focus-visible, .ui-dialog-close:focus-visible, .ui-toast-close:focus-visible { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
+
+.ui-dialog-close, .ui-toast-close { align-items: center; background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); color: var(--ui-color-text); cursor: pointer; display: inline-flex; font-size: var(--ui-font-size-lg); font-weight: var(--ui-font-weight-black); height: var(--ui-component-size-sm); justify-content: center; line-height: 1; width: var(--ui-component-size-sm); }

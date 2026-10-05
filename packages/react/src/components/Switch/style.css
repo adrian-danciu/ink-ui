@@ -1,0 +1,15 @@
+.ui-switch { align-items: center; background: none; border: 0; color: var(--ui-color-text); cursor: pointer; display: inline-flex; font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-sm); font-weight: var(--ui-font-weight-bold); gap: var(--ui-space-3); min-height: var(--ui-component-size-md); padding: 0; }
+
+.ui-switch-track { align-items: center; background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); display: inline-flex; height: var(--ui-control-size-switch-height); width: var(--ui-control-size-switch-width); }
+
+.ui-switch-thumb { background: var(--ui-color-text); height: var(--ui-control-size-switch-thumb); margin-left: var(--ui-space-1); transition: transform var(--ui-motion-duration-fast) ease; width: var(--ui-control-size-switch-thumb); }
+
+.ui-switch[aria-checked='true'] .ui-switch-track { background: var(--ui-color-accent); }
+
+.ui-switch[aria-checked='true'] .ui-switch-thumb { background: var(--ui-color-accent-text); transform: translateX(calc(var(--ui-control-size-switch-width) - var(--ui-control-size-switch-thumb) - var(--ui-space-2) - var(--ui-border-width-md) * 2)); }
+
+.ui-switch:focus-visible { outline: none; }
+
+.ui-switch:focus-visible .ui-switch-track { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
+
+.ui-switch:disabled { cursor: not-allowed; opacity: var(--ui-opacity-disabled); }

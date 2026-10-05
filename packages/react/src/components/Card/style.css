@@ -1,0 +1,19 @@
+.ui-card {
+  background: var(--ui-color-surface);
+  border: var(--ui-border-width-md) solid var(--ui-color-border);
+  border-radius: var(--ui-radius-sm);
+  box-shadow: var(--ui-shadow-offset-md) var(--ui-shadow-offset-md) 0 var(--ui-color-shadow);
+  color: var(--ui-color-text);
+  font-family: var(--ui-font-family-body);
+  padding: var(--ui-space-4);
+}
+
+.ui-card-stripe { background: var(--ui-color-accent); height: var(--ui-space-1); margin-bottom: var(--ui-space-4); }
+
+.ui-card-eyebrow { color: var(--ui-color-text-muted); display: block; font-family: var(--ui-font-family-mono); font-size: var(--ui-font-size-caption); font-weight: var(--ui-font-weight-bold); letter-spacing: var(--ui-letter-spacing-wide); margin-bottom: var(--ui-space-2); text-transform: uppercase; }
+
+.ui-card-title { font-family: var(--ui-font-family-display); font-size: var(--ui-font-size-xl); font-weight: var(--ui-font-weight-black); letter-spacing: var(--ui-letter-spacing-tight); line-height: var(--ui-line-height-title); margin: 0; text-transform: uppercase; }
+
+.ui-card-description { color: var(--ui-color-text-muted); font-size: var(--ui-font-size-sm); line-height: var(--ui-line-height-body); margin: var(--ui-space-2) 0 0; }
+
+.ui-card-content { margin-top: var(--ui-space-4); }

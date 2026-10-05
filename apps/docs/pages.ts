@@ -1,0 +1,227 @@
+export interface PropRow {
+  name: string;
+  type: string;
+  description: string;
+}
+
+export interface ComponentPage {
+  slug: string;
+  name: string;
+  category: 'Actions' | 'Forms' | 'Content' | 'Feedback' | 'Navigation';
+  description: string;
+  code: string;
+  props: readonly PropRow[];
+}
+
+export const componentPages: readonly ComponentPage[] = [
+  {
+    slug: 'button', name: 'Button', category: 'Actions',
+    description: 'A clear action with three sizes, two visual variants, and optional accent overrides.',
+    code: `<Button size="md" variant="primary" onClick={handleClick}>\n  Publish\n</Button>`,
+    props: [
+      { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Button height and padding. Default: md.' },
+      { name: 'variant', type: "'primary' | 'secondary'", description: 'Filled or outlined treatment. Default: primary.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active theme accent for this button.' },
+      { name: 'disabled', type: 'boolean', description: 'Prevents activation and applies the disabled style.' },
+    ],
+  },
+  {
+    slug: 'icon-button', name: 'IconButton', category: 'Actions',
+    description: 'A compact icon action with a required accessible label.',
+    code: `<IconButton label="Add favorite" icon="★" onClick={handleClick} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Required accessible name and tooltip text.' },
+      { name: 'icon', type: 'ReactNode', description: 'Visible icon; hidden from assistive technology.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Control size. Default: md.' },
+      { name: 'variant', type: "'primary' | 'secondary'", description: 'Default: secondary.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'text-field', name: 'TextField', category: 'Forms',
+    description: 'A labelled single-line input with helper and error messaging.',
+    code: `<TextField label="Search" placeholder="Enter a keyword"\n  value={query} onChange={event => setQuery(event.currentTarget.value)} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Visible label associated with the input.' },
+      { name: 'helperText', type: 'string', description: 'Supporting guidance below the input.' },
+      { name: 'errorText', type: 'string', description: 'Error message; sets aria-invalid.' },
+      { name: 'value / onChange', type: 'HTML input props', description: 'Controlled input value and change handler.' },
+    ],
+  },
+  {
+    slug: 'text-area', name: 'TextArea', category: 'Forms',
+    description: 'A labelled multi-line field for longer notes and descriptions.',
+    code: `<TextArea label="Notes" value={note}\n  onChange={event => setNote(event.currentTarget.value)}\n  helperText="Keep it concise." />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Visible label associated with the textarea.' },
+      { name: 'helperText', type: 'string', description: 'Supporting guidance below the field.' },
+      { name: 'errorText', type: 'string', description: 'Error message; sets aria-invalid.' },
+      { name: 'rows', type: 'number', description: 'Visible text rows. Default: 4.' },
+    ],
+  },
+  {
+    slug: 'checkbox', name: 'Checkbox', category: 'Forms',
+    description: 'A controlled binary choice with a full-label hit area.',
+    code: `<Checkbox label="Add to collection" checked={checked}\n  onCheckedChange={setChecked} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Text shown beside the box.' },
+      { name: 'checked', type: 'boolean', description: 'Current checked state.' },
+      { name: 'onCheckedChange', type: '(checked: boolean) => void', description: 'Called when the state changes.' },
+      { name: 'disabled', type: 'boolean', description: 'Disables the control.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'switch', name: 'Switch', category: 'Forms',
+    description: 'A controlled on/off setting for immediate state changes.',
+    code: `<Switch label="Live updates" checked={enabled}\n  onCheckedChange={setEnabled} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Visible and accessible setting name.' },
+      { name: 'checked', type: 'boolean', description: 'Current on/off state.' },
+      { name: 'onCheckedChange', type: '(checked: boolean) => void', description: 'Called on activation.' },
+      { name: 'disabled', type: 'boolean', description: 'Disables the setting.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'radio-group', name: 'RadioGroup', category: 'Forms',
+    description: 'A labelled set of mutually exclusive choices.',
+    code: `<RadioGroup label="Frequency" value={frequency}\n  onValueChange={setFrequency}\n  options={[{ label: 'Daily', value: 'daily' }, { label: 'Weekly', value: 'weekly' }]} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Fieldset legend for the choice group.' },
+      { name: 'options', type: '{ label: string; value: string }[]', description: 'Available choices.' },
+      { name: 'value', type: 'string', description: 'Selected option value.' },
+      { name: 'onValueChange', type: '(value: string) => void', description: 'Called when another option is selected.' },
+      { name: 'disabled', type: 'boolean', description: 'Disables the whole group.' },
+    ],
+  },
+  {
+    slug: 'select', name: 'Select', category: 'Forms',
+    description: 'A native select field with the library’s hard-edged styling.',
+    code: `<Select label="Category" value={category}\n  onValueChange={setCategory}\n  options={[{ label: 'Design', value: 'design' }]} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Visible label for the select.' },
+      { name: 'options', type: '{ label: string; value: string }[]', description: 'Available choices.' },
+      { name: 'value', type: 'string', description: 'Selected option value.' },
+      { name: 'onValueChange', type: '(value: string) => void', description: 'Called when selection changes.' },
+      { name: 'placeholder', type: 'string', description: 'Optional disabled prompt option.' },
+    ],
+  },
+  {
+    slug: 'card', name: 'Card', category: 'Content',
+    description: 'A framed content surface with an optional eyebrow, description, and actions.',
+    code: `<Card eyebrow="FIELD NOTE / 001" title="A stronger signal"\n  description="A clear action at every step.">\n  <Button size="sm">Explore</Button>\n</Card>`,
+    props: [
+      { name: 'title', type: 'string', description: 'Card heading.' },
+      { name: 'eyebrow', type: 'string', description: 'Small label above the title.' },
+      { name: 'description', type: 'string', description: 'Supporting copy.' },
+      { name: 'children', type: 'ReactNode', description: 'Additional content or actions.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'badge', name: 'Badge', category: 'Content',
+    description: 'A short status label for compact metadata.',
+    code: `<Badge tone="success">Live</Badge>`,
+    props: [
+      { name: 'tone', type: "'accent' | 'neutral' | 'success' | 'danger'", description: 'Color treatment. Default: accent.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent for the accent tone.' },
+      { name: 'children', type: 'string', description: 'Short label text.' },
+    ],
+  },
+  {
+    slug: 'empty-state', name: 'EmptyState', category: 'Content',
+    description: 'A clear message and next action for a collection with no items.',
+    code: `<EmptyState title="Nothing here yet"\n  description="Start your first collection.">\n  <Button size="sm">Create collection</Button>\n</EmptyState>`,
+    props: [
+      { name: 'title', type: 'string', description: 'Primary empty-state message.' },
+      { name: 'description', type: 'string', description: 'Supporting explanation.' },
+      { name: 'children', type: 'ReactNode', description: 'Optional action area.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'alert', name: 'Alert', category: 'Feedback',
+    description: 'An inline message for information, success, warning, or danger.',
+    code: `<Alert tone="warning" title="Check your details"\n  description="One field needs attention." />`,
+    props: [
+      { name: 'title', type: 'string', description: 'Main message.' },
+      { name: 'description', type: 'string', description: 'Optional detail.' },
+      { name: 'tone', type: "'info' | 'success' | 'warning' | 'danger'", description: 'Message severity. Default: info.' },
+    ],
+  },
+  {
+    slug: 'toast', name: 'Toast', category: 'Feedback',
+    description: 'A dismissible status message for short-lived feedback.',
+    code: `<Toast open={open} title="Collection saved"\n  description="Your changes are ready."\n  tone="success" onDismiss={() => setOpen(false)} />`,
+    props: [
+      { name: 'open', type: 'boolean', description: 'Whether the message is visible.' },
+      { name: 'title', type: 'string', description: 'Main message.' },
+      { name: 'description', type: 'string', description: 'Optional detail.' },
+      { name: 'tone', type: "'info' | 'success' | 'warning' | 'danger'", description: 'Message severity. Default: info.' },
+      { name: 'onDismiss', type: '() => void', description: 'Called when the close button is pressed.' },
+    ],
+  },
+  {
+    slug: 'progress-bar', name: 'ProgressBar', category: 'Feedback',
+    description: 'A labelled progress indicator that clamps values to 0–100.',
+    code: `<ProgressBar label="Collection complete" value={68} />`,
+    props: [
+      { name: 'value', type: 'number', description: 'Percentage from 0 to 100.' },
+      { name: 'label', type: 'string', description: 'Accessible progress label. Default: Progress.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'tabs', name: 'Tabs', category: 'Navigation',
+    description: 'A controlled set of panels with arrow-key navigation.',
+    code: `<Tabs label="Sections" value={tab} onValueChange={setTab}\n  tabs={[\n    { label: 'Overview', value: 'overview', content: <p>Overview</p> },\n    { label: 'Details', value: 'details', content: <p>Details</p> },\n  ]} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Accessible name for the tab list.' },
+      { name: 'tabs', type: '{ label; value; content }[]', description: 'Tab labels and panel content.' },
+      { name: 'value', type: 'string', description: 'Selected tab value.' },
+      { name: 'onValueChange', type: '(value: string) => void', description: 'Called when selection changes.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'accordion', name: 'Accordion', category: 'Navigation',
+    description: 'Expandable content sections with one open item at a time.',
+    code: `<Accordion value={openItem} onValueChange={setOpenItem}\n  items={[{ title: 'Materials', value: 'materials',\n    content: <p>Heavy borders and crisp type.</p> }]} />`,
+    props: [
+      { name: 'items', type: '{ title; value; content }[]', description: 'Disclosure headings and content.' },
+      { name: 'value', type: 'string | null', description: 'Open item, or null when all are closed.' },
+      { name: 'onValueChange', type: '(value: string | null) => void', description: 'Called when a heading is toggled.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'dialog', name: 'Dialog', category: 'Navigation',
+    description: 'A modal confirmation surface using the native dialog element.',
+    code: `<Button onClick={() => setOpen(true)}>Open dialog</Button>\n<Dialog open={open} onOpenChange={setOpen}\n  title="Publish this collection?" description="Everyone can see it.">\n  <Button onClick={() => setOpen(false)}>Confirm</Button>\n</Dialog>`,
+    props: [
+      { name: 'open', type: 'boolean', description: 'Whether the modal is open.' },
+      { name: 'onOpenChange', type: '(open: boolean) => void', description: 'Called on close or Escape.' },
+      { name: 'title', type: 'string', description: 'Dialog heading.' },
+      { name: 'description', type: 'string', description: 'Optional explanation.' },
+      { name: 'children', type: 'ReactNode', description: 'Actions or additional content.' },
+    ],
+  },
+  {
+    slug: 'sidebar', name: 'Sidebar', category: 'Navigation',
+    description: 'Grouped navigation with a clear current-page state. Used by these docs.',
+    code: `<Sidebar currentPath="/components/button"\n  groups={[{ title: 'Components', links: [\n    { label: 'Button', href: '/components/button' },\n    { label: 'Card', href: '/components/card' },\n  ]}]} />`,
+    props: [
+      { name: 'groups', type: '{ title; links: { label; href }[] }[]', description: 'Navigation sections and links.' },
+      { name: 'currentPath', type: 'string', description: 'Link href marked as the current page.' },
+      { name: 'label', type: 'string', description: 'Accessible navigation label.' },
+      { name: 'header / footer', type: 'ReactNode', description: 'Optional content above and below the links.' },
+      { name: 'onNavigate', type: '() => void', description: 'Called when a link is activated; useful for mobile drawers.' },
+    ],
+  },
+];
+
+export const componentGroups = (['Actions', 'Forms', 'Content', 'Feedback', 'Navigation'] as const).map(category => ({
+  title: category,
+  links: componentPages.filter(page => page.category === category).map(page => ({ label: page.name, href: `/components/${page.slug}` })),
+}));

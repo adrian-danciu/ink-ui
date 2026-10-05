@@ -1,0 +1,17 @@
+.ui-icon-button { align-items: center; border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); box-shadow: var(--ui-shadow-offset-md) var(--ui-shadow-offset-md) 0 var(--ui-color-shadow); cursor: pointer; display: inline-flex; font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-lg); font-weight: var(--ui-font-weight-black); justify-content: center; line-height: 1; padding: 0; }
+
+.ui-icon-button[data-size='sm'] { height: var(--ui-component-size-sm); width: var(--ui-component-size-sm); }
+
+.ui-icon-button[data-size='md'] { height: var(--ui-component-size-md); width: var(--ui-component-size-md); }
+
+.ui-icon-button[data-size='lg'] { height: var(--ui-component-size-lg); width: var(--ui-component-size-lg); }
+
+.ui-icon-button[data-variant='primary'] { background: var(--ui-color-accent); color: var(--ui-color-accent-text); }
+
+.ui-icon-button[data-variant='secondary'] { background: var(--ui-color-surface); color: var(--ui-color-text); }
+
+.ui-icon-button:hover:not(:disabled) { transform: translate(var(--ui-shadow-offset-pressed), var(--ui-shadow-offset-pressed)); box-shadow: var(--ui-shadow-offset-sm) var(--ui-shadow-offset-sm) 0 var(--ui-color-shadow); }
+
+.ui-icon-button:active:not(:disabled) { transform: translate(var(--ui-shadow-offset-md), var(--ui-shadow-offset-md)); box-shadow: none; }
+
+.ui-icon-button:disabled { cursor: not-allowed; opacity: var(--ui-opacity-disabled); }

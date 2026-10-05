@@ -1,0 +1,13 @@
+.ui-toast { align-items: flex-start; background: var(--ui-color-accent); border: var(--ui-border-width-strong) solid var(--ui-color-border); box-shadow: var(--ui-shadow-offset-sm) var(--ui-shadow-offset-sm) 0 var(--ui-color-shadow); color: var(--ui-color-accent-text); display: flex; font-family: var(--ui-font-family-body); gap: var(--ui-space-3); justify-content: space-between; padding: var(--ui-space-3); }
+
+.ui-toast[data-tone='success'] { background: var(--ui-color-success); color: var(--ui-color-success-text); }
+
+.ui-toast[data-tone='danger'] { background: var(--ui-color-danger); color: var(--ui-color-danger-text); }
+
+.ui-toast-copy { display: grid; gap: var(--ui-space-1); }
+
+.ui-toast-title { font-size: var(--ui-font-size-sm); font-weight: var(--ui-font-weight-black); letter-spacing: var(--ui-letter-spacing-wide); text-transform: uppercase; }
+
+.ui-toast-description { font-size: var(--ui-font-size-sm); line-height: var(--ui-line-height-body); }
+
+.ui-toast-close { flex: none; }

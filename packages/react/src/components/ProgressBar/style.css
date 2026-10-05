@@ -1,0 +1,7 @@
+.ui-progress { color: var(--ui-color-text); font-family: var(--ui-font-family-body); }
+
+.ui-progress-heading { display: flex; font-size: var(--ui-font-size-sm); font-weight: var(--ui-font-weight-black); justify-content: space-between; letter-spacing: var(--ui-letter-spacing-wide); margin-bottom: var(--ui-space-2); text-transform: uppercase; }
+
+.ui-progress-track { background: var(--ui-color-surface-raised); border: var(--ui-border-width-md) solid var(--ui-color-border); height: var(--ui-control-size-progress); overflow: hidden; width: 100%; }
+
+.ui-progress-fill { background: var(--ui-color-accent); height: 100%; }

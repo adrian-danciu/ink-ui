@@ -1,0 +1,19 @@
+.ui-radio-group { border: 0; margin: 0; min-width: 0; padding: 0; }
+
+.ui-radio-legend { color: var(--ui-color-text); font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-sm); font-weight: var(--ui-font-weight-black); letter-spacing: var(--ui-letter-spacing-wide); margin-bottom: var(--ui-space-2); padding: 0; text-transform: uppercase; }
+
+.ui-radio-options { display: flex; flex-wrap: wrap; gap: var(--ui-space-3); }
+
+.ui-radio-option { align-items: center; color: var(--ui-color-text); cursor: pointer; display: inline-flex; font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-sm); font-weight: var(--ui-font-weight-bold); gap: var(--ui-space-2); min-height: var(--ui-component-size-md); position: relative; }
+
+.ui-radio-option input { height: var(--ui-control-size-radio); margin: 0; opacity: 0; position: absolute; width: var(--ui-control-size-radio); }
+
+.ui-radio-mark { align-items: center; background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-full); display: inline-flex; height: var(--ui-control-size-radio); justify-content: center; width: var(--ui-control-size-radio); }
+
+.ui-radio-mark::after { background: var(--ui-color-accent); border-radius: var(--ui-radius-full); content: ''; display: none; height: var(--ui-space-3); width: var(--ui-space-3); }
+
+.ui-radio-option input:checked + .ui-radio-mark::after { display: block; }
+
+.ui-radio-option input:focus-visible + .ui-radio-mark { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
+
+.ui-radio-group:disabled { opacity: var(--ui-opacity-disabled); }

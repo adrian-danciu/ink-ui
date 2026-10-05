@@ -1,0 +1,5 @@
+.ui-theme {
+  background: var(--ui-color-canvas);
+  color: var(--ui-color-text);
+  font-family: var(--ui-font-family-body);
+}

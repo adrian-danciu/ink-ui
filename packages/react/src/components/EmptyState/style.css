@@ -1,0 +1,9 @@
+.ui-empty-state { align-items: center; background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); box-shadow: var(--ui-shadow-offset-md) var(--ui-shadow-offset-md) 0 var(--ui-color-shadow); display: flex; flex-direction: column; padding: var(--ui-space-6); text-align: center; }
+
+.ui-empty-mark { align-items: center; background: var(--ui-color-accent); border: var(--ui-border-width-md) solid var(--ui-color-border); color: var(--ui-color-accent-text); display: flex; font-size: var(--ui-font-size-2xl); height: var(--ui-control-size-empty-mark); justify-content: center; margin-bottom: var(--ui-space-4); width: var(--ui-control-size-empty-mark); }
+
+.ui-empty-title { font-family: var(--ui-font-family-display); font-size: var(--ui-font-size-xl); font-weight: var(--ui-font-weight-black); line-height: var(--ui-line-height-title); margin: 0; text-transform: uppercase; }
+
+.ui-empty-description { color: var(--ui-color-text-muted); font-size: var(--ui-font-size-sm); line-height: var(--ui-line-height-body); margin: var(--ui-space-2) 0 0; }
+
+.ui-empty-action { margin-top: var(--ui-space-4); }

@@ -1,0 +1,32 @@
+{
+  "name": "@ui-library/react-native",
+  "version": "0.0.0",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "react-native": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "react-native": "./dist/index.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "bun x --bun tsup src/index.tsx --format esm,cjs --dts --clean --external react-native",
+    "typecheck": "bun x --bun tsc -p tsconfig.json"
+  },
+  "dependencies": { "@ui-library/tokens": "workspace:*" },
+  "peerDependencies": { "react": ">=19 <20", "react-native": ">=0.81" },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",
+    "react-native": "^0.81.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": { "access": "public" }
+}

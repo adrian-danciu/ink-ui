@@ -1,0 +1,28 @@
+{
+  "name": "@ui-library/react",
+  "version": "0.0.0",
+  "type": "module",
+  "files": ["dist", "styles.css", "styles/base.css", "src/ThemeProvider/style.css", "src/components/*/style.css"],
+  "sideEffects": ["./styles.css", "./styles/base.css", "./src/ThemeProvider/style.css", "./src/components/*/style.css"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" },
+    "./styles.css": "./styles.css"
+  },
+  "scripts": {
+    "build": "bun x --bun tsup src/index.tsx --format esm,cjs --dts --clean",
+    "typecheck": "bun x --bun tsc -p tsconfig.json"
+  },
+  "dependencies": { "@ui-library/tokens": "workspace:*" },
+  "peerDependencies": { "react": ">=18.2 <20", "react-dom": ">=18.2 <20" },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": { "access": "public" }
+}

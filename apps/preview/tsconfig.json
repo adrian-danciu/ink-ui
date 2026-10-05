@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "types": ["bun", "react", "react-dom"],
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["server.ts", "main.tsx", "styles.d.ts"]
+}

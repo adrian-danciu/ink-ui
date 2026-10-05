@@ -1,0 +1,13 @@
+.ui-dialog { background: var(--ui-color-surface); border: var(--ui-border-width-strong) solid var(--ui-color-border); box-shadow: var(--ui-shadow-offset-lg) var(--ui-shadow-offset-lg) 0 var(--ui-color-shadow); box-sizing: border-box; color: var(--ui-color-text); font-family: var(--ui-font-family-body); margin: auto; max-height: calc(100% - var(--ui-space-8)); max-width: calc(100% - var(--ui-space-8)); padding: var(--ui-space-5); width: var(--ui-breakpoint-sm); }
+
+.ui-dialog::backdrop { background: var(--ui-color-shadow); opacity: var(--ui-opacity-overlay); }
+
+.ui-dialog-header { align-items: center; border-bottom: var(--ui-border-width-md) solid var(--ui-color-border); display: flex; justify-content: space-between; padding-bottom: var(--ui-space-2); }
+
+.ui-dialog-kicker { color: var(--ui-color-text-muted); font-family: var(--ui-font-family-mono); font-size: var(--ui-font-size-caption); font-weight: var(--ui-font-weight-bold); letter-spacing: var(--ui-letter-spacing-wide); }
+
+.ui-dialog-title { font-family: var(--ui-font-family-display); font-size: var(--ui-font-size-2xl); font-weight: var(--ui-font-weight-black); line-height: var(--ui-line-height-title); margin: var(--ui-space-4) 0 0; text-transform: uppercase; }
+
+.ui-dialog-description { color: var(--ui-color-text-muted); font-size: var(--ui-font-size-sm); line-height: var(--ui-line-height-body); margin: var(--ui-space-2) 0 0; }
+
+.ui-dialog-content { margin-top: var(--ui-space-5); }

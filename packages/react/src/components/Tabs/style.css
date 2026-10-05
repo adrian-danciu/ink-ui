@@ -1,0 +1,7 @@
+.ui-tab-list { border-bottom: var(--ui-border-width-md) solid var(--ui-color-border); display: flex; flex-wrap: wrap; gap: var(--ui-space-1); }
+
+.ui-tab { background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-bottom: 0; color: var(--ui-color-text); cursor: pointer; font: var(--ui-font-weight-black) var(--ui-font-size-sm) var(--ui-font-family-body); letter-spacing: var(--ui-letter-spacing-wide); min-height: var(--ui-component-size-md); padding: var(--ui-space-2) var(--ui-space-3); text-transform: uppercase; }
+
+.ui-tab[aria-selected='true'] { background: var(--ui-color-accent); color: var(--ui-color-accent-text); }
+
+.ui-tab-panel { background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-top: 0; font-size: var(--ui-font-size-sm); line-height: var(--ui-line-height-body); padding: var(--ui-space-4); }

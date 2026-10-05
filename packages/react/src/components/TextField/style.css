@@ -1,0 +1,35 @@
+.ui-field { display: grid; gap: var(--ui-space-2); }
+
+.ui-field-label {
+  color: var(--ui-color-text);
+  font-family: var(--ui-font-family-body);
+  font-size: var(--ui-font-size-sm);
+  font-weight: var(--ui-font-weight-black);
+  letter-spacing: var(--ui-letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.ui-input {
+  background: var(--ui-color-surface);
+  border: var(--ui-border-width-md) solid var(--ui-color-border);
+  border-radius: var(--ui-radius-sm);
+  box-shadow: var(--ui-shadow-offset-sm) var(--ui-shadow-offset-sm) 0 var(--ui-color-shadow);
+  color: var(--ui-color-text);
+  font-family: var(--ui-font-family-body);
+  font-size: var(--ui-font-size-md);
+  min-height: var(--ui-component-size-md);
+  padding-inline: var(--ui-space-3);
+  width: 100%;
+}
+
+.ui-input::placeholder { color: var(--ui-color-text-muted); opacity: var(--ui-opacity-default); }
+
+.ui-input:focus-visible { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
+
+.ui-input[aria-invalid='true'] { border-color: var(--ui-color-danger); }
+
+.ui-input:disabled { opacity: var(--ui-opacity-disabled); }
+
+.ui-field-message { color: var(--ui-color-text-muted); font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-xs); line-height: var(--ui-line-height-caption); }
+
+.ui-field-message[data-error='true'] { color: var(--ui-color-danger); }

@@ -1,0 +1,21 @@
+.ui-badge {
+  align-items: center;
+  background: var(--ui-color-accent);
+  border: var(--ui-border-width-sm) solid var(--ui-color-border);
+  border-radius: var(--ui-radius-sm);
+  color: var(--ui-color-accent-text);
+  display: inline-flex;
+  font-family: var(--ui-font-family-body);
+  font-size: var(--ui-font-size-xs);
+  font-weight: var(--ui-font-weight-black);
+  letter-spacing: var(--ui-letter-spacing-wide);
+  line-height: var(--ui-line-height-caption);
+  padding: var(--ui-space-1) var(--ui-space-2);
+  text-transform: uppercase;
+}
+
+.ui-badge[data-tone='neutral'] { background: var(--ui-color-surface-raised); color: var(--ui-color-text); }
+
+.ui-badge[data-tone='success'] { background: var(--ui-color-success); color: var(--ui-color-success-text); }
+
+.ui-badge[data-tone='danger'] { background: var(--ui-color-danger); color: var(--ui-color-danger-text); }

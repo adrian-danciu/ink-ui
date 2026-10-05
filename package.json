@@ -1,0 +1,27 @@
+{
+  "name": "ui-library-workspace",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "bun@1.4.2",
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "build": "bun --filter @ui-library/tokens build && bun --filter @ui-library/react build && bun --filter @ui-library/react-native build",
+    "check": "bun run build && bun --filter @ui-library/react typecheck && bun --filter @ui-library/react-native typecheck && bun --filter @ui-library/preview typecheck && bun --filter @ui-library/docs typecheck && bun test",
+    "dev": "bun run preview",
+    "preview": "bun --filter @ui-library/tokens build && bun --filter @ui-library/react build && bun --filter @ui-library/preview start",
+    "docs": "bun --filter @ui-library/tokens build && bun --filter @ui-library/react build && bun --filter @ui-library/docs start",
+    "test": "bun test",
+    "changeset": "bun x --bun changeset",
+    "version-packages": "bun x --bun changeset version",
+    "release": "bun run check && bun x --bun changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.0",
+    "@changesets/changelog-git": "^0.2.0",
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",
+    "react-native": "^0.81.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
