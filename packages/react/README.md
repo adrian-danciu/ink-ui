@@ -30,3 +30,23 @@ export function Example() {
 Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, Breadcrumbs, Pagination, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, EmptyState, and Sidebar.
 
 Styles are provided through one import: `@adrian-danciu/ink-ui/styles.css`. Tokens come from the `@adrian-danciu/ink-ui-tokens` dependency. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.
+
+### Sidebar
+
+`Sidebar` supports icons on either side of each link. Enable `collapsible` for a desktop icon rail. Pass `mobileOpen` and `onMobileOpenChange` to use its small-screen drawer; render your own menu button to set `mobileOpen` to `true`.
+
+```tsx
+<Sidebar
+  collapsible
+  mobileOpen={menuOpen}
+  onMobileOpenChange={setMenuOpen}
+  currentPath="/projects"
+  groups={[{ title: 'Workspace', links: [
+    { label: 'Overview', href: '/', icon: '⌂' },
+    { label: 'Projects', href: '/projects', icon: '▦' },
+    { label: 'Settings', href: '/settings', icon: '⚙', iconPosition: 'right' },
+  ] }]}
+/>
+```
+
+Use `onNavigate={(event, href) => { event.preventDefault(); router.push(href); }}` with a client router. Without it, links use normal browser navigation.

@@ -29,3 +29,7 @@ export function Example() {
 Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, Breadcrumbs, Pagination, Sidebar, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, and EmptyState. Native `Sidebar` uses an `onNavigate(href)` callback so the app can connect its router.
 
 Native components use JavaScript tokens and do not require a CSS import. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.
+
+### Sidebar
+
+`Sidebar` accepts `icon` and `iconPosition: 'left' | 'right'` on each link, plus a default `iconPosition` prop. Use `collapsible` for an inline icon rail. Supplying `mobileOpen` renders it in a native modal drawer with a close control and backdrop. Connect links to your navigation library through `onNavigate(href)`.

@@ -238,14 +238,18 @@ export const componentPages: readonly ComponentPage[] = [
   },
   {
     slug: 'sidebar', name: 'Sidebar', category: 'Navigation',
-    description: 'Grouped navigation with a clear current-page state. Used by these docs.',
-    code: `<Sidebar currentPath="/components/button"\n  groups={[{ title: 'Components', links: [\n    { label: 'Button', href: '/components/button' },\n    { label: 'Card', href: '/components/card' },\n  ]}]} />`,
+    description: 'Grouped navigation with optional link icons, a collapsible desktop rail, and a controlled mobile drawer.',
+    code: `<Sidebar collapsible currentPath="/projects"\n  mobileOpen={menuOpen} onMobileOpenChange={setMenuOpen}\n  groups={[{ title: 'Workspace', links: [\n    { label: 'Overview', href: '/overview', icon: '⌂' },\n    { label: 'Projects', href: '/projects', icon: '▦' },\n    { label: 'Settings', href: '/settings', icon: '⚙', iconPosition: 'right' },\n  ]}]} />`,
     props: [
-      { name: 'groups', type: '{ title; links: { label; href }[] }[]', description: 'Navigation sections and links.' },
+      { name: 'groups', type: 'SidebarGroup[]', description: 'Titled sections with label, href, optional icon, and per-link iconPosition.' },
       { name: 'currentPath', type: 'string', description: 'Link href marked as the current page.' },
       { name: 'label', type: 'string', description: 'Accessible navigation label.' },
+      { name: 'iconPosition', type: "'left' | 'right'", description: 'Default icon side for links. Each link may override it.' },
+      { name: 'collapsible / collapsed', type: 'boolean', description: 'Enable the desktop toggle; optionally control its collapsed state.' },
+      { name: 'defaultCollapsed / onCollapsedChange', type: 'boolean / callback', description: 'Initial uncontrolled state and change notification.' },
+      { name: 'mobileOpen / onMobileOpenChange', type: 'boolean / callback', description: 'Opt into a controlled small-screen drawer with close and backdrop behavior.' },
       { name: 'header / footer', type: 'ReactNode', description: 'Optional content above and below the links.' },
-      { name: 'onNavigate', type: 'callback', description: 'Called when a link is activated. React Native receives the href for its router.' },
+      { name: 'onNavigate', type: 'callback', description: 'Web receives the click event and href, so custom routers can prevent default. React Native receives href.' },
     ],
   },
   {

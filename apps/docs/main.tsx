@@ -67,6 +67,7 @@ function ComponentDoc({ page, theme, mode }: { page: ComponentPage; theme: Theme
       <div className="docs-section-heading"><h2 id="example-heading">Live example</h2><span>INTERACTIVE / {theme.toUpperCase()} / {mode.toUpperCase()}</span></div>
       <div className="docs-demo"><ComponentExample key={page.slug} slug={page.slug} /></div>
       <p className="docs-caption">The example uses the selected style, mode, and accent. Change them above to compare the same component across the system.</p>
+      {page.slug === 'sidebar' && <p className="docs-caption">These sidebar links are sample destinations and do not navigate away from the documentation.</p>}
     </section>
     <section className="docs-section" aria-labelledby="usage-heading">
       <div className="docs-section-heading"><h2 id="usage-heading">Usage</h2><span>REACT / NEXT.JS</span></div>
@@ -131,13 +132,14 @@ function App() {
   const [mode, setMode] = React.useState<ThemeMode>(readMode);
   const [accent, setAccent] = React.useState<AccentName | 'default'>(readAccent);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
   const [path, setPath] = React.useState(() => window.location.pathname.replace(/\/$/, '') || '/');
   const mainRef = React.useRef<HTMLElement>(null);
   const page = path.startsWith('/components/') ? componentPages.find(item => `/components/${item.slug}` === path) : undefined;
 
   function showNewPage() {
     if (mainRef.current) mainRef.current.scrollTop = 0;
-    if (window.matchMedia('(max-width: 760px)').matches) window.scrollTo(0, 0);
+    if (window.matchMedia('(max-width: 767px)').matches) window.scrollTo(0, 0);
     window.requestAnimationFrame(() => mainRef.current?.focus({ preventScroll: true }));
   }
 
@@ -178,9 +180,9 @@ function App() {
       <a className="docs-brand" href="/" aria-label="Ink UI home"><span className="docs-brand-mark">I/</span><span>INK UI<small>COMPONENT LIBRARY / DOCUMENTATION</small></span></a>
       <div className="docs-masthead-actions"><a href="http://localhost:3000/">OPEN PREVIEW ↗</a><button type="button" className="docs-menu-toggle" aria-expanded={menuOpen} aria-controls="docs-sidebar" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'CLOSE MENU' : 'MENU'}</button></div>
     </header>
-    <div className="docs-layout">
+    <div className="docs-layout" data-sidebar-collapsed={sidebarCollapsed}>
       <div id="docs-sidebar" className={['docs-sidebar-wrap', menuOpen && 'is-open'].filter(Boolean).join(' ')}>
-        <Sidebar groups={navigation} currentPath={path} label="Documentation" onNavigate={() => setMenuOpen(false)} header={<div className="docs-sidebar-intro"><strong>FIELD GUIDE</strong><span>{String(componentPages.length).padStart(2, '0')} / INDEX</span></div>} footer={<div className="docs-sidebar-foot">HARD LINES.<br />CLEAR ACTIONS.</div>} />
+        <Sidebar groups={navigation} currentPath={path} label="Documentation" collapsible collapsed={sidebarCollapsed} onCollapsedChange={setSidebarCollapsed} mobileOpen={menuOpen} onMobileOpenChange={setMenuOpen} header={<div className="docs-sidebar-intro"><strong>FIELD GUIDE</strong><span>{String(componentPages.length).padStart(2, '0')} / INDEX</span></div>} footer={<div className="docs-sidebar-foot">HARD LINES.<br />CLEAR ACTIONS.</div>} />
       </div>
       <main className="docs-main" id="main-content" ref={mainRef} tabIndex={-1}>
         <div className="docs-toolbar">

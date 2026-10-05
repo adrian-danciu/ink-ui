@@ -17,6 +17,7 @@ export function ComponentExample({ slug }: { slug: string }) {
   const [chipSelected, setChipSelected] = React.useState(false);
   const [chipVisible, setChipVisible] = React.useState(true);
   const [page, setPage] = React.useState(4);
+  const [demoSidebarOpen, setDemoSidebarOpen] = React.useState(false);
 
   switch (slug) {
     case 'button': return <div className="demo-stack">
@@ -43,7 +44,13 @@ export function ComponentExample({ slug }: { slug: string }) {
     case 'tabs': return <div className="demo-field"><Tabs label="Collection sections" value={tab} onValueChange={setTab} tabs={[{ label: 'Overview', value: 'overview', content: <p>A sharp summary of the collection.</p> }, { label: 'Details', value: 'details', content: <p>Materials, notes, and related work.</p> }]} /></div>;
     case 'accordion': return <div className="demo-field"><Accordion items={[{ title: 'Materials', value: 'materials', content: <p>Heavy borders. Flat colors. Crisp type.</p> }, { title: 'Usage', value: 'usage', content: <p>Use the same tokens across every surface.</p> }]} value={openItem} onValueChange={setOpenItem} /></div>;
     case 'dialog': return <><Button onClick={() => setDialogOpen(true)}>Open dialog</Button><Dialog open={dialogOpen} onOpenChange={setDialogOpen} title="Publish this collection?" description="This will make the collection visible to everyone."><div className="demo-row"><Button variant="secondary" onClick={() => setDialogOpen(false)}>Cancel</Button><Button onClick={() => setDialogOpen(false)}>Publish</Button></div></Dialog></>;
-    case 'sidebar': return <div className="demo-sidebar"><Sidebar currentPath="/components/sidebar" groups={[{ title: 'Foundations', links: [{ label: 'Getting started', href: '/getting-started' }, { label: 'Themes', href: '/themes' }] }, { title: 'Navigation', links: [{ label: 'Sidebar', href: '/components/sidebar' }, { label: 'Tabs', href: '/components/tabs' }] }]} /></div>;
+    case 'sidebar': return <div className="demo-sidebar">
+      <button className="demo-mobile-sidebar-trigger" type="button" onClick={() => setDemoSidebarOpen(true)}>Open sample sidebar</button>
+      <Sidebar collapsible currentPath="/demo/overview" mobileOpen={demoSidebarOpen} onMobileOpenChange={setDemoSidebarOpen} onNavigate={event => event.preventDefault()} groups={[
+        { title: 'Workspace', links: [{ label: 'Overview', href: '/demo/overview', icon: '⌂' }, { label: 'Projects', href: '/demo/projects', icon: '▦' }, { label: 'Activity', href: '/demo/activity', icon: '◷' }, { label: 'Saved items', href: '/demo/saved', icon: '★', iconPosition: 'right' }] },
+        { title: 'Account', links: [{ label: 'Messages', href: '/demo/messages', icon: '✉' }, { label: 'Team', href: '/demo/team', icon: '♧' }, { label: 'Settings', href: '/demo/settings', icon: '⚙', iconPosition: 'right' }, { label: 'Help', href: '/demo/help' }] },
+      ]} />
+    </div>;
     case 'chip': return <div className="demo-row">{chipVisible && <Chip label="Design" selected={chipSelected} onClick={() => setChipSelected(value => !value)} onRemove={() => setChipVisible(false)} />}<Chip label="Editorial" variant="outlined" /><Chip label="Unavailable" disabled onClick={() => {}} /></div>;
     case 'breadcrumbs': return <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Components', href: '/components' }, { label: 'Breadcrumbs' }]} />;
     case 'pagination': return <Pagination page={page} count={12} onPageChange={setPage} />;

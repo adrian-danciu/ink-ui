@@ -161,7 +161,10 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
         </div>
         <div className="component-block">
           <span className="sample-label">SIDEBAR</span>
-          <Sidebar currentPath="/library" groups={[{ title: 'Workspace', links: [{ label: 'Overview', href: '/' }, { label: 'Library', href: '/library' }, { label: 'Settings', href: '/settings' }] }]} />
+          <Sidebar collapsible currentPath="/sample/library" onNavigate={event => event.preventDefault()} groups={[
+            { title: 'Workspace', links: [{ label: 'Overview', href: '/sample/overview', icon: '⌂' }, { label: 'Library', href: '/sample/library', icon: '▦' }, { label: 'Collections', href: '/sample/collections', icon: '◇' }, { label: 'Activity', href: '/sample/activity', icon: '◷' }] },
+            { title: 'Account', links: [{ label: 'Profile', href: '/sample/profile', icon: '◎' }, { label: 'Settings', href: '/sample/settings', icon: '⚙', iconPosition: 'right' }, { label: 'Help', href: '/sample/help' }] },
+          ]} />
         </div>
       </section>
       <div className="panel-rule" />
