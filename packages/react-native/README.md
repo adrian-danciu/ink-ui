@@ -26,6 +26,6 @@ export function Example() {
 
 ## Components
 
-Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, Breadcrumbs, Pagination, SideNav, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, and EmptyState. Native `SideNav` uses an `onNavigate(href)` callback so the app can connect its router.
+Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, Breadcrumbs, Pagination, Sidebar, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, and EmptyState. Native `Sidebar` uses an `onNavigate(href)` callback so the app can connect its router.
 
 Native components use JavaScript tokens and do not require a CSS import. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.

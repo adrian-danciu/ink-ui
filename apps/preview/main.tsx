@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, Pagination, ProgressBar, RadioGroup, Select, Separator, SideNav, Skeleton, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, Pagination, ProgressBar, RadioGroup, Select, Separator, Sidebar, Skeleton, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName, type ThemeMode } from '@adrian-danciu/ink-ui-tokens';
 import '@adrian-danciu/ink-ui/styles.css';
 import './preview.css';
@@ -160,8 +160,8 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <Pagination page={page} count={12} onPageChange={setPage} accent={accent} />
         </div>
         <div className="component-block">
-          <span className="sample-label">SIDE NAV</span>
-          <SideNav currentPath="/library" groups={[{ title: 'Workspace', links: [{ label: 'Overview', href: '/' }, { label: 'Library', href: '/library' }, { label: 'Settings', href: '/settings' }] }]} />
+          <span className="sample-label">SIDEBAR</span>
+          <Sidebar currentPath="/library" groups={[{ title: 'Workspace', links: [{ label: 'Overview', href: '/' }, { label: 'Library', href: '/library' }, { label: 'Settings', href: '/settings' }] }]} />
         </div>
       </section>
       <div className="panel-rule" />

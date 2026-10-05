@@ -3,10 +3,10 @@ import { Pressable, Text, View } from 'react-native';
 import { tokens } from '@adrian-danciu/ink-ui-tokens';
 import { blackWeight, boldWeight, useAccent, useTheme } from '../../theme';
 
-export interface SideNavLink { label: string; href: string }
-export interface SideNavGroup { title: string; links: readonly SideNavLink[] }
-export interface SideNavProps {
-  groups: readonly SideNavGroup[];
+export interface SidebarLink { label: string; href: string }
+export interface SidebarGroup { title: string; links: readonly SidebarLink[] }
+export interface SidebarProps {
+  groups: readonly SidebarGroup[];
   currentPath?: string;
   label?: string;
   header?: ReactNode;
@@ -14,7 +14,7 @@ export interface SideNavProps {
   onNavigate: (href: string) => void;
 }
 
-export function SideNav({ groups, currentPath, label = 'Side navigation', header, footer, onNavigate }: SideNavProps) {
+export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', header, footer, onNavigate }: SidebarProps) {
   const colors = useTheme();
   const accent = useAccent();
   return <View accessibilityLabel={label} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: tokens.borderWidth.strong }}>

@@ -21,7 +21,7 @@ export * from './components/Toast/Toast';
 export * from './components/Avatar/Avatar';
 export * from './components/Separator/Separator';
 export * from './components/Skeleton/Skeleton';
-export * from './components/SideNav/SideNav';
+export * from './components/Sidebar/Sidebar';
 export * from './components/Chip/Chip';
 export * from './components/Breadcrumbs/Breadcrumbs';
 export * from './components/Pagination/Pagination';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, Pagination, ProgressBar, RadioGroup, Select, Separator, Sidebar, SideNav, Skeleton, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, Pagination, ProgressBar, RadioGroup, Select, Separator, Sidebar, Skeleton, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
 
 export function ComponentExample({ slug }: { slug: string }) {
   const [count, setCount] = React.useState(0);
@@ -44,7 +44,6 @@ export function ComponentExample({ slug }: { slug: string }) {
     case 'accordion': return <div className="demo-field"><Accordion items={[{ title: 'Materials', value: 'materials', content: <p>Heavy borders. Flat colors. Crisp type.</p> }, { title: 'Usage', value: 'usage', content: <p>Use the same tokens across every surface.</p> }]} value={openItem} onValueChange={setOpenItem} /></div>;
     case 'dialog': return <><Button onClick={() => setDialogOpen(true)}>Open dialog</Button><Dialog open={dialogOpen} onOpenChange={setDialogOpen} title="Publish this collection?" description="This will make the collection visible to everyone."><div className="demo-row"><Button variant="secondary" onClick={() => setDialogOpen(false)}>Cancel</Button><Button onClick={() => setDialogOpen(false)}>Publish</Button></div></Dialog></>;
     case 'sidebar': return <div className="demo-sidebar"><Sidebar currentPath="/components/sidebar" groups={[{ title: 'Foundations', links: [{ label: 'Getting started', href: '/getting-started' }, { label: 'Themes', href: '/themes' }] }, { title: 'Navigation', links: [{ label: 'Sidebar', href: '/components/sidebar' }, { label: 'Tabs', href: '/components/tabs' }] }]} /></div>;
-    case 'side-nav': return <div className="demo-sidebar"><SideNav currentPath="/components/side-nav" groups={[{ title: 'Workspace', links: [{ label: 'Overview', href: '/' }, { label: 'Components', href: '/components' }] }, { title: 'Navigation', links: [{ label: 'SideNav', href: '/components/side-nav' }, { label: 'Pagination', href: '/components/pagination' }] }]} /></div>;
     case 'chip': return <div className="demo-row">{chipVisible && <Chip label="Design" selected={chipSelected} onClick={() => setChipSelected(value => !value)} onRemove={() => setChipVisible(false)} />}<Chip label="Editorial" variant="outlined" /><Chip label="Unavailable" disabled onClick={() => {}} /></div>;
     case 'breadcrumbs': return <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Components', href: '/components' }, { label: 'Breadcrumbs' }]} />;
     case 'pagination': return <Pagination page={page} count={12} onPageChange={setPage} />;

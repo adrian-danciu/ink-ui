@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Button, Select, SideNav, ThemeProvider, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui';
+import { Button, Select, Sidebar, ThemeProvider, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName } from '@adrian-danciu/ink-ui-tokens';
 import { ComponentExample } from './examples';
 import { componentGroups, componentPages, type ComponentPage } from './pages';
@@ -79,7 +79,7 @@ function ComponentDoc({ page, theme, mode }: { page: ComponentPage; theme: Theme
       </tbody></table></div>
       <p className="docs-caption">See the TypeScript export for the complete type. DOM-based components also accept their corresponding native HTML props where their interface extends them.</p>
     </section>
-    {page.slug !== 'sidebar' && <p className="docs-platform-note">Also available from <code>@adrian-danciu/ink-ui-native</code> with the same component name. Platform event props follow React Native conventions.</p>}
+    <p className="docs-platform-note">Also available from <code>@adrian-danciu/ink-ui-native</code> with the same component name. Platform event props follow React Native conventions.</p>
     {next && <a className="docs-next" href={`/components/${next.slug}`}><span>NEXT COMPONENT</span><strong>{next.name} ↗</strong></a>}
   </>;
 }
@@ -131,15 +131,48 @@ function App() {
   const [mode, setMode] = React.useState<ThemeMode>(readMode);
   const [accent, setAccent] = React.useState<AccentName | 'default'>(readAccent);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const path = window.location.pathname.replace(/\/$/, '') || '/';
+  const [path, setPath] = React.useState(() => window.location.pathname.replace(/\/$/, '') || '/');
+  const mainRef = React.useRef<HTMLElement>(null);
   const page = path.startsWith('/components/') ? componentPages.find(item => `/components/${item.slug}` === path) : undefined;
+
+  function showNewPage() {
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+    if (window.matchMedia('(max-width: 760px)').matches) window.scrollTo(0, 0);
+    window.requestAnimationFrame(() => mainRef.current?.focus({ preventScroll: true }));
+  }
+
+  React.useEffect(() => {
+    const onPopState = () => {
+      setPath(window.location.pathname.replace(/\/$/, '') || '/');
+      showNewPage();
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  function handleInternalLinkClick(event: React.MouseEvent<HTMLDivElement>) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const anchor = target.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor || anchor.hasAttribute('download') || (anchor.target && anchor.target !== '_self')) return;
+    const url = new URL(anchor.href);
+    if (url.origin !== window.location.origin || url.hash) return;
+    const nextPath = url.pathname.replace(/\/$/, '') || '/';
+    if (nextPath !== '/' && nextPath !== '/getting-started' && nextPath !== '/themes' && nextPath !== '/components' && !componentPages.some(item => nextPath === `/components/${item.slug}`)) return;
+    event.preventDefault();
+    if (nextPath === path) return;
+    window.history.pushState(null, '', `${url.pathname}${url.search}`);
+    setPath(nextPath);
+    showNewPage();
+  }
 
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-theme', theme); }, [theme]);
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-mode', mode); }, [mode]);
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-accent', accent); }, [accent]);
   React.useEffect(() => { document.title = `${page?.name ?? (path === '/' ? 'Overview' : path === '/getting-started' ? 'Getting started' : path === '/themes' ? 'Themes & tokens' : 'Components')} — Ink UI`; }, [page, path]);
 
-  return <ThemeProvider theme={theme} mode={mode} accent={accent === 'default' ? undefined : accent} className="docs-app">
+  return <ThemeProvider theme={theme} mode={mode} accent={accent === 'default' ? undefined : accent} className="docs-app" onClickCapture={handleInternalLinkClick}>
     <div className="docs-topline"><span>INK UI / COMPONENT SYSTEM</span><span>REACT + REACT NATIVE / 001</span></div>
     <header className="docs-masthead">
       <a className="docs-brand" href="/" aria-label="Ink UI home"><span className="docs-brand-mark">I/</span><span>INK UI<small>COMPONENT LIBRARY / DOCUMENTATION</small></span></a>
@@ -147,9 +180,9 @@ function App() {
     </header>
     <div className="docs-layout">
       <div id="docs-sidebar" className={['docs-sidebar-wrap', menuOpen && 'is-open'].filter(Boolean).join(' ')}>
-        <SideNav groups={navigation} currentPath={path} label="Documentation" onNavigate={() => setMenuOpen(false)} header={<div className="docs-sidebar-intro"><strong>FIELD GUIDE</strong><span>{String(componentPages.length).padStart(2, '0')} / INDEX</span></div>} footer={<div className="docs-sidebar-foot">HARD LINES.<br />CLEAR ACTIONS.</div>} />
+        <Sidebar groups={navigation} currentPath={path} label="Documentation" onNavigate={() => setMenuOpen(false)} header={<div className="docs-sidebar-intro"><strong>FIELD GUIDE</strong><span>{String(componentPages.length).padStart(2, '0')} / INDEX</span></div>} footer={<div className="docs-sidebar-foot">HARD LINES.<br />CLEAR ACTIONS.</div>} />
       </div>
-      <main className="docs-main" id="main-content">
+      <main className="docs-main" id="main-content" ref={mainRef} tabIndex={-1}>
         <div className="docs-toolbar">
           <span>APPEARANCE / LIVE SYSTEM</span>
           <div className="docs-toolbar-controls">

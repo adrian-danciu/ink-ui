@@ -238,26 +238,14 @@ export const componentPages: readonly ComponentPage[] = [
   },
   {
     slug: 'sidebar', name: 'Sidebar', category: 'Navigation',
-    description: 'Grouped web navigation with a clear current-page state. SideNav is the cross-platform name.',
+    description: 'Grouped navigation with a clear current-page state. Used by these docs.',
     code: `<Sidebar currentPath="/components/button"\n  groups={[{ title: 'Components', links: [\n    { label: 'Button', href: '/components/button' },\n    { label: 'Card', href: '/components/card' },\n  ]}]} />`,
     props: [
       { name: 'groups', type: '{ title; links: { label; href }[] }[]', description: 'Navigation sections and links.' },
       { name: 'currentPath', type: 'string', description: 'Link href marked as the current page.' },
       { name: 'label', type: 'string', description: 'Accessible navigation label.' },
       { name: 'header / footer', type: 'ReactNode', description: 'Optional content above and below the links.' },
-      { name: 'onNavigate', type: '() => void', description: 'Called when a link is activated; useful for mobile drawers.' },
-    ],
-  },
-  {
-    slug: 'side-nav', name: 'SideNav', category: 'Navigation',
-    description: 'Grouped side navigation with a current-page state. The docs use this component.',
-    code: `<SideNav currentPath="/projects" groups={[{ title: 'Workspace', links: [\n  { label: 'Projects', href: '/projects' },\n  { label: 'Settings', href: '/settings' },\n] }]} />`,
-    props: [
-      { name: 'groups', type: 'SideNavGroup[]', description: 'Titled groups of links.' },
-      { name: 'currentPath', type: 'string', description: 'Href marked as the current page.' },
-      { name: 'label', type: 'string', description: 'Accessible navigation label.' },
-      { name: 'header / footer', type: 'ReactNode', description: 'Optional content above and below links.' },
-      { name: 'onNavigate', type: 'callback', description: 'Called when a link is activated. React Native receives its href.' },
+      { name: 'onNavigate', type: 'callback', description: 'Called when a link is activated. React Native receives the href for its router.' },
     ],
   },
   {
