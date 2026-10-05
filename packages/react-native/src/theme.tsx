@@ -1,8 +1,8 @@
 import * as React from 'react';
 import type { TextStyle } from 'react-native';
-import { accents, getTheme, themes, tokens, type AccentName, type ThemeMode, type ThemeName } from '@ui-library/tokens';
+import { accents, getTheme, themes, tokens, type AccentName, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui-tokens';
 
-export type { AccentName, ThemeMode, ThemeName } from '@ui-library/tokens';
+export type { AccentName, ThemeMode, ThemeName } from '@adrian-danciu/ink-ui-tokens';
 
 interface ThemeSelection { theme: ThemeName; mode: ThemeMode; accent: AccentName }
 const ThemeContext = React.createContext<ThemeSelection>({ theme: 'paper', mode: 'light', accent: 'red' });

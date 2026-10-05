@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Button, Select, Sidebar, ThemeProvider, type ThemeMode, type ThemeName } from '@ui-library/react';
-import { accents, themes, type AccentName } from '@ui-library/tokens';
+import { Button, Select, Sidebar, ThemeProvider, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui';
+import { accents, themes, type AccentName } from '@adrian-danciu/ink-ui-tokens';
 import { ComponentExample } from './examples';
 import { componentGroups, componentPages, type ComponentPage } from './pages';
-import '@ui-library/react/styles.css';
+import '@adrian-danciu/ink-ui/styles.css';
 import './docs.css';
 
 const navigation = [
@@ -79,7 +79,7 @@ function ComponentDoc({ page, theme, mode }: { page: ComponentPage; theme: Theme
       </tbody></table></div>
       <p className="docs-caption">See the TypeScript export for the complete type. DOM-based components also accept their corresponding native HTML props where their interface extends them.</p>
     </section>
-    {page.slug !== 'sidebar' && <p className="docs-platform-note">Also available from <code>@ui-library/react-native</code> with the same component name. Platform event props follow React Native conventions.</p>}
+    {page.slug !== 'sidebar' && <p className="docs-platform-note">Also available from <code>@adrian-danciu/ink-ui-native</code> with the same component name. Platform event props follow React Native conventions.</p>}
     {next && <a className="docs-next" href={`/components/${next.slug}`}><span>NEXT COMPONENT</span><strong>{next.name} ↗</strong></a>}
   </>;
 }
@@ -101,9 +101,9 @@ function GettingStarted() {
   return <>
     <PageHeader index="01" category="Guide" title="Getting started" description="Start with the Bun workspace, then import the stylesheet and components into your React app." />
     <section className="docs-section"><div className="docs-section-heading"><h2>Run locally</h2><span>WORKSPACE</span></div><CodeBlock code={'bun install\nbun run docs'} /><p className="docs-body-copy">The docs server runs on port 3001. The component preview runs separately with <code>bun run dev</code> on port 3000.</p></section>
-    <section className="docs-section"><div className="docs-section-heading"><h2>React / Next.js</h2><span>WEB</span></div><CodeBlock code={`import '@ui-library/react/styles.css';\nimport { Button, ThemeProvider } from '@ui-library/react';\n\n<ThemeProvider theme="paper" mode="light" accent="red">\n  <Button>Continue</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Import the stylesheet once at the app root. In Next.js, put it in your root layout. Wrap the part of the app you want themed with <code>ThemeProvider</code>.</p></section>
-    <section className="docs-section"><div className="docs-section-heading"><h2>React Native</h2><span>MOBILE</span></div><CodeBlock code={`import { Button, ThemeProvider } from '@ui-library/react-native';\n\n<ThemeProvider theme="electric" mode="dark" accent="lime">\n  <Button onPress={() => {}}>Continue</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Native components use the same token values through JavaScript styles. CSS imports are only for the web package.</p></section>
-    <p className="docs-platform-note">The <code>@ui-library</code> package scope is still a workspace placeholder. Package installation instructions will be updated when the library is named and published on npm.</p>
+    <section className="docs-section"><div className="docs-section-heading"><h2>React / Next.js</h2><span>WEB</span></div><CodeBlock code={`import '@adrian-danciu/ink-ui/styles.css';\nimport { Button, ThemeProvider } from '@adrian-danciu/ink-ui';\n\n<ThemeProvider theme="paper" mode="light" accent="red">\n  <Button>Continue</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Import the stylesheet once at the app root. In Next.js, put it in your root layout. Wrap the part of the app you want themed with <code>ThemeProvider</code>.</p></section>
+    <section className="docs-section"><div className="docs-section-heading"><h2>React Native</h2><span>MOBILE</span></div><CodeBlock code={`import { Button, ThemeProvider } from '@adrian-danciu/ink-ui-native';\n\n<ThemeProvider theme="electric" mode="dark" accent="lime">\n  <Button onPress={() => {}}>Continue</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Native components use the same token values through JavaScript styles. CSS imports are only for the web package.</p></section>
+    <p className="docs-platform-note">The <code>@adrian-danciu</code> packages are being prepared for npm. Until release, clone the repository and run the examples from this workspace.</p>
   </>;
 }
 

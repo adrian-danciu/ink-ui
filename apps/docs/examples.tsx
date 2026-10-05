@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, Alert, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Sidebar, Switch, Tabs, TextArea, TextField, Toast } from '@ui-library/react';
+import { Accordion, Alert, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Sidebar, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
 
 export function ComponentExample({ slug }: { slug: string }) {
   const [count, setCount] = React.useState(0);

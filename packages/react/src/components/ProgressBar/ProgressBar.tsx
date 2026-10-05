@@ -1,4 +1,4 @@
-import type { AccentName } from '@ui-library/tokens';
+import type { AccentName } from '@adrian-danciu/ink-ui-tokens';
 
 export interface ProgressBarProps {
   value: number;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, TextInput, View, StyleProp, type TextInputProps, type TextStyle } from 'react-native';
-import { tokens } from '@ui-library/tokens';
+import { tokens } from '@adrian-danciu/ink-ui-tokens';
 import { useTheme, blackWeight } from '../../theme';
 
 export interface TextFieldProps extends Omit<TextInputProps, 'style'> {

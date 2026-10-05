@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { AccentName } from '@ui-library/tokens';
+import type { AccentName } from '@adrian-danciu/ink-ui-tokens';
 
 export interface DialogProps {
   open: boolean;

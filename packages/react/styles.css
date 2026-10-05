@@ -1,4 +1,4 @@
-@import '@ui-library/tokens/styles.css';
+@import '@adrian-danciu/ink-ui-tokens/styles.css';
 @import './styles/base.css';
 @import './src/ThemeProvider/style.css';
 @import './src/components/Button/style.css';

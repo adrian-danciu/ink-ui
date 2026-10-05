@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { themes, type AccentName, type ThemeMode, type ThemeName } from '@ui-library/tokens';
+import { themes, type AccentName, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui-tokens';
 
 export interface ThemeProviderProps extends React.HTMLAttributes<HTMLDivElement> {
   theme: ThemeName;

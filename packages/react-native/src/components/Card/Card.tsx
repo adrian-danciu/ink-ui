@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View, StyleProp, type ViewStyle } from 'react-native';
-import { tokens, type AccentName } from '@ui-library/tokens';
+import { tokens, type AccentName } from '@adrian-danciu/ink-ui-tokens';
 import { useTheme, useAccent, blackWeight, boldWeight } from '../../theme';
 
 export interface CardProps {

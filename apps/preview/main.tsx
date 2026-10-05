@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Accordion, Alert, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@ui-library/react';
-import { accents, themes, type AccentName, type ThemeMode } from '@ui-library/tokens';
-import '@ui-library/react/styles.css';
+import { Accordion, Alert, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
+import { accents, themes, type AccentName, type ThemeMode } from '@adrian-danciu/ink-ui-tokens';
+import '@adrian-danciu/ink-ui/styles.css';
 import './preview.css';
 
 const themeInfo: { id: ThemeName; number: string; title: string; description: string }[] = [

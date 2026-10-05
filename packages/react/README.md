@@ -1,0 +1,32 @@
+# Ink UI for React
+
+Ink UI brings bold borders, offset shadows, editorial typography, and token-driven color to React and Next.js. Choose from Poster, Paper, and Electric themes; each supports light and dark modes. Set an accent for the whole interface or override it on individual components.
+
+## Install
+
+```sh
+npm install @adrian-danciu/ink-ui
+```
+
+With Bun: `bun add @adrian-danciu/ink-ui`.
+
+React and React DOM are peer dependencies. In a Next.js app, import the stylesheet once from the root layout.
+
+## Use
+
+```tsx
+import '@adrian-danciu/ink-ui/styles.css';
+import { Button, ThemeProvider } from '@adrian-danciu/ink-ui';
+
+export function Example() {
+  return <ThemeProvider theme="paper" mode="light" accent="red">
+    <Button accent="turquoise">Continue</Button>
+  </ThemeProvider>;
+}
+```
+
+## Components
+
+Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, EmptyState, and Sidebar.
+
+Styles are provided through one import: `@adrian-danciu/ink-ui/styles.css`. Tokens come from the `@adrian-danciu/ink-ui-tokens` dependency. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.

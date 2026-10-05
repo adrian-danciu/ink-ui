@@ -1,5 +1,5 @@
 {
-  "name": "@ui-library/preview",
+  "name": "ink-ui-preview",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,8 +8,8 @@
     "typecheck": "bun x --bun tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@ui-library/react": "workspace:*",
-    "@ui-library/tokens": "workspace:*",
+    "@adrian-danciu/ink-ui": "workspace:*",
+    "@adrian-danciu/ink-ui-tokens": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

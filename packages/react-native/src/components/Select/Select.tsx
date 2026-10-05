@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Modal, Pressable, ScrollView, Text, View } from 'react-native';
-import { tokens } from '@ui-library/tokens';
+import { tokens } from '@adrian-danciu/ink-ui-tokens';
 import { useTheme, blackWeight, boldWeight } from '../../theme';
 
 export interface SelectProps {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { tokens, type AccentName } from '@ui-library/tokens';
+import { tokens, type AccentName } from '@adrian-danciu/ink-ui-tokens';
 import { useTheme, useAccent, blackWeight } from '../../theme';
 
 export interface TabsProps {

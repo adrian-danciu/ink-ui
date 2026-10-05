@@ -1,4 +1,4 @@
-export type { AccentName, ThemeMode, ThemeName } from '@ui-library/tokens';
+export type { AccentName, ThemeMode, ThemeName } from '@adrian-danciu/ink-ui-tokens';
 export { ThemeProvider, useTheme } from './theme';
 export type { ThemeProviderProps } from './theme';
 export * from './components/Button/Button';

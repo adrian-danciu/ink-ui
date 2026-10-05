@@ -1,5 +1,5 @@
 import { Text, TextInput, View, StyleProp, type TextInputProps, type TextStyle } from 'react-native';
-import { tokens } from '@ui-library/tokens';
+import { tokens } from '@adrian-danciu/ink-ui-tokens';
 import { useTheme, blackWeight } from '../../theme';
 
 export interface TextAreaProps extends Omit<TextInputProps, 'style' | 'multiline'> {

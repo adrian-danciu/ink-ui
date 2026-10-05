@@ -1,5 +1,5 @@
 import { Pressable, Text, View } from 'react-native';
-import { accents, tokens } from '@ui-library/tokens';
+import { accents, tokens } from '@adrian-danciu/ink-ui-tokens';
 import { useTheme, blackWeight } from '../../theme';
 
 export interface ToastProps {
