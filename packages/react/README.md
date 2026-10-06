@@ -27,7 +27,7 @@ export function Example() {
 
 ## Components
 
-Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, Breadcrumbs, Pagination, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, EmptyState, and Sidebar.
+Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Rating, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Breadcrumbs, Pagination, Stepper, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, EmptyState, and Sidebar.
 
 Styles are provided through one import: `@adrian-danciu/ink-ui/styles.css`. Tokens come from the `@adrian-danciu/ink-ui-tokens` dependency. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.
 
@@ -50,3 +50,13 @@ Styles are provided through one import: `@adrian-danciu/ink-ui/styles.css`. Toke
 ```
 
 Use `onNavigate={(event, href) => { event.preventDefault(); router.push(href); }}` with a client router. Without it, links use normal browser navigation.
+
+### List, Stepper, and Rating
+
+`List` renders structured rows; pass `onItemSelect` and `selectedId` for controlled selection. `Stepper` shows progress through an ordered flow with a zero-based `activeStep`. `Rating` is a controlled star input with arrow-key navigation.
+
+```tsx
+<List items={[{ id: 'drafts', title: 'Drafts', description: 'Work in progress' }]} selectedId={selectedId} onItemSelect={setSelectedId} />
+<Stepper steps={[{ label: 'Details' }, { label: 'Review' }, { label: 'Publish' }]} activeStep={1} />
+<Rating label="Rate this collection" value={rating} onValueChange={setRating} />
+```

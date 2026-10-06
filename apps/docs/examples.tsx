@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, Pagination, ProgressBar, RadioGroup, Select, Separator, Sidebar, Skeleton, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sidebar, Skeleton, Stepper, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
 
 export function ComponentExample({ slug }: { slug: string }) {
   const [count, setCount] = React.useState(0);
@@ -18,6 +18,9 @@ export function ComponentExample({ slug }: { slug: string }) {
   const [chipVisible, setChipVisible] = React.useState(true);
   const [page, setPage] = React.useState(4);
   const [demoSidebarOpen, setDemoSidebarOpen] = React.useState(false);
+  const [selectedListItem, setSelectedListItem] = React.useState('drafts');
+  const [activeStep, setActiveStep] = React.useState(1);
+  const [rating, setRating] = React.useState(3);
 
   switch (slug) {
     case 'button': return <div className="demo-stack">
@@ -54,6 +57,9 @@ export function ComponentExample({ slug }: { slug: string }) {
     case 'chip': return <div className="demo-row">{chipVisible && <Chip label="Design" selected={chipSelected} onClick={() => setChipSelected(value => !value)} onRemove={() => setChipVisible(false)} />}<Chip label="Editorial" variant="outlined" /><Chip label="Unavailable" disabled onClick={() => {}} /></div>;
     case 'breadcrumbs': return <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Components', href: '/components' }, { label: 'Breadcrumbs' }]} />;
     case 'pagination': return <Pagination page={page} count={12} onPageChange={setPage} />;
+    case 'list': return <div className="demo-field"><List selectedId={selectedListItem} onItemSelect={setSelectedListItem} items={[{ id: 'drafts', title: 'Drafts', description: 'Work in progress', leading: '◧', trailing: '04' }, { id: 'published', title: 'Published', description: 'Available to everyone', leading: '◆', trailing: '12' }, { id: 'archive', title: 'Archive', description: 'Earlier work', leading: '▤', trailing: '08' }]} /></div>;
+    case 'stepper': return <div className="demo-stack demo-field"><Stepper steps={[{ label: 'Details', description: 'Write the basics' }, { label: 'Review', description: 'Check everything' }, { label: 'Publish', description: 'Go live' }]} activeStep={activeStep} /><div className="demo-row"><Button size="sm" variant="secondary" disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>Previous</Button><Button size="sm" disabled={activeStep === 2} onClick={() => setActiveStep(activeStep + 1)}>Next</Button></div></div>;
+    case 'rating': return <Rating label="Rate this collection" value={rating} onValueChange={setRating} />;
     default: return null;
   }
 }

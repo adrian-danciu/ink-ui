@@ -25,3 +25,6 @@ export * from './components/Sidebar/Sidebar';
 export * from './components/Chip/Chip';
 export * from './components/Breadcrumbs/Breadcrumbs';
 export * from './components/Pagination/Pagination';
+export * from './components/List/List';
+export * from './components/Stepper/Stepper';
+export * from './components/Rating/Rating';

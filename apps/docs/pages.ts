@@ -286,6 +286,40 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'label / accent', type: 'string / AccentName', description: 'Accessible label and accent override.' },
     ],
   },
+  {
+    slug: 'list', name: 'List', category: 'Content',
+    description: 'A bordered list of records with optional leading and trailing content and controlled selection.',
+    code: `<List items={[{ id: 'drafts', title: 'Drafts', description: 'Work in progress', leading: '◧' }]}\n  selectedId={selectedId} onItemSelect={setSelectedId} />`,
+    props: [
+      { name: 'items', type: 'ListItem[]', description: 'Items with id, title, optional description, leading/trailing content, and disabled state.' },
+      { name: 'selectedId', type: 'string', description: 'Currently selected item id.' },
+      { name: 'onItemSelect', type: '(id: string) => void', description: 'Makes each item an interactive action.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the selected item accent.' },
+    ],
+  },
+  {
+    slug: 'stepper', name: 'Stepper', category: 'Navigation',
+    description: 'An ordered indicator for the current step in a multi-step flow.',
+    code: `<Stepper steps={[{ label: 'Details' }, { label: 'Review' }, { label: 'Publish' }]} activeStep={1} />`,
+    props: [
+      { name: 'steps', type: 'StepperStep[]', description: 'Ordered labels with optional descriptions.' },
+      { name: 'activeStep', type: 'number', description: 'Zero-based index of the current step.' },
+      { name: 'orientation', type: "'horizontal' | 'vertical'", description: 'Layout direction. Default: horizontal.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the current step accent.' },
+    ],
+  },
+  {
+    slug: 'rating', name: 'Rating', category: 'Forms',
+    description: 'A controlled star rating with keyboard arrow navigation on web.',
+    code: `<Rating label="Rate this collection" value={rating} onValueChange={setRating} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Visible and accessible name.' },
+      { name: 'value', type: 'number', description: 'Selected rating; zero shows no filled stars.' },
+      { name: 'onValueChange', type: '(value: number) => void', description: 'Called when a star is selected.' },
+      { name: 'max', type: 'number', description: 'Number of stars, clamped to 1–10. Default: 5.' },
+      { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables input or overrides the accent.' },
+    ],
+  },
 ];
 
 export const componentGroups = (['Actions', 'Forms', 'Content', 'Feedback', 'Navigation'] as const).map(category => ({

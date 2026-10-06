@@ -25,3 +25,6 @@
 @import './src/components/Chip/style.css';
 @import './src/components/Breadcrumbs/style.css';
 @import './src/components/Pagination/style.css';
+@import './src/components/List/style.css';
+@import './src/components/Stepper/style.css';
+@import './src/components/Rating/style.css';

@@ -26,10 +26,14 @@ export function Example() {
 
 ## Components
 
-Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, Breadcrumbs, Pagination, Sidebar, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, and EmptyState. Native `Sidebar` uses an `onNavigate(href)` callback so the app can connect its router.
+Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Rating, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Breadcrumbs, Pagination, Stepper, Sidebar, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, and EmptyState. Native `Sidebar` uses an `onNavigate(href)` callback so the app can connect its router.
 
 Native components use JavaScript tokens and do not require a CSS import. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.
 
 ### Sidebar
 
 `Sidebar` accepts `icon` and `iconPosition: 'left' | 'right'` on each link, plus a default `iconPosition` prop. Use `collapsible` for an inline icon rail. Supplying `mobileOpen` renders it in a native modal drawer with a close control and backdrop. Connect links to your navigation library through `onNavigate(href)`.
+
+### List, Stepper, and Rating
+
+`List` accepts rows with optional leading and trailing React Native elements, plus controlled `selectedId` and `onItemSelect`. `Stepper` displays a zero-based `activeStep`. `Rating` accepts a controlled value and `onValueChange` callback.

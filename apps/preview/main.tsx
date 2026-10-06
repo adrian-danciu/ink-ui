@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, Pagination, ProgressBar, RadioGroup, Select, Separator, Sidebar, Skeleton, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sidebar, Skeleton, Stepper, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName, type ThemeMode } from '@adrian-danciu/ink-ui-tokens';
 import '@adrian-danciu/ink-ui/styles.css';
 import './preview.css';
@@ -29,6 +29,9 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
   const [favorites, setFavorites] = React.useState(0);
   const [chipSelected, setChipSelected] = React.useState(false);
   const [page, setPage] = React.useState(4);
+  const [selectedListItem, setSelectedListItem] = React.useState('drafts');
+  const [activeStep, setActiveStep] = React.useState(1);
+  const [rating, setRating] = React.useState(3);
   const colors = themes[id].modes[mode];
   const accent = selectedAccent === 'default' ? themes[id].defaultAccent as AccentName : selectedAccent;
   const swatches = [
@@ -127,7 +130,7 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
       </section>
       <div className="panel-rule" />
       <section aria-label={`${title} content components`}>
-        <div className="section-heading"><span>CONTENT + NAVIGATION</span><span>10—20</span></div>
+        <div className="section-heading"><span>CONTENT + NAVIGATION</span><span>COMPONENT SET</span></div>
         <div className="component-block">
           <span className="sample-label">TEXT AREA</span>
           <TextArea label="Field notes" placeholder="Leave an observation..." value={note} onChange={event => setNote(event.currentTarget.value)} helperText="Keep it concise and useful." />
@@ -160,6 +163,15 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <Pagination page={page} count={12} onPageChange={setPage} accent={accent} />
         </div>
         <div className="component-block">
+          <span className="sample-label">LIST</span>
+          <List selectedId={selectedListItem} onItemSelect={setSelectedListItem} accent={accent} items={[{ id: 'drafts', title: 'Drafts', description: 'Work in progress', leading: '◧', trailing: '04' }, { id: 'published', title: 'Published', description: 'Available to everyone', leading: '◆', trailing: '12' }, { id: 'archive', title: 'Archive', description: 'Earlier work', leading: '▤', trailing: '08' }]} />
+        </div>
+        <div className="component-block">
+          <span className="sample-label">STEPPER</span>
+          <Stepper steps={[{ label: 'Details' }, { label: 'Review' }, { label: 'Publish' }]} activeStep={activeStep} accent={accent} />
+          <div className="button-row"><Button size="sm" variant="secondary" disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>Previous</Button><Button size="sm" disabled={activeStep === 2} onClick={() => setActiveStep(activeStep + 1)}>Next</Button></div>
+        </div>
+        <div className="component-block">
           <span className="sample-label">SIDEBAR</span>
           <Sidebar collapsible currentPath="/sample/library" onNavigate={event => event.preventDefault()} groups={[
             { title: 'Workspace', links: [{ label: 'Overview', href: '/sample/overview', icon: '⌂' }, { label: 'Library', href: '/sample/library', icon: '▦' }, { label: 'Collections', href: '/sample/collections', icon: '◇' }, { label: 'Activity', href: '/sample/activity', icon: '◷' }] },
@@ -169,10 +181,14 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
       </section>
       <div className="panel-rule" />
       <section aria-label={`${title} actions and overlays`}>
-        <div className="section-heading"><span>ACTIONS + OVERLAYS</span><span>21—24</span></div>
+        <div className="section-heading"><span>ACTIONS + OVERLAYS</span><span>COMPONENT SET</span></div>
         <div className="component-block">
           <span className="sample-label">SELECT</span>
           <Select label="Collection category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }]} value={category} onValueChange={setCategory} />
+        </div>
+        <div className="component-block">
+          <span className="sample-label">RATING</span>
+          <Rating label="Rate this collection" value={rating} onValueChange={setRating} accent={accent} />
         </div>
         <div className="component-block">
           <span className="sample-label">ICON BUTTONS</span>
