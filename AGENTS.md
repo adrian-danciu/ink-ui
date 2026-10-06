@@ -7,6 +7,7 @@ Ink UI is a public, MIT-licensed component library for React/Next.js and React N
 - Use Bun 1.4.2, as pinned in the root `package.json`. From the repository root, run `bun install --frozen-lockfile` after cloning.
 - Run `bun run preview` for the component preview at `http://localhost:3000`.
 - Run `bun run docs` for the documentation app at `http://localhost:3001`.
+- Preview and docs build the React package once when started. If you edit a web component's TSX while either server stays open, run `bun --filter @adrian-danciu/ink-ui build` and reload the browser tab. Otherwise, updated CSS can appear alongside stale component JavaScript.
 - Stop preview or docs servers you start when your task is finished, unless the user asks to keep them running.
 - Read `DESIGN-DIRECTION.md` for visual intent, the relevant package README for consumer usage, and `RELEASING.md` before release work. Some early open-decision wording in the design document predates the Ink UI name and npm release; current code and package manifests take precedence.
 

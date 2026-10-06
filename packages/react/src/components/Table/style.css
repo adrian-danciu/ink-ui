@@ -1,0 +1,7 @@
+.ui-table-scroll { max-width: 100%; overflow-x: auto; }
+.ui-table { background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-collapse: collapse; color: var(--ui-color-text); font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-sm); min-width: 100%; text-align: left; }
+.ui-table caption { color: var(--ui-color-text-muted); font-family: var(--ui-font-family-mono); font-size: var(--ui-font-size-xs); padding: var(--ui-space-2) 0; text-align: left; }
+.ui-table th, .ui-table td { border-bottom: var(--ui-border-width-sm) solid var(--ui-color-border); padding: var(--ui-space-3); white-space: nowrap; }
+.ui-table th { background: var(--ui-color-surface-raised); font-size: var(--ui-font-size-xs); font-weight: var(--ui-font-weight-black); letter-spacing: var(--ui-letter-spacing-wide); text-transform: uppercase; }
+.ui-table tr:last-child td { border-bottom: 0; }
+.ui-table [data-align='right'] { text-align: right; }

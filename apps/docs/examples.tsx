@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, Alert, Badge, Button, Card, Checkbox, Dialog, EmptyState, IconButton, ProgressBar, RadioGroup, Select, Sidebar, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Combobox, Dialog, DropdownMenu, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Spinner, Stepper, Switch, Table, Tabs, TextArea, TextField, Toast, ToggleGroup, Tooltip } from '@adrian-danciu/ink-ui';
 
 export function ComponentExample({ slug }: { slug: string }) {
   const [count, setCount] = React.useState(0);
@@ -14,6 +14,18 @@ export function ComponentExample({ slug }: { slug: string }) {
   const [openItem, setOpenItem] = React.useState<string | null>('materials');
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [toastOpen, setToastOpen] = React.useState(true);
+  const [chipSelected, setChipSelected] = React.useState(false);
+  const [chipVisible, setChipVisible] = React.useState(true);
+  const [page, setPage] = React.useState(4);
+  const [demoSidebarOpen, setDemoSidebarOpen] = React.useState(false);
+  const [selectedListItem, setSelectedListItem] = React.useState('drafts');
+  const [activeStep, setActiveStep] = React.useState(1);
+  const [rating, setRating] = React.useState(3);
+  const [view, setView] = React.useState('grid');
+  const [intensity, setIntensity] = React.useState(60);
+  const [menuAction, setMenuAction] = React.useState('None');
+  const [sheetOpen, setSheetOpen] = React.useState(false);
+  const [comboValue, setComboValue] = React.useState('design');
 
   switch (slug) {
     case 'button': return <div className="demo-stack">
@@ -30,6 +42,9 @@ export function ComponentExample({ slug }: { slug: string }) {
     case 'select': return <div className="demo-field"><Select label="Collection category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }]} value={category} onValueChange={setCategory} /></div>;
     case 'card': return <div className="demo-card"><Card eyebrow="FIELD NOTE / 001" title="A stronger signal" description="Bold surfaces, direct labels, and a clear action at every step."><Button size="sm">Explore</Button></Card></div>;
     case 'badge': return <div className="demo-row"><Badge>Featured</Badge><Badge tone="neutral">Draft</Badge><Badge tone="success">Live</Badge><Badge tone="danger">Error</Badge></div>;
+    case 'avatar': return <div className="demo-row"><Avatar name="Alex Morgan" size="sm" /><Avatar name="Alex Morgan" /><Avatar name="Alex Morgan" size="lg" accent="turquoise" /></div>;
+    case 'separator': return <div className="demo-stack demo-field"><span>Above the rule</span><Separator /><span>Below the rule</span></div>;
+    case 'skeleton': return <div className="demo-stack demo-field" aria-busy="true"><div className="demo-row"><Skeleton variant="circle" /><Skeleton width="65%" /></div><Skeleton variant="block" /></div>;
     case 'empty-state': return <div className="demo-card"><EmptyState title="Nothing here yet" description="Your next collection starts with one item."><Button size="sm">Create collection</Button></EmptyState></div>;
     case 'alert': return <div className="demo-stack demo-field"><Alert tone="info" title="Filed successfully" description="Your draft is ready for review." /><Alert tone="warning" title="Check your details" description="One field still needs attention." /></div>;
     case 'toast': return <div className="demo-field">{toastOpen ? <Toast open title="Collection saved" description="Your changes are ready." tone="success" onDismiss={() => setToastOpen(false)} /> : <Button size="sm" onClick={() => setToastOpen(true)}>Show toast</Button>}</div>;
@@ -37,7 +52,27 @@ export function ComponentExample({ slug }: { slug: string }) {
     case 'tabs': return <div className="demo-field"><Tabs label="Collection sections" value={tab} onValueChange={setTab} tabs={[{ label: 'Overview', value: 'overview', content: <p>A sharp summary of the collection.</p> }, { label: 'Details', value: 'details', content: <p>Materials, notes, and related work.</p> }]} /></div>;
     case 'accordion': return <div className="demo-field"><Accordion items={[{ title: 'Materials', value: 'materials', content: <p>Heavy borders. Flat colors. Crisp type.</p> }, { title: 'Usage', value: 'usage', content: <p>Use the same tokens across every surface.</p> }]} value={openItem} onValueChange={setOpenItem} /></div>;
     case 'dialog': return <><Button onClick={() => setDialogOpen(true)}>Open dialog</Button><Dialog open={dialogOpen} onOpenChange={setDialogOpen} title="Publish this collection?" description="This will make the collection visible to everyone."><div className="demo-row"><Button variant="secondary" onClick={() => setDialogOpen(false)}>Cancel</Button><Button onClick={() => setDialogOpen(false)}>Publish</Button></div></Dialog></>;
-    case 'sidebar': return <div className="demo-sidebar"><Sidebar currentPath="/components/sidebar" groups={[{ title: 'Foundations', links: [{ label: 'Getting started', href: '/getting-started' }, { label: 'Themes', href: '/themes' }] }, { title: 'Navigation', links: [{ label: 'Sidebar', href: '/components/sidebar' }, { label: 'Tabs', href: '/components/tabs' }] }]} /></div>;
+    case 'sidebar': return <div className="demo-sidebar">
+      <button className="demo-mobile-sidebar-trigger" type="button" onClick={() => setDemoSidebarOpen(true)}>Open sample sidebar</button>
+      <Sidebar collapsible currentPath="/demo/overview" mobileOpen={demoSidebarOpen} onMobileOpenChange={setDemoSidebarOpen} onNavigate={event => event.preventDefault()} groups={[
+        { title: 'Workspace', links: [{ label: 'Overview', href: '/demo/overview', icon: '⌂' }, { label: 'Projects', href: '/demo/projects', icon: '▦' }, { label: 'Activity', href: '/demo/activity', icon: '◷' }, { label: 'Saved items', href: '/demo/saved', icon: '★', iconPosition: 'right' }] },
+        { title: 'Account', links: [{ label: 'Messages', href: '/demo/messages', icon: '✉' }, { label: 'Team', href: '/demo/team', icon: '♧' }, { label: 'Settings', href: '/demo/settings', icon: '⚙', iconPosition: 'right' }, { label: 'Help', href: '/demo/help' }] },
+      ]} />
+    </div>;
+    case 'chip': return <div className="demo-row">{chipVisible && <Chip label="Design" selected={chipSelected} onClick={() => setChipSelected(value => !value)} onRemove={() => setChipVisible(false)} />}<Chip label="Editorial" variant="outlined" /><Chip label="Unavailable" disabled onClick={() => {}} /></div>;
+    case 'breadcrumbs': return <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Components', href: '/components' }, { label: 'Breadcrumbs' }]} />;
+    case 'pagination': return <Pagination page={page} count={12} onPageChange={setPage} />;
+    case 'list': return <div className="demo-field"><List selectedId={selectedListItem} onItemSelect={setSelectedListItem} items={[{ id: 'drafts', title: 'Drafts', description: 'Work in progress', leading: '◧', trailing: '04' }, { id: 'published', title: 'Published', description: 'Available to everyone', leading: '◆', trailing: '12' }, { id: 'archive', title: 'Archive', description: 'Earlier work', leading: '▤', trailing: '08' }]} /></div>;
+    case 'stepper': return <div className="demo-stack demo-field"><Stepper steps={[{ label: 'Details', description: 'Write the basics' }, { label: 'Review', description: 'Check everything' }, { label: 'Publish', description: 'Go live' }]} activeStep={activeStep} /><div className="demo-row"><Button size="sm" variant="secondary" disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>Previous</Button><Button size="sm" disabled={activeStep === 2} onClick={() => setActiveStep(activeStep + 1)}>Next</Button></div></div>;
+    case 'rating': return <Rating label="Rate this collection" value={rating} onValueChange={setRating} />;
+    case 'spinner': return <div className="demo-row"><Spinner size="sm" label="Loading small item" /><Spinner label="Loading results" /><Spinner size="lg" label="Loading large item" /></div>;
+    case 'toggle-group': return <ToggleGroup label="Collection view" options={[{ label: 'Grid', value: 'grid' }, { label: 'List', value: 'list' }, { label: 'Timeline', value: 'timeline' }]} value={view} onValueChange={setView} />;
+    case 'table': return <Table caption="Recent issues" columns={[{ key: 'id', label: 'Issue' }, { key: 'status', label: 'Status' }, { key: 'owner', label: 'Owner' }]} rows={[{ id: 'one', cells: { id: 'INK-01', status: 'Open', owner: 'Alex' } }, { id: 'two', cells: { id: 'INK-02', status: 'In review', owner: 'Sam' } }, { id: 'three', cells: { id: 'INK-03', status: 'Done', owner: 'Lee' } }]} />;
+    case 'slider': return <div className="demo-field"><Slider label="Intensity" value={intensity} onValueChange={setIntensity} min={0} max={100} step={5} /></div>;
+    case 'dropdown-menu': return <div className="demo-row"><DropdownMenu label="Actions" items={[{ id: 'edit', label: 'Edit' }, { id: 'duplicate', label: 'Duplicate' }, { id: 'delete', label: 'Delete', destructive: true }]} onItemSelect={setMenuAction} /><span>Selected: {menuAction}</span></div>;
+    case 'sheet': return <><Button onClick={() => setSheetOpen(true)}>Open sheet</Button><Sheet open={sheetOpen} onOpenChange={setSheetOpen} title="Collection details" description="A focused panel for supplemental content."><p>Review the notes and close this panel to return to the page.</p><Button onClick={() => setSheetOpen(false)}>Done</Button></Sheet></>;
+    case 'tooltip': return <div className="demo-row"><Tooltip label="Archive" content="Move this item to the archive.">?</Tooltip><Tooltip label="Save" content="Keep this item for later." side="bottom">Save</Tooltip></div>;
+    case 'combobox': return <div className="demo-field"><Combobox label="Category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }, { label: 'Research', value: 'research' }]} value={comboValue} onValueChange={setComboValue} /></div>;
     default: return null;
   }
 }

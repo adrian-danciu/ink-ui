@@ -1,0 +1,9 @@
+.ui-separator {
+  background: var(--ui-color-border);
+  border: 0;
+  flex: none;
+  margin: 0;
+}
+
+.ui-separator[data-orientation='horizontal'] { height: var(--ui-border-width-sm); width: 100%; }
+.ui-separator[data-orientation='vertical'] { align-self: stretch; min-height: var(--ui-component-size-sm); width: var(--ui-border-width-sm); }

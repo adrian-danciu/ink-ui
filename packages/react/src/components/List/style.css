@@ -1,0 +1,11 @@
+.ui-list { border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); list-style: none; margin: 0; padding: 0; }
+.ui-list li + li { border-top: var(--ui-border-width-sm) solid var(--ui-color-border); }
+.ui-list button, .ui-list-item { align-items: center; background: var(--ui-color-surface); color: var(--ui-color-text); display: flex; gap: var(--ui-space-3); min-height: var(--ui-component-size-lg); padding: var(--ui-space-3); text-align: left; width: 100%; }
+.ui-list button { border: 0; cursor: pointer; font: inherit; }
+.ui-list li[data-selected='true'] button, .ui-list li[data-selected='true'] .ui-list-item { background: var(--ui-color-accent); color: var(--ui-color-accent-text); }
+.ui-list-copy { display: grid; flex: 1; gap: var(--ui-space-1); min-width: 0; }
+.ui-list-copy strong { font-size: var(--ui-font-size-sm); font-weight: var(--ui-font-weight-black); }
+.ui-list-copy > span { font-size: var(--ui-font-size-xs); line-height: var(--ui-line-height-caption); }
+.ui-list-leading, .ui-list-trailing { flex: none; font-size: var(--ui-font-size-lg); }
+.ui-list button:focus-visible { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: calc(-1 * var(--ui-space-1)); }
+.ui-list button:disabled { cursor: not-allowed; opacity: var(--ui-opacity-disabled); }
