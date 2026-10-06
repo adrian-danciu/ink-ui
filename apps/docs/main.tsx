@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Button, Select, Sidebar, ThemeProvider, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName } from '@adrian-danciu/ink-ui-tokens';
 import { ComponentExample } from './examples';
+import { logoDataUrl } from './logo';
 import { componentGroups, componentPages, type ComponentPage } from './pages';
 import '@adrian-danciu/ink-ui/styles.css';
 import './docs.css';
@@ -67,6 +68,7 @@ function ComponentDoc({ page, theme, mode }: { page: ComponentPage; theme: Theme
       <div className="docs-section-heading"><h2 id="example-heading">Live example</h2><span>INTERACTIVE / {theme.toUpperCase()} / {mode.toUpperCase()}</span></div>
       <div className="docs-demo"><ComponentExample key={page.slug} slug={page.slug} /></div>
       <p className="docs-caption">The example uses the selected style, mode, and accent. Change them above to compare the same component across the system.</p>
+      {page.slug === 'sidebar' && <p className="docs-caption">These sidebar links are sample destinations and do not navigate away from the documentation.</p>}
     </section>
     <section className="docs-section" aria-labelledby="usage-heading">
       <div className="docs-section-heading"><h2 id="usage-heading">Usage</h2><span>REACT / NEXT.JS</span></div>
@@ -79,7 +81,7 @@ function ComponentDoc({ page, theme, mode }: { page: ComponentPage; theme: Theme
       </tbody></table></div>
       <p className="docs-caption">See the TypeScript export for the complete type. DOM-based components also accept their corresponding native HTML props where their interface extends them.</p>
     </section>
-    {page.slug !== 'sidebar' && <p className="docs-platform-note">Also available from <code>@adrian-danciu/ink-ui-native</code> with the same component name. Platform event props follow React Native conventions.</p>}
+    <p className="docs-platform-note">Also available from <code>@adrian-danciu/ink-ui-native</code> with the same component name. Platform event props follow React Native conventions.</p>
     {next && <a className="docs-next" href={`/components/${next.slug}`}><span>NEXT COMPONENT</span><strong>{next.name} ↗</strong></a>}
   </>;
 }
@@ -93,7 +95,7 @@ function Overview() {
       <a href="/themes"><span>SYSTEM / 02</span><h2>Explore themes</h2><p>Three styles, two modes, shared tokens, and accent overrides.</p><b>VIEW TOKENS ↗</b></a>
       <a href="/components"><span>INDEX / 03</span><h2>Browse components</h2><p>Live examples and API details for every available web component.</p><b>OPEN INDEX ↗</b></a>
     </div>
-    <section className="docs-section"><div className="docs-section-heading"><h2>Component preview</h2><span>CORE COLLECTION</span></div><p className="docs-body-copy">The separate preview app shows the original seventeen components in one selected style. Open it at <a href="http://localhost:3000/?theme=poster">localhost:3000</a> when the preview server is running.</p></section>
+    <section className="docs-section"><div className="docs-section-heading"><h2>Component preview</h2><span>CORE COLLECTION</span></div><p className="docs-body-copy">The separate preview app shows the component collection in one selected style. Open it at <a href="http://localhost:3000/?theme=poster">localhost:3000</a> when the preview server is running.</p></section>
   </>;
 }
 
@@ -131,25 +133,61 @@ function App() {
   const [mode, setMode] = React.useState<ThemeMode>(readMode);
   const [accent, setAccent] = React.useState<AccentName | 'default'>(readAccent);
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const path = window.location.pathname.replace(/\/$/, '') || '/';
+  const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
+  const [path, setPath] = React.useState(() => window.location.pathname.replace(/\/$/, '') || '/');
+  const mainRef = React.useRef<HTMLElement>(null);
   const page = path.startsWith('/components/') ? componentPages.find(item => `/components/${item.slug}` === path) : undefined;
+  const mark = logoDataUrl(theme, mode, accent);
+
+  function showNewPage() {
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+    if (window.matchMedia('(max-width: 767px)').matches) window.scrollTo(0, 0);
+    window.requestAnimationFrame(() => mainRef.current?.focus({ preventScroll: true }));
+  }
+
+  React.useEffect(() => {
+    const onPopState = () => {
+      setPath(window.location.pathname.replace(/\/$/, '') || '/');
+      showNewPage();
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  function handleInternalLinkClick(event: React.MouseEvent<HTMLDivElement>) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const anchor = target.closest<HTMLAnchorElement>('a[href]');
+    if (!anchor || anchor.hasAttribute('download') || (anchor.target && anchor.target !== '_self')) return;
+    const url = new URL(anchor.href);
+    if (url.origin !== window.location.origin || url.hash) return;
+    const nextPath = url.pathname.replace(/\/$/, '') || '/';
+    if (nextPath !== '/' && nextPath !== '/getting-started' && nextPath !== '/themes' && nextPath !== '/components' && !componentPages.some(item => nextPath === `/components/${item.slug}`)) return;
+    event.preventDefault();
+    if (nextPath === path) return;
+    window.history.pushState(null, '', `${url.pathname}${url.search}`);
+    setPath(nextPath);
+    showNewPage();
+  }
 
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-theme', theme); }, [theme]);
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-mode', mode); }, [mode]);
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-accent', accent); }, [accent]);
   React.useEffect(() => { document.title = `${page?.name ?? (path === '/' ? 'Overview' : path === '/getting-started' ? 'Getting started' : path === '/themes' ? 'Themes & tokens' : 'Components')} — Ink UI`; }, [page, path]);
+  React.useEffect(() => { const icon = document.getElementById('ink-ui-favicon') as HTMLLinkElement | null; if (icon) icon.href = mark; }, [mark]);
 
-  return <ThemeProvider theme={theme} mode={mode} accent={accent === 'default' ? undefined : accent} className="docs-app">
+  return <ThemeProvider theme={theme} mode={mode} accent={accent === 'default' ? undefined : accent} className="docs-app" onClickCapture={handleInternalLinkClick}>
     <div className="docs-topline"><span>INK UI / COMPONENT SYSTEM</span><span>REACT + REACT NATIVE / 001</span></div>
     <header className="docs-masthead">
-      <a className="docs-brand" href="/" aria-label="Ink UI home"><span className="docs-brand-mark">I/</span><span>INK UI<small>COMPONENT LIBRARY / DOCUMENTATION</small></span></a>
+      <a className="docs-brand" href="/" aria-label="Ink UI home"><img className="docs-brand-mark" src={mark} alt="" /><span>INK UI<small>COMPONENT LIBRARY / DOCUMENTATION</small></span></a>
       <div className="docs-masthead-actions"><a href="http://localhost:3000/">OPEN PREVIEW ↗</a><button type="button" className="docs-menu-toggle" aria-expanded={menuOpen} aria-controls="docs-sidebar" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'CLOSE MENU' : 'MENU'}</button></div>
     </header>
-    <div className="docs-layout">
+    <div className="docs-layout" data-sidebar-collapsed={sidebarCollapsed}>
       <div id="docs-sidebar" className={['docs-sidebar-wrap', menuOpen && 'is-open'].filter(Boolean).join(' ')}>
-        <Sidebar groups={navigation} currentPath={path} label="Documentation" onNavigate={() => setMenuOpen(false)} header={<div className="docs-sidebar-intro"><strong>FIELD GUIDE</strong><span>01—18 / INDEX</span></div>} footer={<div className="docs-sidebar-foot">HARD LINES.<br />CLEAR ACTIONS.</div>} />
+        <Sidebar groups={navigation} currentPath={path} label="Documentation" collapsible collapsed={sidebarCollapsed} onCollapsedChange={setSidebarCollapsed} mobileOpen={menuOpen} onMobileOpenChange={setMenuOpen} header={<div className="docs-sidebar-intro"><strong>FIELD GUIDE</strong><span>{String(componentPages.length).padStart(2, '0')} / INDEX</span></div>} footer={<div className="docs-sidebar-foot">HARD LINES.<br />CLEAR ACTIONS.</div>} />
       </div>
-      <main className="docs-main" id="main-content">
+      <main className="docs-main" id="main-content" ref={mainRef} tabIndex={-1}>
         <div className="docs-toolbar">
           <span>APPEARANCE / LIVE SYSTEM</span>
           <div className="docs-toolbar-controls">

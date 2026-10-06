@@ -1,0 +1,8 @@
+.ui-rating { display: grid; gap: var(--ui-space-2); }
+.ui-rating-label { color: var(--ui-color-text); font-size: var(--ui-font-size-sm); font-weight: var(--ui-font-weight-black); }
+.ui-rating-stars { display: inline-flex; gap: var(--ui-space-1); width: fit-content; }
+.ui-rating-stars button { background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); color: var(--ui-color-text-muted); cursor: pointer; font-size: var(--ui-font-size-lg); height: var(--ui-component-size-md); line-height: var(--ui-line-height-body); width: var(--ui-component-size-md); }
+.ui-rating-stars button[data-filled='true'] { background: var(--ui-color-accent); color: var(--ui-color-accent-text); }
+.ui-rating-stars button:focus-visible { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
+.ui-rating-stars button:disabled { cursor: default; }
+.ui-rating[data-disabled='true'] { opacity: var(--ui-opacity-disabled); }

@@ -1,0 +1,15 @@
+.ui-sheet { background: transparent; border: 0; color: var(--ui-color-text); height: 100%; inset: 0; margin: 0; max-height: none; max-width: none; padding: 0; position: fixed; width: 100%; }
+.ui-sheet::backdrop { background: var(--ui-color-shadow); opacity: var(--ui-opacity-overlay); }
+.ui-sheet-inner { background: var(--ui-color-surface); border: var(--ui-border-width-strong) solid var(--ui-color-border); box-shadow: var(--ui-shadow-offset-lg) var(--ui-shadow-offset-lg) 0 var(--ui-color-shadow); box-sizing: border-box; height: 100%; max-width: 100%; overflow: auto; padding: var(--ui-space-5); position: absolute; width: var(--ui-breakpoint-sm); }
+.ui-sheet[data-side='left'] .ui-sheet-inner { left: 0; top: 0; }
+.ui-sheet[data-side='right'] .ui-sheet-inner { right: 0; top: 0; }
+.ui-sheet[data-side='top'] .ui-sheet-inner, .ui-sheet[data-side='bottom'] .ui-sheet-inner { height: auto; max-height: 80%; width: 100%; }
+.ui-sheet[data-side='top'] .ui-sheet-inner { left: 0; top: 0; }
+.ui-sheet[data-side='bottom'] .ui-sheet-inner { bottom: 0; left: 0; }
+.ui-sheet-heading { align-items: center; border-bottom: var(--ui-border-width-md) solid var(--ui-color-border); display: flex; justify-content: space-between; padding-bottom: var(--ui-space-2); }
+.ui-sheet-kicker { color: var(--ui-color-text-muted); font-family: var(--ui-font-family-mono); font-size: var(--ui-font-size-caption); font-weight: var(--ui-font-weight-bold); letter-spacing: var(--ui-letter-spacing-wide); }
+.ui-sheet-heading button { background: var(--ui-color-accent); border: var(--ui-border-width-md) solid var(--ui-color-border); color: var(--ui-color-accent-text); cursor: pointer; font-size: var(--ui-font-size-lg); height: var(--ui-component-size-sm); width: var(--ui-component-size-sm); }
+.ui-sheet-heading button:focus-visible { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
+.ui-sheet h2 { font-family: var(--ui-font-family-display); font-size: var(--ui-font-size-2xl); line-height: var(--ui-line-height-title); margin: var(--ui-space-4) 0 0; text-transform: uppercase; }
+.ui-sheet p { color: var(--ui-color-text-muted); font-size: var(--ui-font-size-sm); line-height: var(--ui-line-height-body); margin: var(--ui-space-2) 0 0; }
+.ui-sheet-content { margin-top: var(--ui-space-5); }

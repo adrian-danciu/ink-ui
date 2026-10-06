@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Ink UI</title>
+  <rect x="6" y="6" width="56" height="56" fill="#7853de"/>
+  <rect x="2" y="2" width="56" height="56" fill="#c4f52f" stroke="#17161a" stroke-width="3"/>
+  <path d="M21 18h7v28h-7zm19 0h6L36 46h-6z" fill="#111112"/>
+</svg>

@@ -1,0 +1,10 @@
+.ui-dropdown-menu { display: inline-block; position: relative; }
+.ui-dropdown-trigger { align-items: center; background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); color: var(--ui-color-text); cursor: pointer; display: inline-flex; font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-sm); font-weight: var(--ui-font-weight-black); gap: var(--ui-space-3); justify-content: space-between; min-height: var(--ui-component-size-md); padding: var(--ui-space-2) var(--ui-space-3); text-transform: uppercase; }
+.ui-dropdown-trigger[aria-expanded='true'] { background: var(--ui-color-accent); color: var(--ui-color-accent-text); }
+.ui-dropdown-panel { background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); box-shadow: var(--ui-shadow-offset-md) var(--ui-shadow-offset-md) 0 var(--ui-color-shadow); display: grid; min-width: 100%; padding: var(--ui-space-1); position: absolute; right: 0; top: calc(100% + var(--ui-space-2)); width: max-content; z-index: 20; }
+.ui-dropdown-panel button { background: transparent; border: 0; color: var(--ui-color-text); cursor: pointer; font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-sm); min-height: var(--ui-component-size-md); padding: var(--ui-space-2) var(--ui-space-3); text-align: left; }
+.ui-dropdown-panel button:hover, .ui-dropdown-panel button:focus-visible { background: var(--ui-color-accent); color: var(--ui-color-accent-text); outline: none; }
+.ui-dropdown-panel button[data-destructive='true'] { color: var(--ui-color-danger); }
+.ui-dropdown-panel button[data-destructive='true']:hover, .ui-dropdown-panel button[data-destructive='true']:focus-visible { background: var(--ui-color-danger); color: var(--ui-color-danger-text); }
+.ui-dropdown-panel button:disabled { cursor: not-allowed; opacity: var(--ui-opacity-disabled); }
+.ui-dropdown-trigger:focus-visible { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
