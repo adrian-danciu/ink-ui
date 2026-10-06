@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Button, Select, Sidebar, ThemeProvider, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName } from '@adrian-danciu/ink-ui-tokens';
 import { ComponentExample } from './examples';
+import { logoDataUrl } from './logo';
 import { componentGroups, componentPages, type ComponentPage } from './pages';
 import '@adrian-danciu/ink-ui/styles.css';
 import './docs.css';
@@ -136,6 +137,7 @@ function App() {
   const [path, setPath] = React.useState(() => window.location.pathname.replace(/\/$/, '') || '/');
   const mainRef = React.useRef<HTMLElement>(null);
   const page = path.startsWith('/components/') ? componentPages.find(item => `/components/${item.slug}` === path) : undefined;
+  const mark = logoDataUrl(theme, mode, accent);
 
   function showNewPage() {
     if (mainRef.current) mainRef.current.scrollTop = 0;
@@ -173,11 +175,12 @@ function App() {
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-mode', mode); }, [mode]);
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-accent', accent); }, [accent]);
   React.useEffect(() => { document.title = `${page?.name ?? (path === '/' ? 'Overview' : path === '/getting-started' ? 'Getting started' : path === '/themes' ? 'Themes & tokens' : 'Components')} — Ink UI`; }, [page, path]);
+  React.useEffect(() => { const icon = document.getElementById('ink-ui-favicon') as HTMLLinkElement | null; if (icon) icon.href = mark; }, [mark]);
 
   return <ThemeProvider theme={theme} mode={mode} accent={accent === 'default' ? undefined : accent} className="docs-app" onClickCapture={handleInternalLinkClick}>
     <div className="docs-topline"><span>INK UI / COMPONENT SYSTEM</span><span>REACT + REACT NATIVE / 001</span></div>
     <header className="docs-masthead">
-      <a className="docs-brand" href="/" aria-label="Ink UI home"><span className="docs-brand-mark">I/</span><span>INK UI<small>COMPONENT LIBRARY / DOCUMENTATION</small></span></a>
+      <a className="docs-brand" href="/" aria-label="Ink UI home"><img className="docs-brand-mark" src={mark} alt="" /><span>INK UI<small>COMPONENT LIBRARY / DOCUMENTATION</small></span></a>
       <div className="docs-masthead-actions"><a href="http://localhost:3000/">OPEN PREVIEW ↗</a><button type="button" className="docs-menu-toggle" aria-expanded={menuOpen} aria-controls="docs-sidebar" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'CLOSE MENU' : 'MENU'}</button></div>
     </header>
     <div className="docs-layout" data-sidebar-collapsed={sidebarCollapsed}>
