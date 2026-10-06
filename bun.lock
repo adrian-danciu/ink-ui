@@ -16,7 +16,7 @@
     },
     "apps/docs": {
       "name": "ink-ui-docs",
-      "version": "0.0.0",
+      "version": "0.0.1",
       "dependencies": {
         "@adrian-danciu/ink-ui": "workspace:*",
         "@adrian-danciu/ink-ui-tokens": "workspace:*",
@@ -30,7 +30,7 @@
     },
     "apps/preview": {
       "name": "ink-ui-preview",
-      "version": "0.0.0",
+      "version": "0.0.1",
       "dependencies": {
         "@adrian-danciu/ink-ui": "workspace:*",
         "@adrian-danciu/ink-ui-tokens": "workspace:*",
@@ -44,7 +44,7 @@
     },
     "packages/react": {
       "name": "@adrian-danciu/ink-ui",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@adrian-danciu/ink-ui-tokens": "workspace:*",
       },
@@ -63,7 +63,7 @@
     },
     "packages/react-native": {
       "name": "@adrian-danciu/ink-ui-native",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@adrian-danciu/ink-ui-tokens": "workspace:*",
       },

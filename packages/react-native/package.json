@@ -1,14 +1,31 @@
 {
   "name": "@adrian-danciu/ink-ui-native",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Brutalist React Native components with three themes, light and dark modes, and configurable accents.",
   "license": "MIT",
-  "keywords": ["react-native", "expo", "components", "design-system", "brutalism", "ink-ui"],
-  "repository": { "type": "git", "url": "git+https://github.com/adrian-danciu/ink-ui.git", "directory": "packages/react-native" },
+  "keywords": [
+    "react-native",
+    "expo",
+    "components",
+    "design-system",
+    "brutalism",
+    "ink-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrian-danciu/ink-ui.git",
+    "directory": "packages/react-native"
+  },
   "homepage": "https://github.com/adrian-danciu/ink-ui#readme",
-  "bugs": { "url": "https://github.com/adrian-danciu/ink-ui/issues" },
+  "bugs": {
+    "url": "https://github.com/adrian-danciu/ink-ui/issues"
+  },
   "type": "module",
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "react-native": "./dist/index.js",
@@ -25,8 +42,13 @@
     "build": "bun x --bun tsup src/index.tsx --format esm,cjs --dts --clean --external react-native",
     "typecheck": "bun x --bun tsc -p tsconfig.json"
   },
-  "dependencies": { "@adrian-danciu/ink-ui-tokens": "^0.1.0" },
-  "peerDependencies": { "react": ">=19 <20", "react-native": ">=0.81" },
+  "dependencies": {
+    "@adrian-danciu/ink-ui-tokens": "^0.1.0"
+  },
+  "peerDependencies": {
+    "react": ">=19 <20",
+    "react-native": ">=0.81"
+  },
   "devDependencies": {
     "@types/react": "^19.0.0",
     "react": "^19.0.0",
@@ -34,5 +56,7 @@
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
   },
-  "publishConfig": { "access": "public" }
+  "publishConfig": {
+    "access": "public"
+  }
 }
