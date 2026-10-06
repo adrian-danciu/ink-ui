@@ -75,6 +75,8 @@ Use `Spinner` as a labelled loading status. `ToggleGroup` is a controlled, singl
 
 `Combobox` searches a controlled single-select option list. `Slider` controls a numeric range. `DropdownMenu` offers action items, while `Sheet` displays an edge-anchored modal panel. `Tooltip` provides a short hint on hover, focus, or tap.
 
+Web tooltips render in a viewport-level layer, so scroll containers do not clip them. The hint automatically moves below the trigger when there is not enough space above it.
+
 ```tsx
 <Slider label="Intensity" value={intensity} onValueChange={setIntensity} step={5} />
 <Combobox label="Category" options={categories} value={category} onValueChange={setCategory} />

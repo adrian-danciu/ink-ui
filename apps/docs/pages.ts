@@ -387,7 +387,7 @@ export const componentPages: readonly ComponentPage[] = [
   },
   {
     slug: 'tooltip', name: 'Tooltip', category: 'Feedback',
-    description: 'A short hint on hover or focus; tapping opens a touch-friendly hint.',
+    description: 'A short hint on hover or focus that stays visible above scrolling containers; tapping opens a touch-friendly hint.',
     code: `<Tooltip label="Archive" content="Move this item to the archive.">?</Tooltip>`,
     props: [
       { name: 'label', type: 'string', description: 'Accessible trigger name.' },
