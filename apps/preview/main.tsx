@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sidebar, Skeleton, Spinner, Stepper, Switch, Table, Tabs, TextArea, TextField, ThemeProvider, Toast, ToggleGroup, type ThemeName } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Combobox, Dialog, DropdownMenu, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Spinner, Stepper, Switch, Table, Tabs, TextArea, TextField, ThemeProvider, Toast, ToggleGroup, Tooltip, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName, type ThemeMode } from '@adrian-danciu/ink-ui-tokens';
 import '@adrian-danciu/ink-ui/styles.css';
 import './preview.css';
@@ -33,6 +33,10 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
   const [activeStep, setActiveStep] = React.useState(1);
   const [rating, setRating] = React.useState(3);
   const [view, setView] = React.useState('grid');
+  const [intensity, setIntensity] = React.useState(60);
+  const [menuAction, setMenuAction] = React.useState('none');
+  const [sheetOpen, setSheetOpen] = React.useState(false);
+  const [comboValue, setComboValue] = React.useState('design');
   const colors = themes[id].modes[mode];
   const accent = selectedAccent === 'default' ? themes[id].defaultAccent as AccentName : selectedAccent;
   const swatches = [
@@ -117,6 +121,10 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <RadioGroup label="Dispatch frequency" options={[{ label: 'Daily', value: 'daily' }, { label: 'Weekly', value: 'weekly' }]} value={radioValue} onValueChange={setRadioValue} />
         </div>
         <div className="component-block">
+          <span className="sample-label">SLIDER</span>
+          <Slider label="Intensity" value={intensity} onValueChange={setIntensity} step={5} accent={accent} />
+        </div>
+        <div className="component-block">
           <span className="sample-label">ALERTS</span>
           <div className="feedback-stack">
             <Alert tone="info" title="Filed successfully" description="Your draft is ready for review." />
@@ -196,6 +204,10 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <Select label="Collection category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }]} value={category} onValueChange={setCategory} />
         </div>
         <div className="component-block">
+          <span className="sample-label">COMBOBOX</span>
+          <Combobox label="Search category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }, { label: 'Research', value: 'research' }]} value={comboValue} onValueChange={setComboValue} accent={accent} />
+        </div>
+        <div className="component-block">
           <span className="sample-label">RATING</span>
           <Rating label="Rate this collection" value={rating} onValueChange={setRating} accent={accent} />
         </div>
@@ -208,11 +220,20 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <div className="button-row"><IconButton label="Add favorite" icon="★" variant="primary" onClick={() => setFavorites(value => value + 1)} /><IconButton label="Search" icon="⌕" onClick={() => setFavorites(value => value + 1)} /><span className="click-readout">PRESSED {String(favorites).padStart(2, '0')} TIMES</span></div>
         </div>
         <div className="component-block">
+          <span className="sample-label">DROPDOWN MENU / TOOLTIP</span>
+          <div className="button-row"><DropdownMenu label="Actions" items={[{ id: 'edit', label: 'Edit' }, { id: 'duplicate', label: 'Duplicate' }, { id: 'delete', label: 'Delete', destructive: true }]} onItemSelect={setMenuAction} accent={accent} /><Tooltip label="Archive" content="Move this item to the archive." accent={accent}>?</Tooltip><span className="click-readout">ACTION: {menuAction.toUpperCase()}</span></div>
+        </div>
+        <div className="component-block">
           <span className="sample-label">DIALOG</span>
           <Button size="sm" onClick={() => setDialogOpen(true)}>Open dialog</Button>
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen} title="Publish this collection?" description="This will make the collection visible to everyone." accent={accent}>
             <div className="dialog-actions"><Button variant="secondary" onClick={() => setDialogOpen(false)}>Cancel</Button><Button onClick={() => { setDialogOpen(false); setToastOpen(true); }}>Publish</Button></div>
           </Dialog>
+        </div>
+        <div className="component-block">
+          <span className="sample-label">SHEET</span>
+          <Button size="sm" variant="secondary" onClick={() => setSheetOpen(true)}>Open sheet</Button>
+          <Sheet open={sheetOpen} onOpenChange={setSheetOpen} title="Collection details" description="A focused panel for supplemental content." accent={accent}><p>Review the notes and close this panel to return to the page.</p><Button onClick={() => setSheetOpen(false)}>Done</Button></Sheet>
         </div>
         <div className="component-block">
           <span className="sample-label">TOAST</span>

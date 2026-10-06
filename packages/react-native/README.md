@@ -26,7 +26,7 @@ export function Example() {
 
 ## Components
 
-Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Rating, ToggleGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Table, Breadcrumbs, Pagination, Stepper, Sidebar, Alert, ProgressBar, Spinner, Tabs, Accordion, Dialog, Toast, and EmptyState. Native `Sidebar` uses an `onNavigate(href)` callback so the app can connect its router.
+Button, IconButton, DropdownMenu, TextField, TextArea, Select, Combobox, Slider, Checkbox, Switch, RadioGroup, Rating, ToggleGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Table, Breadcrumbs, Pagination, Stepper, Sidebar, Alert, ProgressBar, Spinner, Tooltip, Tabs, Accordion, Dialog, Sheet, Toast, and EmptyState. Native `Sidebar` uses an `onNavigate(href)` callback so the app can connect its router.
 
 Native components use JavaScript tokens and do not require a CSS import. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.
 
@@ -41,3 +41,7 @@ Native components use JavaScript tokens and do not require a CSS import. See the
 ### Spinner, ToggleGroup, and Table
 
 `Spinner` uses the native activity indicator with Ink UI's theme color and token sizes. `ToggleGroup` offers a controlled single choice. `Table` displays string or number cells in a horizontally scrollable grid.
+
+### Search, range, and overlays
+
+`Combobox` opens a searchable selection modal. `Slider` supports touch and accessibility increment/decrement actions. `DropdownMenu` presents a touch-friendly action modal; `Sheet` slides in from a chosen edge. `Tooltip` opens a dismissible hint on tap or long press. These components use the same controlled values and callbacks as their web counterparts.

@@ -27,7 +27,7 @@ export function Example() {
 
 ## Components
 
-Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Rating, ToggleGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Table, Breadcrumbs, Pagination, Stepper, Alert, ProgressBar, Spinner, Tabs, Accordion, Dialog, Toast, EmptyState, and Sidebar.
+Button, IconButton, DropdownMenu, TextField, TextArea, Select, Combobox, Slider, Checkbox, Switch, RadioGroup, Rating, ToggleGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Table, Breadcrumbs, Pagination, Stepper, Alert, ProgressBar, Spinner, Tooltip, Tabs, Accordion, Dialog, Sheet, Toast, EmptyState, and Sidebar.
 
 Styles are provided through one import: `@adrian-danciu/ink-ui/styles.css`. Tokens come from the `@adrian-danciu/ink-ui-tokens` dependency. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.
 
@@ -69,4 +69,16 @@ Use `Spinner` as a labelled loading status. `ToggleGroup` is a controlled, singl
 <Spinner label="Loading results" />
 <ToggleGroup label="View" options={[{ label: 'Grid', value: 'grid' }, { label: 'List', value: 'list' }]} value={view} onValueChange={setView} />
 <Table columns={[{ key: 'name', label: 'Name' }]} rows={[{ id: 'one', cells: { name: 'Ink UI' } }]} />
+```
+
+### Search, range, and overlays
+
+`Combobox` searches a controlled single-select option list. `Slider` controls a numeric range. `DropdownMenu` offers action items, while `Sheet` displays an edge-anchored modal panel. `Tooltip` provides a short hint on hover, focus, or tap.
+
+```tsx
+<Slider label="Intensity" value={intensity} onValueChange={setIntensity} step={5} />
+<Combobox label="Category" options={categories} value={category} onValueChange={setCategory} />
+<DropdownMenu label="Actions" items={[{ id: 'edit', label: 'Edit' }]} onItemSelect={handleAction} />
+<Sheet open={open} onOpenChange={setOpen} title="Details">Content</Sheet>
+<Tooltip label="Archive" content="Move this item to the archive.">?</Tooltip>
 ```

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sidebar, Skeleton, Spinner, Stepper, Switch, Table, Tabs, TextArea, TextField, Toast, ToggleGroup } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Combobox, Dialog, DropdownMenu, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sheet, Sidebar, Skeleton, Slider, Spinner, Stepper, Switch, Table, Tabs, TextArea, TextField, Toast, ToggleGroup, Tooltip } from '@adrian-danciu/ink-ui';
 
 export function ComponentExample({ slug }: { slug: string }) {
   const [count, setCount] = React.useState(0);
@@ -22,6 +22,10 @@ export function ComponentExample({ slug }: { slug: string }) {
   const [activeStep, setActiveStep] = React.useState(1);
   const [rating, setRating] = React.useState(3);
   const [view, setView] = React.useState('grid');
+  const [intensity, setIntensity] = React.useState(60);
+  const [menuAction, setMenuAction] = React.useState('None');
+  const [sheetOpen, setSheetOpen] = React.useState(false);
+  const [comboValue, setComboValue] = React.useState('design');
 
   switch (slug) {
     case 'button': return <div className="demo-stack">
@@ -64,6 +68,11 @@ export function ComponentExample({ slug }: { slug: string }) {
     case 'spinner': return <div className="demo-row"><Spinner size="sm" label="Loading small item" /><Spinner label="Loading results" /><Spinner size="lg" label="Loading large item" /></div>;
     case 'toggle-group': return <ToggleGroup label="Collection view" options={[{ label: 'Grid', value: 'grid' }, { label: 'List', value: 'list' }, { label: 'Timeline', value: 'timeline' }]} value={view} onValueChange={setView} />;
     case 'table': return <Table caption="Recent issues" columns={[{ key: 'id', label: 'Issue' }, { key: 'status', label: 'Status' }, { key: 'owner', label: 'Owner' }]} rows={[{ id: 'one', cells: { id: 'INK-01', status: 'Open', owner: 'Alex' } }, { id: 'two', cells: { id: 'INK-02', status: 'In review', owner: 'Sam' } }, { id: 'three', cells: { id: 'INK-03', status: 'Done', owner: 'Lee' } }]} />;
+    case 'slider': return <div className="demo-field"><Slider label="Intensity" value={intensity} onValueChange={setIntensity} min={0} max={100} step={5} /></div>;
+    case 'dropdown-menu': return <div className="demo-row"><DropdownMenu label="Actions" items={[{ id: 'edit', label: 'Edit' }, { id: 'duplicate', label: 'Duplicate' }, { id: 'delete', label: 'Delete', destructive: true }]} onItemSelect={setMenuAction} /><span>Selected: {menuAction}</span></div>;
+    case 'sheet': return <><Button onClick={() => setSheetOpen(true)}>Open sheet</Button><Sheet open={sheetOpen} onOpenChange={setSheetOpen} title="Collection details" description="A focused panel for supplemental content."><p>Review the notes and close this panel to return to the page.</p><Button onClick={() => setSheetOpen(false)}>Done</Button></Sheet></>;
+    case 'tooltip': return <div className="demo-row"><Tooltip label="Archive" content="Move this item to the archive.">?</Tooltip><Tooltip label="Save" content="Keep this item for later." side="bottom">Save</Tooltip></div>;
+    case 'combobox': return <div className="demo-field"><Combobox label="Category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }, { label: 'Research', value: 'research' }]} value={comboValue} onValueChange={setComboValue} /></div>;
     default: return null;
   }
 }

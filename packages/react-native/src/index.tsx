@@ -31,3 +31,8 @@ export * from './components/Rating/Rating';
 export * from './components/Spinner/Spinner';
 export * from './components/ToggleGroup/ToggleGroup';
 export * from './components/Table/Table';
+export * from './components/Slider/Slider';
+export * from './components/DropdownMenu/DropdownMenu';
+export * from './components/Sheet/Sheet';
+export * from './components/Tooltip/Tooltip';
+export * from './components/Combobox/Combobox';

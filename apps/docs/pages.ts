@@ -352,6 +352,62 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'caption', type: 'string', description: 'Optional table description.' },
     ],
   },
+  {
+    slug: 'slider', name: 'Slider', category: 'Forms',
+    description: 'A controlled numeric range input with token-styled track and thumb.',
+    code: `<Slider label="Intensity" value={intensity} onValueChange={setIntensity} min={0} max={100} step={5} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Visible and accessible range label.' },
+      { name: 'value / onValueChange', type: 'number / callback', description: 'Controlled value and change callback.' },
+      { name: 'min / max / step', type: 'number', description: 'Range bounds and increment. Defaults: 0, 100, 1.' },
+      { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables input or overrides the accent.' },
+    ],
+  },
+  {
+    slug: 'dropdown-menu', name: 'DropdownMenu', category: 'Actions',
+    description: 'A compact menu of actions with arrow-key navigation on web and a native modal on mobile.',
+    code: `<DropdownMenu label="Actions" items={[{ id: 'edit', label: 'Edit' }, { id: 'delete', label: 'Delete', destructive: true }]} onItemSelect={handleAction} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Menu trigger label.' },
+      { name: 'items', type: 'DropdownMenuItem[]', description: 'Action ids, labels, optional disabled or destructive flags.' },
+      { name: 'onItemSelect', type: '(id: string) => void', description: 'Called when an action is chosen.' },
+      { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables the trigger or overrides its accent.' },
+    ],
+  },
+  {
+    slug: 'sheet', name: 'Sheet', category: 'Navigation',
+    description: 'An edge-anchored modal panel for supplemental content.',
+    code: `<Sheet open={open} onOpenChange={setOpen} title="Collection details" side="right"><p>Details here.</p></Sheet>`,
+    props: [
+      { name: 'open / onOpenChange', type: 'boolean / callback', description: 'Controlled visibility and close callback.' },
+      { name: 'title / description', type: 'string', description: 'Accessible heading and optional supporting text.' },
+      { name: 'side', type: "'left' | 'right' | 'top' | 'bottom'", description: 'Edge from which the sheet opens. Default: right.' },
+      { name: 'children / accent', type: 'ReactNode / AccentName', description: 'Panel content and optional accent override.' },
+    ],
+  },
+  {
+    slug: 'tooltip', name: 'Tooltip', category: 'Feedback',
+    description: 'A short hint on hover or focus; tapping opens a touch-friendly hint.',
+    code: `<Tooltip label="Archive" content="Move this item to the archive.">?</Tooltip>`,
+    props: [
+      { name: 'label', type: 'string', description: 'Accessible trigger name.' },
+      { name: 'content', type: 'string', description: 'Brief explanatory text.' },
+      { name: 'children', type: 'string', description: 'Optional trigger text or symbol.' },
+      { name: 'side', type: "'top' | 'bottom'", description: 'Web tooltip placement. Default: top.' },
+    ],
+  },
+  {
+    slug: 'combobox', name: 'Combobox', category: 'Forms',
+    description: 'A searchable, controlled single-select list for larger option sets.',
+    code: `<Combobox label="Category" options={categories} value={category} onValueChange={setCategory} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Visible and accessible field name.' },
+      { name: 'options', type: 'ComboboxOption[]', description: 'Choice labels and values; options may be disabled.' },
+      { name: 'value / onValueChange', type: 'string / callback', description: 'Controlled selection and change callback.' },
+      { name: 'placeholder / emptyMessage', type: 'string', description: 'Search prompt and no-results message.' },
+      { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables the field or overrides the accent.' },
+    ],
+  },
 ];
 
 export const componentGroups = (['Actions', 'Forms', 'Content', 'Feedback', 'Navigation'] as const).map(category => ({
