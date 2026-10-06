@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sidebar, Skeleton, Stepper, Switch, Tabs, TextArea, TextField, ThemeProvider, Toast, type ThemeName } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sidebar, Skeleton, Spinner, Stepper, Switch, Table, Tabs, TextArea, TextField, ThemeProvider, Toast, ToggleGroup, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName, type ThemeMode } from '@adrian-danciu/ink-ui-tokens';
 import '@adrian-danciu/ink-ui/styles.css';
 import './preview.css';
@@ -32,6 +32,7 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
   const [selectedListItem, setSelectedListItem] = React.useState('drafts');
   const [activeStep, setActiveStep] = React.useState(1);
   const [rating, setRating] = React.useState(3);
+  const [view, setView] = React.useState('grid');
   const colors = themes[id].modes[mode];
   const accent = selectedAccent === 'default' ? themes[id].defaultAccent as AccentName : selectedAccent;
   const swatches = [
@@ -127,6 +128,10 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <ProgressBar label="Collection complete" value={progress} />
           <input className="progress-input" type="range" min="0" max="100" value={progress} aria-label={`${title} progress sample value`} onChange={event => setProgress(Number(event.currentTarget.value))} />
         </div>
+        <div className="component-block">
+          <span className="sample-label">SPINNER</span>
+          <div className="button-row"><Spinner size="sm" label="Loading small item" /><Spinner label="Loading results" /><Spinner size="lg" label="Loading large item" /></div>
+        </div>
       </section>
       <div className="panel-rule" />
       <section aria-label={`${title} content components`}>
@@ -167,6 +172,10 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <List selectedId={selectedListItem} onItemSelect={setSelectedListItem} accent={accent} items={[{ id: 'drafts', title: 'Drafts', description: 'Work in progress', leading: '◧', trailing: '04' }, { id: 'published', title: 'Published', description: 'Available to everyone', leading: '◆', trailing: '12' }, { id: 'archive', title: 'Archive', description: 'Earlier work', leading: '▤', trailing: '08' }]} />
         </div>
         <div className="component-block">
+          <span className="sample-label">TABLE</span>
+          <Table caption="Recent issues" columns={[{ key: 'id', label: 'Issue' }, { key: 'status', label: 'Status' }, { key: 'owner', label: 'Owner' }]} rows={[{ id: 'one', cells: { id: 'INK-01', status: 'Open', owner: 'Alex' } }, { id: 'two', cells: { id: 'INK-02', status: 'In review', owner: 'Sam' } }, { id: 'three', cells: { id: 'INK-03', status: 'Done', owner: 'Lee' } }]} />
+        </div>
+        <div className="component-block">
           <span className="sample-label">STEPPER</span>
           <Stepper steps={[{ label: 'Details' }, { label: 'Review' }, { label: 'Publish' }]} activeStep={activeStep} accent={accent} />
           <div className="button-row"><Button size="sm" variant="secondary" disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>Previous</Button><Button size="sm" disabled={activeStep === 2} onClick={() => setActiveStep(activeStep + 1)}>Next</Button></div>
@@ -189,6 +198,10 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
         <div className="component-block">
           <span className="sample-label">RATING</span>
           <Rating label="Rate this collection" value={rating} onValueChange={setRating} accent={accent} />
+        </div>
+        <div className="component-block">
+          <span className="sample-label">TOGGLE GROUP</span>
+          <ToggleGroup label="Collection view" options={[{ label: 'Grid', value: 'grid' }, { label: 'List', value: 'list' }, { label: 'Timeline', value: 'timeline' }]} value={view} onValueChange={setView} accent={accent} />
         </div>
         <div className="component-block">
           <span className="sample-label">ICON BUTTONS</span>

@@ -1,0 +1,5 @@
+.ui-spinner { animation: ui-spinner-turn calc(var(--ui-motion-duration-fast) * 8) steps(8) infinite; border: var(--ui-border-width-strong) solid var(--ui-color-border); border-right-color: var(--ui-color-accent); border-bottom-color: var(--ui-color-accent); border-radius: var(--ui-radius-full); display: inline-block; flex: none; height: var(--ui-component-size-md); width: var(--ui-component-size-md); }
+.ui-spinner[data-size='sm'] { height: var(--ui-component-size-sm); width: var(--ui-component-size-sm); }
+.ui-spinner[data-size='lg'] { height: var(--ui-component-size-lg); width: var(--ui-component-size-lg); }
+@keyframes ui-spinner-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ui-spinner { animation: none; } }

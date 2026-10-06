@@ -27,7 +27,7 @@ export function Example() {
 
 ## Components
 
-Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Rating, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Breadcrumbs, Pagination, Stepper, Alert, ProgressBar, Tabs, Accordion, Dialog, Toast, EmptyState, and Sidebar.
+Button, IconButton, TextField, TextArea, Select, Checkbox, Switch, RadioGroup, Rating, ToggleGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Table, Breadcrumbs, Pagination, Stepper, Alert, ProgressBar, Spinner, Tabs, Accordion, Dialog, Toast, EmptyState, and Sidebar.
 
 Styles are provided through one import: `@adrian-danciu/ink-ui/styles.css`. Tokens come from the `@adrian-danciu/ink-ui-tokens` dependency. See the [source and documentation](https://github.com/adrian-danciu/ink-ui) for component examples.
 
@@ -59,4 +59,14 @@ Use `onNavigate={(event, href) => { event.preventDefault(); router.push(href); }
 <List items={[{ id: 'drafts', title: 'Drafts', description: 'Work in progress' }]} selectedId={selectedId} onItemSelect={setSelectedId} />
 <Stepper steps={[{ label: 'Details' }, { label: 'Review' }, { label: 'Publish' }]} activeStep={1} />
 <Rating label="Rate this collection" value={rating} onValueChange={setRating} />
+```
+
+### Spinner, ToggleGroup, and Table
+
+Use `Spinner` as a labelled loading status. `ToggleGroup` is a controlled, single-choice button group. `Table` renders string or number cells in a scrollable semantic table.
+
+```tsx
+<Spinner label="Loading results" />
+<ToggleGroup label="View" options={[{ label: 'Grid', value: 'grid' }, { label: 'List', value: 'list' }]} value={view} onValueChange={setView} />
+<Table columns={[{ key: 'name', label: 'Name' }]} rows={[{ id: 'one', cells: { name: 'Ink UI' } }]} />
 ```

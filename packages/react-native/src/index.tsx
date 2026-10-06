@@ -28,3 +28,6 @@ export * from './components/Pagination/Pagination';
 export * from './components/List/List';
 export * from './components/Stepper/Stepper';
 export * from './components/Rating/Rating';
+export * from './components/Spinner/Spinner';
+export * from './components/ToggleGroup/ToggleGroup';
+export * from './components/Table/Table';

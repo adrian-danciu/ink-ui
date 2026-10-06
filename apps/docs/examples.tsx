@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sidebar, Skeleton, Stepper, Switch, Tabs, TextArea, TextField, Toast } from '@adrian-danciu/ink-ui';
+import { Accordion, Alert, Avatar, Badge, Breadcrumbs, Button, Card, Checkbox, Chip, Dialog, EmptyState, IconButton, List, Pagination, ProgressBar, RadioGroup, Rating, Select, Separator, Sidebar, Skeleton, Spinner, Stepper, Switch, Table, Tabs, TextArea, TextField, Toast, ToggleGroup } from '@adrian-danciu/ink-ui';
 
 export function ComponentExample({ slug }: { slug: string }) {
   const [count, setCount] = React.useState(0);
@@ -21,6 +21,7 @@ export function ComponentExample({ slug }: { slug: string }) {
   const [selectedListItem, setSelectedListItem] = React.useState('drafts');
   const [activeStep, setActiveStep] = React.useState(1);
   const [rating, setRating] = React.useState(3);
+  const [view, setView] = React.useState('grid');
 
   switch (slug) {
     case 'button': return <div className="demo-stack">
@@ -60,6 +61,9 @@ export function ComponentExample({ slug }: { slug: string }) {
     case 'list': return <div className="demo-field"><List selectedId={selectedListItem} onItemSelect={setSelectedListItem} items={[{ id: 'drafts', title: 'Drafts', description: 'Work in progress', leading: '◧', trailing: '04' }, { id: 'published', title: 'Published', description: 'Available to everyone', leading: '◆', trailing: '12' }, { id: 'archive', title: 'Archive', description: 'Earlier work', leading: '▤', trailing: '08' }]} /></div>;
     case 'stepper': return <div className="demo-stack demo-field"><Stepper steps={[{ label: 'Details', description: 'Write the basics' }, { label: 'Review', description: 'Check everything' }, { label: 'Publish', description: 'Go live' }]} activeStep={activeStep} /><div className="demo-row"><Button size="sm" variant="secondary" disabled={activeStep === 0} onClick={() => setActiveStep(activeStep - 1)}>Previous</Button><Button size="sm" disabled={activeStep === 2} onClick={() => setActiveStep(activeStep + 1)}>Next</Button></div></div>;
     case 'rating': return <Rating label="Rate this collection" value={rating} onValueChange={setRating} />;
+    case 'spinner': return <div className="demo-row"><Spinner size="sm" label="Loading small item" /><Spinner label="Loading results" /><Spinner size="lg" label="Loading large item" /></div>;
+    case 'toggle-group': return <ToggleGroup label="Collection view" options={[{ label: 'Grid', value: 'grid' }, { label: 'List', value: 'list' }, { label: 'Timeline', value: 'timeline' }]} value={view} onValueChange={setView} />;
+    case 'table': return <Table caption="Recent issues" columns={[{ key: 'id', label: 'Issue' }, { key: 'status', label: 'Status' }, { key: 'owner', label: 'Owner' }]} rows={[{ id: 'one', cells: { id: 'INK-01', status: 'Open', owner: 'Alex' } }, { id: 'two', cells: { id: 'INK-02', status: 'In review', owner: 'Sam' } }, { id: 'three', cells: { id: 'INK-03', status: 'Done', owner: 'Lee' } }]} />;
     default: return null;
   }
 }

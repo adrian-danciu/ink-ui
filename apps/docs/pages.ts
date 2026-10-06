@@ -320,6 +320,38 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables input or overrides the accent.' },
     ],
   },
+  {
+    slug: 'spinner', name: 'Spinner', category: 'Feedback',
+    description: 'A compact status indicator for work in progress, with reduced-motion support on web.',
+    code: `<Spinner label="Loading results" size="md" />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Accessible loading message. Default: Loading.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Token-based indicator size. Default: md.' },
+      { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+    ],
+  },
+  {
+    slug: 'toggle-group', name: 'ToggleGroup', category: 'Forms',
+    description: 'A compact controlled choice between mutually exclusive options.',
+    code: `<ToggleGroup label="View" value={view} onValueChange={setView}\n  options={[{ label: 'Grid', value: 'grid' }, { label: 'List', value: 'list' }]} />`,
+    props: [
+      { name: 'label', type: 'string', description: 'Accessible name for the button group.' },
+      { name: 'options', type: 'ToggleGroupOption[]', description: 'Choice labels and values; individual options may be disabled.' },
+      { name: 'value', type: 'string', description: 'Currently selected option value.' },
+      { name: 'onValueChange', type: '(value: string) => void', description: 'Called when another option is pressed.' },
+      { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables all choices or overrides the accent.' },
+    ],
+  },
+  {
+    slug: 'table', name: 'Table', category: 'Content',
+    description: 'A horizontally scrollable, token-styled table for concise data.',
+    code: `<Table caption="Recent issues" columns={[\n  { key: 'id', label: 'Issue' }, { key: 'status', label: 'Status' }\n]} rows={[{ id: 'one', cells: { id: 'INK-01', status: 'Open' } }]} />`,
+    props: [
+      { name: 'columns', type: 'TableColumn[]', description: 'Column keys, headers, and optional left/right alignment.' },
+      { name: 'rows', type: 'TableRow[]', description: 'Rows with stable ids and string or number values keyed by column.' },
+      { name: 'caption', type: 'string', description: 'Optional table description.' },
+    ],
+  },
 ];
 
 export const componentGroups = (['Actions', 'Forms', 'Content', 'Feedback', 'Navigation'] as const).map(category => ({
