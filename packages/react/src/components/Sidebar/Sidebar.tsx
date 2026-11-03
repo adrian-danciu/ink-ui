@@ -26,9 +26,10 @@ export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   mobileOpen?: boolean;
   onMobileOpenChange?: (open: boolean) => void;
   onNavigate?: (event: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+  motion?: boolean;
 }
 
-export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', header, footer, iconPosition = 'left', collapsible = false, collapsed, defaultCollapsed = false, onCollapsedChange, mobileOpen, onMobileOpenChange, onNavigate, className, ...props }: SidebarProps) {
+export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', header, footer, iconPosition = 'left', collapsible = false, collapsed, defaultCollapsed = false, onCollapsedChange, mobileOpen, onMobileOpenChange, onNavigate, motion, className, ...props }: SidebarProps) {
   const [internalCollapsed, setInternalCollapsed] = React.useState(defaultCollapsed);
   const [isMobile, setIsMobile] = React.useState(() => typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 767px)').matches);
   const isCollapsed = collapsed ?? internalCollapsed;
@@ -72,7 +73,7 @@ export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', hea
 
   return <>
     {drawer && <button type="button" className="ui-sidebar-backdrop" data-open={mobileDrawerOpen} aria-label="Close navigation" tabIndex={mobileDrawerOpen ? 0 : -1} onClick={() => onMobileOpenChange?.(false)} />}
-    <aside {...props} ref={panelRef} role={mobileDrawerOpen ? 'dialog' : props.role} aria-modal={mobileDrawerOpen ? true : props['aria-modal']} aria-label={mobileDrawerOpen ? label : props['aria-label']} className={['ui-sidebar', className].filter(Boolean).join(' ')} data-collapsed={collapsible && isCollapsed} data-mobile-drawer={drawer} data-mobile-open={mobileOpen}>
+    <aside {...props} ref={panelRef} role={mobileDrawerOpen ? 'dialog' : props.role} aria-modal={mobileDrawerOpen ? true : props['aria-modal']} aria-label={mobileDrawerOpen ? label : props['aria-label']} className={['ui-sidebar', className].filter(Boolean).join(' ')} data-collapsed={collapsible && isCollapsed} data-mobile-drawer={drawer} data-mobile-open={mobileOpen} data-ui-motion={motion === undefined ? undefined : motion ? 'on' : 'off'}>
       {(collapsible || drawer) && <div className="ui-sidebar-actions">
         {collapsible && <button type="button" className="ui-sidebar-collapse" aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'} aria-expanded={!isCollapsed} onClick={toggleCollapsed}><span aria-hidden="true">{isCollapsed ? '→' : '←'}</span></button>}
         {drawer && <button ref={closeRef} type="button" className="ui-sidebar-mobile-close" aria-label="Close navigation" onClick={() => onMobileOpenChange?.(false)}>×</button>}

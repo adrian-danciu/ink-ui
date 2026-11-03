@@ -4,6 +4,8 @@
 .ui-combobox > input:focus-visible { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
 .ui-combobox > input:disabled { cursor: not-allowed; opacity: var(--ui-opacity-disabled); }
 .ui-combobox-list { background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); box-shadow: var(--ui-shadow-offset-md) var(--ui-shadow-offset-md) 0 var(--ui-color-shadow); display: grid; left: 0; max-height: var(--ui-breakpoint-sm); overflow-y: auto; position: absolute; right: 0; top: 100%; z-index: 20; }
+.ui-combobox-list { animation: ui-combobox-enter var(--ui-motion-duration-effective-fast) ease-out both; }
+@keyframes ui-combobox-enter { from { opacity: 0; transform: translateY(calc(-1 * var(--ui-space-2))); } to { opacity: 1; transform: translateY(0); } }
 .ui-combobox-list button { background: transparent; border: 0; color: var(--ui-color-text); cursor: pointer; font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-sm); min-height: var(--ui-component-size-md); padding: var(--ui-space-2) var(--ui-space-3); text-align: left; }
 .ui-combobox-list button[data-active='true'], .ui-combobox-list button:hover { background: var(--ui-color-accent); color: var(--ui-color-accent-text); }
 .ui-combobox-list button:disabled { cursor: not-allowed; opacity: var(--ui-opacity-disabled); }

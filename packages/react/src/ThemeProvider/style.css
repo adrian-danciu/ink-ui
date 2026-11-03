@@ -1,5 +1,12 @@
 .ui-theme {
+  --ui-motion-duration-effective-fast: var(--ui-motion-duration-fast);
+  --ui-motion-play-state: running;
   background: var(--ui-color-canvas);
   color: var(--ui-color-text);
   font-family: var(--ui-font-family-body);
+}
+.ui-theme[data-ui-motion='off'], .ui-theme [data-ui-motion='off'] { --ui-motion-duration-effective-fast: 0ms; --ui-motion-play-state: paused; }
+.ui-theme [data-ui-motion='on'] { --ui-motion-duration-effective-fast: var(--ui-motion-duration-fast); --ui-motion-play-state: running; }
+@media (prefers-reduced-motion: reduce) {
+  .ui-theme, .ui-theme [data-ui-motion] { --ui-motion-duration-effective-fast: 0ms !important; --ui-motion-play-state: paused !important; }
 }

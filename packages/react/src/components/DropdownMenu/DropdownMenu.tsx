@@ -8,9 +8,10 @@ export interface DropdownMenuProps {
   onItemSelect: (id: string) => void;
   disabled?: boolean;
   accent?: AccentName;
+  motion?: boolean;
 }
 
-export function DropdownMenu({ label, items, onItemSelect, disabled = false, accent }: DropdownMenuProps) {
+export function DropdownMenu({ label, items, onItemSelect, disabled = false, accent, motion }: DropdownMenuProps) {
   const [open, setOpen] = React.useState(false);
   const id = React.useId();
   const rootRef = React.useRef<HTMLDivElement>(null);
@@ -42,7 +43,7 @@ export function DropdownMenu({ label, items, onItemSelect, disabled = false, acc
       : null;
     if (next || typed) { event.preventDefault(); (next ?? typed)?.focus(); }
   }
-  return <div ref={rootRef} className="ui-dropdown-menu" data-ui-accent={accent}>
+  return <div ref={rootRef} className="ui-dropdown-menu" data-ui-accent={accent} data-ui-motion={motion === undefined ? undefined : motion ? 'on' : 'off'}>
     <button ref={triggerRef} id={`${id}-trigger`} type="button" className="ui-dropdown-trigger" aria-haspopup="menu" aria-expanded={open} aria-controls={open ? `${id}-menu` : undefined} disabled={disabled} onClick={() => { if (open) close(); else openMenu(); }} onKeyDown={event => { if (event.key === 'Escape') close(true); else if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); openMenu(event.key === 'ArrowUp' ? 'last' : 'first'); } }}>{label}<span aria-hidden="true">⌄</span></button>
     {open && <div ref={menuRef} id={`${id}-menu`} role="menu" aria-labelledby={`${id}-trigger`} className="ui-dropdown-panel" tabIndex={-1} onKeyDown={onMenuKeyDown} onBlur={event => { if (!rootRef.current?.contains(event.relatedTarget as Node)) close(); }}>
       {items.map((item, index) => <button key={item.id} ref={node => { itemRefs.current[index] = node; }} type="button" role="menuitem" disabled={item.disabled} data-destructive={item.destructive} tabIndex={-1} onClick={() => { onItemSelect(item.id); close(true); }}>{item.label}</button>)}

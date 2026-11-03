@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { tokens, type AccentName } from '@adrian-danciu/ink-ui-tokens';
-import { blackWeight, useAccent, useTheme } from '../../theme';
+import { blackWeight, useAccent, useMotion, useTheme } from '../../theme';
 
 export interface ComboboxOption { label: string; value: string; disabled?: boolean }
 export interface ComboboxProps {
@@ -13,11 +13,13 @@ export interface ComboboxProps {
   emptyMessage?: string;
   disabled?: boolean;
   accent?: AccentName;
+  motion?: boolean;
 }
 
-export function Combobox({ label, options, value, onValueChange, placeholder = 'Search options', emptyMessage = 'No matches', disabled = false, accent }: ComboboxProps) {
+export function Combobox({ label, options, value, onValueChange, placeholder = 'Search options', emptyMessage = 'No matches', disabled = false, accent, motion }: ComboboxProps) {
   const colors = useTheme();
   const selectedAccent = useAccent(accent);
+  const motionEnabled = useMotion(motion);
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState('');
   const selected = options.find(option => option.value === value);
@@ -25,7 +27,7 @@ export function Combobox({ label, options, value, onValueChange, placeholder = '
   return <View style={{ gap: tokens.space[2] }}>
     <Text style={{ color: colors.text, fontSize: tokens.fontSize.sm, fontWeight: blackWeight, textTransform: 'uppercase' }}>{label}</Text>
     <Pressable accessibilityRole="button" accessibilityLabel={`${label}, ${selected?.label ?? placeholder}`} accessibilityState={{ disabled, expanded: open }} disabled={disabled} onPress={() => { setQuery(''); setOpen(true); }} style={{ backgroundColor: colors.surface, borderColor: colors.border, borderRadius: tokens.radius.sm, borderWidth: tokens.borderWidth.md, justifyContent: 'center', minHeight: tokens.componentSize.md, opacity: disabled ? tokens.opacity.disabled : tokens.opacity.default, paddingHorizontal: tokens.space[3] }}><Text style={{ color: selected ? colors.text : colors.textMuted, fontSize: tokens.fontSize.md }}>{selected?.label ?? placeholder}</Text></Pressable>
-    <Modal animationType="fade" transparent visible={open} onRequestClose={() => setOpen(false)}>
+    <Modal animationType={motionEnabled ? 'fade' : 'none'} transparent visible={open} onRequestClose={() => setOpen(false)}>
       <View style={{ flex: 1, justifyContent: 'center', padding: tokens.space[5] }}>
         <Pressable accessibilityRole="button" accessibilityLabel="Close options" onPress={() => setOpen(false)} style={{ backgroundColor: colors.shadow, bottom: 0, left: 0, opacity: tokens.opacity.overlay, position: 'absolute', right: 0, top: 0 }} />
         <View accessibilityViewIsModal style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: tokens.borderWidth.strong, maxHeight: '80%', padding: tokens.space[4] }}>
