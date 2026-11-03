@@ -3,13 +3,15 @@ import { createRoot } from 'react-dom/client';
 import { Button, Select, Sidebar, ThemeProvider, type ThemeMode, type ThemeName } from '@adrian-danciu/ink-ui';
 import { accents, themes, type AccentName } from '@adrian-danciu/ink-ui-tokens';
 import { ComponentExample } from './examples';
+import { CodeBlock, PageHeader } from './docs-ui';
+import { NativeGuide, NextGuide } from './guides';
 import { logoDataUrl } from './logo';
 import { componentGroups, componentPages, type ComponentPage } from './pages';
 import '@adrian-danciu/ink-ui/styles.css';
 import './docs.css';
 
 const navigation = [
-  { title: 'Start here', links: [{ label: 'Overview', href: '/' }, { label: 'Getting started', href: '/getting-started' }, { label: 'Themes & tokens', href: '/themes' }, { label: 'All components', href: '/components' }] },
+  { title: 'Start here', links: [{ label: 'Overview', href: '/' }, { label: 'Getting started', href: '/getting-started' }, { label: 'React & Next.js', href: '/react-next' }, { label: 'React Native', href: '/react-native' }, { label: 'Themes & tokens', href: '/themes' }, { label: 'All components', href: '/components' }] },
   ...componentGroups,
 ];
 
@@ -38,27 +40,6 @@ function readAccent(): AccentName | 'default' {
   return value && Object.hasOwn(accents, value) ? value as AccentName : 'default';
 }
 
-function CodeBlock({ code }: { code: string }) {
-  const [copied, setCopied] = React.useState(false);
-  async function copy() {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
-  }
-  return <div className="docs-code">
-    <div className="docs-code-head"><span>TSX / EXAMPLE</span><button type="button" onClick={copy}>{copied ? 'COPIED' : 'COPY'}</button></div>
-    <pre><code>{code}</code></pre>
-  </div>;
-}
-
-function PageHeader({ index, category, title, description }: { index: string; category: string; title: string; description: string }) {
-  return <header className="docs-page-header">
-    <div className="docs-eyebrow"><span>{category.toUpperCase()}</span><span>ISSUE {index}</span></div>
-    <h1>{title}</h1>
-    <p>{description}</p>
-  </header>;
-}
-
 function ComponentDoc({ page, theme, mode }: { page: ComponentPage; theme: ThemeName; mode: ThemeMode }) {
   const index = String(componentPages.indexOf(page) + 1).padStart(2, '0');
   const next = componentPages[componentPages.indexOf(page) + 1];
@@ -81,7 +62,7 @@ function ComponentDoc({ page, theme, mode }: { page: ComponentPage; theme: Theme
       </tbody></table></div>
       <p className="docs-caption">See the TypeScript export for the complete type. DOM-based components also accept their corresponding native HTML props where their interface extends them.</p>
     </section>
-    <p className="docs-platform-note">Also available from <code>@adrian-danciu/ink-ui-native</code> with the same component name. Platform event props follow React Native conventions.</p>
+    <p className="docs-platform-note">This page shows the web API. The component is also exported by <code>@adrian-danciu/ink-ui-native</code>, where events and rendering follow React Native conventions. See the <a href="/react-native">React Native guide</a> for installation and platform differences.</p>
     {next && <a className="docs-next" href={`/components/${next.slug}`}><span>NEXT COMPONENT</span><strong>{next.name} ↗</strong></a>}
   </>;
 }
@@ -91,21 +72,23 @@ function Overview() {
     <PageHeader index="00" category="The system" title="Ink UI" description="A bold, token-driven component library for React, Next.js, and React Native. Hard edges, clear actions, and three visual styles." />
     <div className="docs-callout"><span>01 / THE IDEA</span><strong>Built like a poster. Read like a paper. Used like a system.</strong><p>Poster, Paper, and Electric share one component vocabulary. Every style has light and dark modes, with accents you can change per provider or per component.</p></div>
     <div className="docs-feature-grid">
-      <a href="/getting-started"><span>START / 01</span><h2>Get set up</h2><p>Workspace setup, imports, and your first component.</p><b>READ GUIDE ↗</b></a>
+      <a href="/getting-started"><span>START / 01</span><h2>Get set up</h2><p>Install from npm or Bun, choose your platform, and render your first component.</p><b>READ GUIDE ↗</b></a>
       <a href="/themes"><span>SYSTEM / 02</span><h2>Explore themes</h2><p>Three styles, two modes, shared tokens, and accent overrides.</p><b>VIEW TOKENS ↗</b></a>
       <a href="/components"><span>INDEX / 03</span><h2>Browse components</h2><p>Live examples and API details for every available web component.</p><b>OPEN INDEX ↗</b></a>
     </div>
-    <section className="docs-section"><div className="docs-section-heading"><h2>Component preview</h2><span>CORE COLLECTION</span></div><p className="docs-body-copy">The separate preview app shows the component collection in one selected style. Open it at <a href="http://localhost:3000/?theme=poster">localhost:3000</a> when the preview server is running.</p></section>
+    <section className="docs-section"><div className="docs-section-heading"><h2>Choose your platform</h2><span>TWO RENDERERS / ONE SYSTEM</span></div><p className="docs-body-copy">Start with the <a href="/react-next">React and Next.js guide</a> or the <a href="/react-native">React Native guide</a>. The separate local <a href="http://localhost:3000/?theme=poster">component preview</a> shows the collection in one selected style when <code>bun run preview</code> is running.</p></section>
   </>;
 }
 
 function GettingStarted() {
   return <>
-    <PageHeader index="01" category="Guide" title="Getting started" description="Start with the Bun workspace, then import the stylesheet and components into your React app." />
-    <section className="docs-section"><div className="docs-section-heading"><h2>Run locally</h2><span>WORKSPACE</span></div><CodeBlock code={'bun install\nbun run docs'} /><p className="docs-body-copy">The docs server runs on port 3001. The component preview runs separately with <code>bun run dev</code> on port 3000.</p></section>
-    <section className="docs-section"><div className="docs-section-heading"><h2>React / Next.js</h2><span>WEB</span></div><CodeBlock code={`import '@adrian-danciu/ink-ui/styles.css';\nimport { Button, ThemeProvider } from '@adrian-danciu/ink-ui';\n\n<ThemeProvider theme="paper" mode="light" accent="red">\n  <Button>Continue</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Import the stylesheet once at the app root. In Next.js, put it in your root layout. Wrap the part of the app you want themed with <code>ThemeProvider</code>.</p></section>
-    <section className="docs-section"><div className="docs-section-heading"><h2>React Native</h2><span>MOBILE</span></div><CodeBlock code={`import { Button, ThemeProvider } from '@adrian-danciu/ink-ui-native';\n\n<ThemeProvider theme="electric" mode="dark" accent="lime">\n  <Button onPress={() => {}}>Continue</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Native components use the same token values through JavaScript styles. CSS imports are only for the web package.</p></section>
-    <p className="docs-platform-note">The <code>@adrian-danciu</code> packages are being prepared for npm. Until release, clone the repository and run the examples from this workspace.</p>
+    <PageHeader index="01" category="Guide" title="Getting started" description="Install Ink UI from npm or Bun, then choose the web or native package for your app." />
+    <div className="docs-guide-grid">
+      <a href="/react-next"><span>WEB / 01</span><h2>React & Next.js</h2><p>Import one stylesheet, add a provider, and use standard DOM events.</p><strong>OPEN WEB GUIDE ↗</strong></a>
+      <a href="/react-native"><span>MOBILE / 02</span><h2>React Native</h2><p>Use native components and events with the same themes and tokens.</p><strong>OPEN NATIVE GUIDE ↗</strong></a>
+    </div>
+    <section className="docs-section"><div className="docs-section-heading"><h2>Install a package</h2><span>NPM OR BUN</span></div><CodeBlock label="NPM / WEB" code="npm install @adrian-danciu/ink-ui" /><p className="docs-body-copy">For Bun, run <code>bun add @adrian-danciu/ink-ui</code>. In a React Native app, install <code>@adrian-danciu/ink-ui-native</code> instead. Your app supplies React and the renderer peer dependency for its platform.</p></section>
+    <section className="docs-section"><div className="docs-section-heading"><h2>Work on Ink UI locally</h2><span>CONTRIBUTORS</span></div><CodeBlock label="BUN / WORKSPACE" code={'git clone https://github.com/adrian-danciu/ink-ui.git\ncd ink-ui\nbun install --frozen-lockfile\nbun run docs'} /><p className="docs-body-copy">The docs app runs at <code>localhost:3001</code>. Run <code>bun run preview</code> separately to inspect all components at <code>localhost:3000</code>. You do not need to clone the repository to use the npm packages.</p></section>
   </>;
 }
 
@@ -118,7 +101,8 @@ function ThemesPage() {
     })}</div>
     <section className="docs-section"><div className="docs-section-heading"><h2>Set a style</h2><span>PROVIDER</span></div><CodeBlock code={`<ThemeProvider theme="poster" mode="dark" accent="red">\n  <Button accent="turquoise">Override this button</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Choose a style and mode at the provider. The accent prop changes the default highlight; components with an accent prop can override it locally.</p></section>
     <section className="docs-section"><div className="docs-section-heading"><h2>Motion</h2><span>ON BY DEFAULT</span></div><CodeBlock code={`<ThemeProvider theme="paper" motion={false}>\n  <Button>Instant action</Button>\n  <Button motion>Animated override</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Motion is enabled by default. Set <code>motion={'{false}'}</code> on ThemeProvider for a whole subtree, or on an animated component for one control. Device reduced-motion settings take precedence over both. The motion toggle above lets you inspect the live examples.</p></section>
-    <section className="docs-section"><div className="docs-section-heading"><h2>Token source</h2><span>ONE FILE</span></div><p className="docs-body-copy">Color, spacing, type, radius, border, sizing, and breakpoint values come from <code>packages/tokens/src/tokens.json</code>. The web package uses generated CSS custom properties; React Native reads the same values as JavaScript. Edit the JSON source and rebuild to change the system.</p></section>
+    <section className="docs-section"><div className="docs-section-heading"><h2>Available accents</h2><span>INDEPENDENT OF STYLE</span></div><div className="docs-accent-grid">{Object.entries(accents).map(([name, value]) => <div key={name}><span className="docs-accent-swatch" style={{ background: value.base, color: value.on }}>Aa</span><strong>{name}</strong></div>)}</div><p className="docs-body-copy">Choose red, turquoise, yellow, lime, purple, or pink at the provider. Components with an <code>accent</code> prop can override it for one control.</p></section>
+    <section className="docs-section"><div className="docs-section-heading"><h2>Token source</h2><span>ONE FILE</span></div><p className="docs-body-copy">Color, spacing, type, radius, border, sizing, and breakpoint values come from <code>packages/tokens/src/tokens.json</code>. The web package uses generated <code>--ui-*</code> CSS properties; React Native reads the same values as JavaScript. Consumers building custom surfaces can install <code>@adrian-danciu/ink-ui-tokens</code> directly and import <code>tokens</code>, <code>themes</code>, or <code>getTheme</code>.</p><CodeBlock label="NPM / TOKENS" code="npm install @adrian-danciu/ink-ui-tokens" /></section>
   </>;
 }
 
@@ -165,7 +149,7 @@ function App() {
     const url = new URL(anchor.href);
     if (url.origin !== window.location.origin || url.hash) return;
     const nextPath = url.pathname.replace(/\/$/, '') || '/';
-    if (nextPath !== '/' && nextPath !== '/getting-started' && nextPath !== '/themes' && nextPath !== '/components' && !componentPages.some(item => nextPath === `/components/${item.slug}`)) return;
+    if (nextPath !== '/' && nextPath !== '/getting-started' && nextPath !== '/react-next' && nextPath !== '/react-native' && nextPath !== '/themes' && nextPath !== '/components' && !componentPages.some(item => nextPath === `/components/${item.slug}`)) return;
     event.preventDefault();
     if (nextPath === path) return;
     window.history.pushState(null, '', `${url.pathname}${url.search}`);
@@ -176,7 +160,7 @@ function App() {
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-theme', theme); }, [theme]);
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-mode', mode); }, [mode]);
   React.useEffect(() => { window.sessionStorage.setItem('ink-ui-docs-accent', accent); }, [accent]);
-  React.useEffect(() => { document.title = `${page?.name ?? (path === '/' ? 'Overview' : path === '/getting-started' ? 'Getting started' : path === '/themes' ? 'Themes & tokens' : 'Components')} — Ink UI`; }, [page, path]);
+  React.useEffect(() => { document.title = `${page?.name ?? (path === '/' ? 'Overview' : path === '/getting-started' ? 'Getting started' : path === '/react-next' ? 'React & Next.js' : path === '/react-native' ? 'React Native' : path === '/themes' ? 'Themes & tokens' : 'Components')} — Ink UI`; }, [page, path]);
   React.useEffect(() => { const icon = document.getElementById('ink-ui-favicon') as HTMLLinkElement | null; if (icon) icon.href = mark; }, [mark]);
 
   return <ThemeProvider theme={theme} mode={mode} accent={accent === 'default' ? undefined : accent} motion={motion} className="docs-app" onClickCapture={handleInternalLinkClick}>
@@ -200,7 +184,7 @@ function App() {
           </div>
         </div>
         <div className="docs-content">
-          {path === '/' ? <Overview /> : path === '/getting-started' ? <GettingStarted /> : path === '/themes' ? <ThemesPage /> : path === '/components' ? <ComponentsIndex /> : page ? <ComponentDoc page={page} theme={theme} mode={mode} /> : <><PageHeader index="—" category="Not found" title="Missing page" description="This page is not in the field guide." /><a href="/components">Browse components ↗</a></>}
+          {path === '/' ? <Overview /> : path === '/getting-started' ? <GettingStarted /> : path === '/react-next' ? <NextGuide /> : path === '/react-native' ? <NativeGuide /> : path === '/themes' ? <ThemesPage /> : path === '/components' ? <ComponentsIndex /> : page ? <ComponentDoc page={page} theme={theme} mode={mode} /> : <><PageHeader index="—" category="Not found" title="Missing page" description="This page is not in the field guide." /><a href="/components">Browse components ↗</a></>}
         </div>
         <footer className="docs-footer"><span>INK UI / LOCAL DOCUMENTATION</span><span>POSTER · PAPER · ELECTRIC</span></footer>
       </main>
