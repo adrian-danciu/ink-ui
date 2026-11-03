@@ -76,6 +76,7 @@ Use `Spinner` as a labelled loading status. `ToggleGroup` is a controlled, singl
 `Combobox` searches a controlled single-select option list. `Slider` controls a numeric range. `DropdownMenu` offers action items, while `Sheet` displays an edge-anchored modal panel. `Tooltip` provides a short hint on hover, focus, or tap.
 
 Web tooltips render in a viewport-level layer, so scroll containers do not clip them. The hint automatically moves below the trigger when there is not enough space above it.
+In Combobox, Arrow Up and Arrow Down move through enabled options, Enter selects, and Escape restores the current value. DropdownMenu opens from its trigger with Arrow Down or Arrow Up, supports Home, End, and first-letter navigation, and returns focus to the trigger on Escape. Dialog and Sheet use the browser's modal dialog behavior and report browser-driven dismissal through `onOpenChange`.
 
 ```tsx
 <Slider label="Intensity" value={intensity} onValueChange={setIntensity} step={5} />

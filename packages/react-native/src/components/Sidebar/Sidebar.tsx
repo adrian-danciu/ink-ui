@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Modal, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
+import { Animated, Modal, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { tokens } from '@adrian-danciu/ink-ui-tokens';
 import { blackWeight, boldWeight, useAccent, useTheme } from '../../theme';
+import { useEdgeSlide } from '../../internal/useEdgeSlide';
 
 export interface SidebarLink { label: string; href: string; icon?: React.ReactNode; iconPosition?: 'left' | 'right' }
 export interface SidebarGroup { title: string; links: readonly SidebarLink[] }
@@ -28,6 +29,8 @@ export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', hea
   const [internalCollapsed, setInternalCollapsed] = React.useState(defaultCollapsed);
   const isCollapsed = collapsible && (collapsed ?? internalCollapsed);
   const drawer = mobileOpen !== undefined;
+  const drawerWidth = Math.min(tokens.componentSize.lg * 6, screenWidth - tokens.space[8]);
+  const slide = useEdgeSlide(!!mobileOpen, -drawerWidth);
 
   function toggleCollapsed() {
     const next = !isCollapsed;
@@ -46,7 +49,7 @@ export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', hea
           const active = currentPath === link.href;
           const showLabel = !isCollapsed || drawer;
           const icon = link.icon ? <View accessible={false} style={{ alignItems: 'center', justifyContent: 'center', width: tokens.space[5] }}>{link.icon}</View> : null;
-          return <Pressable key={link.href} accessibilityRole="button" accessibilityLabel={link.label} accessibilityState={{ selected: active }} onPress={() => { onNavigate(link.href); if (drawer) onMobileOpenChange?.(false); }} style={{ alignItems: 'center', backgroundColor: active ? accent.base : colors.surface, borderColor: active ? colors.border : 'transparent', borderWidth: tokens.borderWidth.md, flexDirection: 'row', gap: tokens.space[2], justifyContent: showLabel ? 'flex-start' : 'center', marginBottom: tokens.space[1], minHeight: tokens.componentSize.md, paddingHorizontal: showLabel ? tokens.space[3] : tokens.space[1], paddingVertical: tokens.space[2] }}>
+          return <Pressable key={link.href} accessibilityRole="link" accessibilityLabel={link.label} accessibilityState={{ selected: active }} onPress={() => { onNavigate(link.href); if (drawer) onMobileOpenChange?.(false); }} style={{ alignItems: 'center', backgroundColor: active ? accent.base : colors.surface, borderColor: active ? colors.border : 'transparent', borderWidth: tokens.borderWidth.md, flexDirection: 'row', gap: tokens.space[2], justifyContent: showLabel ? 'flex-start' : 'center', marginBottom: tokens.space[1], minHeight: tokens.componentSize.md, paddingHorizontal: showLabel ? tokens.space[3] : tokens.space[1], paddingVertical: tokens.space[2] }}>
             {(link.iconPosition ?? iconPosition) === 'left' && icon}
             {showLabel ? <Text style={{ color: active ? accent.on : colors.text, flex: 1, fontSize: tokens.fontSize.sm, fontWeight: active ? blackWeight : boldWeight }}>{link.label}</Text> : !icon && <Text style={{ color: active ? accent.on : colors.text, fontSize: tokens.fontSize.sm, fontWeight: blackWeight }}>{link.label.charAt(0).toUpperCase()}</Text>}
             {(link.iconPosition ?? iconPosition) === 'right' && icon}
@@ -58,10 +61,10 @@ export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', hea
   </View>;
 
   if (!drawer) return content;
-  return <Modal visible={!!mobileOpen} transparent animationType="slide" onRequestClose={() => onMobileOpenChange?.(false)}>
-    <View style={{ flex: 1, flexDirection: 'row' }}>
-      <View style={{ width: Math.min(tokens.componentSize.lg * 6, screenWidth - tokens.space[8]) }}>{content}</View>
-      <Pressable accessibilityRole="button" accessibilityLabel="Close navigation" onPress={() => onMobileOpenChange?.(false)} style={{ backgroundColor: colors.border, flex: 1, opacity: tokens.opacity.overlay }} />
+  return <Modal visible={slide.visible} transparent animationType="none" onShow={slide.onShow} onRequestClose={() => onMobileOpenChange?.(false)}>
+    <View style={{ flex: 1 }}>
+      <Pressable accessibilityRole="button" accessibilityLabel="Close navigation" onPress={() => onMobileOpenChange?.(false)} style={{ backgroundColor: colors.shadow, bottom: 0, left: 0, opacity: tokens.opacity.overlay, position: 'absolute', right: 0, top: 0 }} />
+      <Animated.View style={{ height: '100%', width: drawerWidth, transform: [{ translateX: slide.translate }] }}>{content}</Animated.View>
     </View>
   </Modal>;
 }

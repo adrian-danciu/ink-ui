@@ -32,7 +32,7 @@ Native components use JavaScript tokens and do not require a CSS import. See the
 
 ### Sidebar
 
-`Sidebar` accepts `icon` and `iconPosition: 'left' | 'right'` on each link, plus a default `iconPosition` prop. Use `collapsible` for an inline icon rail. Supplying `mobileOpen` renders it in a native modal drawer with a close control and backdrop. Connect links to your navigation library through `onNavigate(href)`.
+`Sidebar` accepts `icon` and `iconPosition: 'left' | 'right'` on each link, plus a default `iconPosition` prop. Use `collapsible` for an inline icon rail. Supplying `mobileOpen` renders it in a native modal drawer that slides from the left, with a close control and backdrop. Connect links to your navigation library through `onNavigate(href)`.
 
 ### List, Stepper, and Rating
 
@@ -44,4 +44,5 @@ Native components use JavaScript tokens and do not require a CSS import. See the
 
 ### Search, range, and overlays
 
-`Combobox` opens a searchable selection modal. `Slider` supports touch and accessibility increment/decrement actions. `DropdownMenu` presents a touch-friendly action modal; `Sheet` slides in from a chosen edge. `Tooltip` opens a dismissible hint on tap or long press. These components use the same controlled values and callbacks as their web counterparts.
+`Combobox` opens a searchable selection modal. `Slider` supports touch and accessibility increment/decrement actions. `DropdownMenu` presents a touch-friendly action modal; `Sheet` slides in from its chosen edge (`right` by default). `Tooltip` opens a dismissible hint on tap or long press. These components use the same controlled values and callbacks as their web counterparts.
+Modal surfaces expose close controls and handle the platform back action. Native Sidebar items announce themselves as navigation links; Tooltip has a separate dismiss control so its content can be explored without closing it.
