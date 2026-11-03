@@ -19,7 +19,7 @@ export function Sheet({ open, onOpenChange, title, description, side = 'right', 
   const vertical = side === 'left' || side === 'right';
   return <Modal animationType="slide" transparent visible={open} onRequestClose={() => onOpenChange(false)}>
     <View style={{ flex: 1, flexDirection: vertical ? 'row' : 'column', justifyContent: side === 'right' || side === 'bottom' ? 'flex-end' : 'flex-start' }}>
-      <Pressable accessibilityLabel="Close panel" onPress={() => onOpenChange(false)} style={{ backgroundColor: colors.shadow, bottom: 0, left: 0, opacity: tokens.opacity.overlay, position: 'absolute', right: 0, top: 0 }} />
+      <Pressable accessibilityRole="button" accessibilityLabel="Close panel" onPress={() => onOpenChange(false)} style={{ backgroundColor: colors.shadow, bottom: 0, left: 0, opacity: tokens.opacity.overlay, position: 'absolute', right: 0, top: 0 }} />
       <View accessibilityViewIsModal style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: tokens.borderWidth.strong, height: vertical ? '100%' : undefined, maxHeight: vertical ? undefined : '80%', width: vertical ? '85%' : '100%' }}>
         <View style={{ alignItems: 'center', borderBottomColor: colors.border, borderBottomWidth: tokens.borderWidth.md, flexDirection: 'row', justifyContent: 'space-between', padding: tokens.space[4] }}>
           <Text style={{ color: colors.textMuted, fontSize: tokens.fontSize.caption, fontWeight: boldWeight }}>PANEL / 001</Text>

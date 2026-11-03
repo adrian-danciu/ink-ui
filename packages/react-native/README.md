@@ -45,3 +45,4 @@ Native components use JavaScript tokens and do not require a CSS import. See the
 ### Search, range, and overlays
 
 `Combobox` opens a searchable selection modal. `Slider` supports touch and accessibility increment/decrement actions. `DropdownMenu` presents a touch-friendly action modal; `Sheet` slides in from a chosen edge. `Tooltip` opens a dismissible hint on tap or long press. These components use the same controlled values and callbacks as their web counterparts.
+Modal surfaces expose close controls and handle the platform back action. Native Sidebar items announce themselves as navigation links; Tooltip has a separate dismiss control so its content can be explored without closing it.

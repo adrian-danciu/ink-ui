@@ -205,7 +205,7 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
         </div>
         <div className="component-block">
           <span className="sample-label">COMBOBOX</span>
-          <Combobox label="Search category" options={[{ label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }, { label: 'Research', value: 'research' }]} value={comboValue} onValueChange={setComboValue} accent={accent} />
+          <Combobox label="Search category" options={[{ label: 'Archived', value: 'archived', disabled: true }, { label: 'Design', value: 'design' }, { label: 'Photography', value: 'photo' }, { label: 'Writing', value: 'writing' }, { label: 'Research', value: 'research' }]} value={comboValue} onValueChange={setComboValue} accent={accent} />
         </div>
         <div className="component-block">
           <span className="sample-label">RATING</span>
@@ -221,7 +221,7 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
         </div>
         <div className="component-block">
           <span className="sample-label">DROPDOWN MENU / TOOLTIP</span>
-          <div className="button-row"><DropdownMenu label="Actions" items={[{ id: 'edit', label: 'Edit' }, { id: 'duplicate', label: 'Duplicate' }, { id: 'delete', label: 'Delete', destructive: true }]} onItemSelect={setMenuAction} accent={accent} /><Tooltip label="Archive" content="Move this item to the archive." accent={accent}>?</Tooltip><span className="click-readout">ACTION: {menuAction.toUpperCase()}</span></div>
+          <div className="button-row"><DropdownMenu label="Actions" items={[{ id: 'edit', label: 'Edit' }, { id: 'locked', label: 'Locked', disabled: true }, { id: 'duplicate', label: 'Duplicate' }, { id: 'delete', label: 'Delete', destructive: true }]} onItemSelect={setMenuAction} accent={accent} /><Tooltip label="Archive" content="Move this item to the archive." accent={accent}>?</Tooltip><span className="click-readout">ACTION: {menuAction.toUpperCase()}</span></div>
         </div>
         <div className="component-block">
           <span className="sample-label">DIALOG</span>
