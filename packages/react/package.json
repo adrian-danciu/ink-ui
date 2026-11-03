@@ -1,6 +1,6 @@
 {
   "name": "@adrian-danciu/ink-ui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Brutalist React and Next.js components with three themes, light and dark modes, and configurable accents.",
   "license": "MIT",
   "keywords": [
