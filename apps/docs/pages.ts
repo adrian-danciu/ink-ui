@@ -22,6 +22,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Button height and padding. Default: md.' },
       { name: 'variant', type: "'primary' | 'secondary'", description: 'Filled or outlined treatment. Default: primary.' },
       { name: 'accent', type: 'AccentName', description: 'Overrides the active theme accent for this button.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for this button; reduced-motion preference still wins.' },
       { name: 'disabled', type: 'boolean', description: 'Prevents activation and applies the disabled style.' },
     ],
   },
@@ -35,6 +36,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Control size. Default: md.' },
       { name: 'variant', type: "'primary' | 'secondary'", description: 'Default: secondary.' },
       { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the press transition.' },
     ],
   },
   {
@@ -69,6 +71,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'onCheckedChange', type: '(checked: boolean) => void', description: 'Called when the state changes.' },
       { name: 'disabled', type: 'boolean', description: 'Disables the control.' },
       { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the checkmark transition.' },
     ],
   },
   {
@@ -81,6 +84,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'onCheckedChange', type: '(checked: boolean) => void', description: 'Called on activation.' },
       { name: 'disabled', type: 'boolean', description: 'Disables the setting.' },
       { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the thumb transition.' },
     ],
   },
   {
@@ -234,6 +238,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'title', type: 'string', description: 'Dialog heading.' },
       { name: 'description', type: 'string', description: 'Optional explanation.' },
       { name: 'children', type: 'ReactNode', description: 'Actions or additional content.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the opening animation.' },
     ],
   },
   {
@@ -250,6 +255,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'mobileOpen / onMobileOpenChange', type: 'boolean / callback', description: 'Opt into a controlled small-screen drawer with close and backdrop behavior.' },
       { name: 'header / footer', type: 'ReactNode', description: 'Optional content above and below the links.' },
       { name: 'onNavigate', type: 'callback', description: 'Web receives the click event and href, so custom routers can prevent default. React Native receives href.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the mobile drawer.' },
     ],
   },
   {
@@ -328,6 +334,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'label', type: 'string', description: 'Accessible loading message. Default: Loading.' },
       { name: 'size', type: "'sm' | 'md' | 'lg'", description: 'Token-based indicator size. Default: md.' },
       { name: 'accent', type: 'AccentName', description: 'Overrides the active accent.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion; off keeps a static loading indicator.' },
     ],
   },
   {
@@ -372,6 +379,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'items', type: 'DropdownMenuItem[]', description: 'Action ids, labels, optional disabled or destructive flags.' },
       { name: 'onItemSelect', type: '(id: string) => void', description: 'Called when an action is chosen.' },
       { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables the trigger or overrides its accent.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the menu entrance.' },
     ],
   },
   {
@@ -383,6 +391,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'title / description', type: 'string', description: 'Accessible heading and optional supporting text.' },
       { name: 'side', type: "'left' | 'right' | 'top' | 'bottom'", description: 'Edge from which the sheet opens. Default: right.' },
       { name: 'children / accent', type: 'ReactNode / AccentName', description: 'Panel content and optional accent override.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the edge entrance.' },
     ],
   },
   {
@@ -394,6 +403,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'content', type: 'string', description: 'Brief explanatory text.' },
       { name: 'children', type: 'string', description: 'Optional trigger text or symbol.' },
       { name: 'side', type: "'top' | 'bottom'", description: 'Web tooltip placement. Default: top.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the hint entrance.' },
     ],
   },
   {
@@ -406,6 +416,7 @@ export const componentPages: readonly ComponentPage[] = [
       { name: 'value / onValueChange', type: 'string / callback', description: 'Controlled selection and change callback.' },
       { name: 'placeholder / emptyMessage', type: 'string', description: 'Search prompt and no-results message.' },
       { name: 'disabled / accent', type: 'boolean / AccentName', description: 'Disables the field or overrides the accent.' },
+      { name: 'motion', type: 'boolean', description: 'Overrides provider motion for the results entrance.' },
     ],
   },
 ];

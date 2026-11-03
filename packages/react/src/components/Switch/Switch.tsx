@@ -6,9 +6,10 @@ export interface SwitchProps {
   onCheckedChange: (checked: boolean) => void;
   disabled?: boolean;
   accent?: AccentName;
+  motion?: boolean;
 }
 
-export function Switch({ label, checked, onCheckedChange, disabled, accent }: SwitchProps) {
+export function Switch({ label, checked, onCheckedChange, disabled, accent, motion }: SwitchProps) {
   return <button
     type="button"
     role="switch"
@@ -16,6 +17,7 @@ export function Switch({ label, checked, onCheckedChange, disabled, accent }: Sw
     disabled={disabled}
     className="ui-switch"
     data-ui-accent={accent}
+    data-ui-motion={motion === undefined ? undefined : motion ? 'on' : 'off'}
     onClick={() => onCheckedChange(!checked)}
   >
     <span className="ui-switch-track" aria-hidden="true"><span className="ui-switch-thumb" /></span>

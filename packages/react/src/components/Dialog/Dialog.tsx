@@ -7,10 +7,11 @@ export interface DialogProps {
   title: string;
   description?: string;
   accent?: AccentName;
+  motion?: boolean;
   children?: React.ReactNode;
 }
 
-export function Dialog({ open, onOpenChange, title, description, accent, children }: DialogProps) {
+export function Dialog({ open, onOpenChange, title, description, accent, motion, children }: DialogProps) {
   const ref = React.useRef<HTMLDialogElement>(null);
   const id = React.useId();
   React.useEffect(() => {
@@ -19,7 +20,7 @@ export function Dialog({ open, onOpenChange, title, description, accent, childre
     if (open && !dialog.open) dialog.showModal();
     else if (!open && dialog.open) dialog.close();
   }, [open]);
-  return <dialog ref={ref} className="ui-dialog" data-ui-accent={accent} aria-labelledby={`${id}-title`} aria-describedby={description ? `${id}-description` : undefined} onCancel={event => { event.preventDefault(); onOpenChange(false); }} onClose={() => { if (open) onOpenChange(false); }}>
+  return <dialog ref={ref} className="ui-dialog" data-ui-accent={accent} data-ui-motion={motion === undefined ? undefined : motion ? 'on' : 'off'} aria-labelledby={`${id}-title`} aria-describedby={description ? `${id}-description` : undefined} onCancel={event => { event.preventDefault(); onOpenChange(false); }} onClose={() => { if (open) onOpenChange(false); }}>
     <div className="ui-dialog-header"><span className="ui-dialog-kicker">ATTENTION / 001</span><button className="ui-dialog-close" type="button" aria-label="Close dialog" onClick={() => onOpenChange(false)}>×</button></div>
     <h2 className="ui-dialog-title" id={`${id}-title`}>{title}</h2>
     {description && <p className="ui-dialog-description" id={`${id}-description`}>{description}</p>}

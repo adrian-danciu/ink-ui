@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, Modal, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { tokens } from '@adrian-danciu/ink-ui-tokens';
-import { blackWeight, boldWeight, useAccent, useTheme } from '../../theme';
+import { blackWeight, boldWeight, useAccent, useMotion, useTheme } from '../../theme';
 import { useEdgeSlide } from '../../internal/useEdgeSlide';
 
 export interface SidebarLink { label: string; href: string; icon?: React.ReactNode; iconPosition?: 'left' | 'right' }
@@ -20,17 +20,19 @@ export interface SidebarProps {
   mobileOpen?: boolean;
   onMobileOpenChange?: (open: boolean) => void;
   onNavigate: (href: string) => void;
+  motion?: boolean;
 }
 
-export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', header, footer, iconPosition = 'left', collapsible = false, collapsed, defaultCollapsed = false, onCollapsedChange, mobileOpen, onMobileOpenChange, onNavigate }: SidebarProps) {
+export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', header, footer, iconPosition = 'left', collapsible = false, collapsed, defaultCollapsed = false, onCollapsedChange, mobileOpen, onMobileOpenChange, onNavigate, motion }: SidebarProps) {
   const colors = useTheme();
   const accent = useAccent();
+  const motionEnabled = useMotion(motion);
   const { width: screenWidth } = useWindowDimensions();
   const [internalCollapsed, setInternalCollapsed] = React.useState(defaultCollapsed);
   const isCollapsed = collapsible && (collapsed ?? internalCollapsed);
   const drawer = mobileOpen !== undefined;
   const drawerWidth = Math.min(tokens.componentSize.lg * 6, screenWidth - tokens.space[8]);
-  const slide = useEdgeSlide(!!mobileOpen, -drawerWidth);
+  const slide = useEdgeSlide(!!mobileOpen, -drawerWidth, motionEnabled);
 
   function toggleCollapsed() {
     const next = !isCollapsed;

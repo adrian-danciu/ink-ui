@@ -13,7 +13,7 @@
   letter-spacing: var(--ui-letter-spacing-wide);
   padding-inline: var(--ui-space-4);
   text-transform: uppercase;
-  transition: box-shadow var(--ui-motion-duration-fast) ease, transform var(--ui-motion-duration-fast) ease;
+  transition: box-shadow var(--ui-motion-duration-effective-fast) ease, transform var(--ui-motion-duration-effective-fast) ease;
 }
 
 .ui-button[data-size='sm'] { min-height: var(--ui-component-size-sm); }

@@ -1,4 +1,4 @@
-.ui-icon-button { align-items: center; border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); box-shadow: var(--ui-shadow-offset-md) var(--ui-shadow-offset-md) 0 var(--ui-color-shadow); cursor: pointer; display: inline-flex; font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-lg); font-weight: var(--ui-font-weight-black); justify-content: center; line-height: 1; padding: 0; }
+.ui-icon-button { align-items: center; border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); box-shadow: var(--ui-shadow-offset-md) var(--ui-shadow-offset-md) 0 var(--ui-color-shadow); cursor: pointer; display: inline-flex; font-family: var(--ui-font-family-body); font-size: var(--ui-font-size-lg); font-weight: var(--ui-font-weight-black); justify-content: center; line-height: 1; padding: 0; transition: box-shadow var(--ui-motion-duration-effective-fast) ease, transform var(--ui-motion-duration-effective-fast) ease; }
 
 .ui-icon-button[data-size='sm'] { height: var(--ui-component-size-sm); width: var(--ui-component-size-sm); }
 

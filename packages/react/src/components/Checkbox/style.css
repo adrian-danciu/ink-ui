@@ -4,11 +4,11 @@
 
 .ui-checkbox-mark { align-items: center; background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); display: inline-flex; height: var(--ui-control-size-checkbox); justify-content: center; width: var(--ui-control-size-checkbox); }
 
-.ui-checkbox-mark::after { color: var(--ui-color-accent-text); content: '✓'; display: none; font-size: var(--ui-font-size-md); font-weight: var(--ui-font-weight-black); }
+.ui-checkbox-mark::after { color: var(--ui-color-accent-text); content: '✓'; font-size: var(--ui-font-size-md); font-weight: var(--ui-font-weight-black); opacity: 0; transform: scale(.5); transition: opacity var(--ui-motion-duration-effective-fast) ease, transform var(--ui-motion-duration-effective-fast) ease; }
 
 .ui-checkbox input:checked + .ui-checkbox-mark { background: var(--ui-color-accent); }
 
-.ui-checkbox input:checked + .ui-checkbox-mark::after { display: block; }
+.ui-checkbox input:checked + .ui-checkbox-mark::after { opacity: 1; transform: scale(1); }
 
 .ui-checkbox input:focus-visible + .ui-checkbox-mark { outline: var(--ui-border-width-focus) solid var(--ui-color-focus); outline-offset: var(--ui-space-1); }
 

@@ -8,6 +8,7 @@ export interface TooltipProps {
   children?: string;
   side?: 'top' | 'bottom';
   accent?: AccentName;
+  motion?: boolean;
 }
 
 interface Placement {
@@ -17,7 +18,7 @@ interface Placement {
   colors: React.CSSProperties;
 }
 
-export function Tooltip({ label, content, children, side = 'top', accent }: TooltipProps) {
+export function Tooltip({ label, content, children, side = 'top', accent, motion }: TooltipProps) {
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState<Placement>({ left: 0, top: 0, visible: false, colors: {} });
   const id = React.useId();
@@ -44,14 +45,17 @@ export function Tooltip({ label, content, children, side = 'top', accent }: Tool
       const chosen = fits(preferred) ? preferred : fits(alternate) ? alternate : preferred;
       const left = Math.max(margin, Math.min(triggerRect.left + triggerRect.width / 2 - tooltipRect.width / 2, window.innerWidth - tooltipRect.width - margin));
       const boundedTop = Math.max(margin, Math.min(chosen, window.innerHeight - tooltipRect.height - margin));
-      const colors = Object.fromEntries(['accent', 'accent-text', 'border', 'shadow'].map(name => [`--ui-color-${name}`, computed.getPropertyValue(`--ui-color-${name}`)])) as React.CSSProperties;
+      const colors = {
+        ...Object.fromEntries(['accent', 'accent-text', 'border', 'shadow'].map(name => [`--ui-color-${name}`, computed.getPropertyValue(`--ui-color-${name}`)])),
+        '--ui-motion-duration-effective-fast': computed.getPropertyValue('--ui-motion-duration-effective-fast'),
+      } as React.CSSProperties;
       setPlacement({ left, top: boundedTop, visible: true, colors });
     }
     position();
     window.addEventListener('resize', position);
     window.addEventListener('scroll', position, true);
     return () => { window.removeEventListener('resize', position); window.removeEventListener('scroll', position, true); };
-  }, [open, side, content, accent]);
+  }, [open, side, content, accent, motion]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -60,7 +64,7 @@ export function Tooltip({ label, content, children, side = 'top', accent }: Tool
     return () => document.removeEventListener('pointerdown', onPointerDown);
   }, [open]);
 
-  return <span ref={rootRef} className="ui-tooltip" data-side={side} data-ui-accent={accent}>
+  return <span ref={rootRef} className="ui-tooltip" data-side={side} data-ui-accent={accent} data-ui-motion={motion === undefined ? undefined : motion ? 'on' : 'off'}>
     <button ref={triggerRef} type="button" aria-label={label} aria-describedby={open ? id : undefined} aria-expanded={open} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onFocus={() => setOpen(true)} onBlur={() => setOpen(false)} onClick={() => setOpen(true)} onKeyDown={event => { if (event.key === 'Escape') setOpen(false); }}>{children ?? label}</button>
     {open && createPortal(<span ref={contentRef} id={id} className="ui-tooltip-content" role="tooltip" style={{ ...placement.colors, left: placement.left, top: placement.top, visibility: placement.visible ? 'visible' : 'hidden' }}>{content}</span>, document.body)}
   </span>;

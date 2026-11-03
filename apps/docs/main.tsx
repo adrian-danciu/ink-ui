@@ -117,6 +117,7 @@ function ThemesPage() {
       return <article key={option.value}><div><span>STYLE / {option.value.toUpperCase()}</span><h2>{option.label}</h2><p>{option.value === 'paper' ? 'Warm paper and black ink.' : option.value === 'poster' ? 'Editorial contrast and signal red.' : 'Graphite, ultraviolet, and electric lime.'}</p></div><div className="docs-theme-swatches"><span style={{ background: theme.modes.light.canvas }} title="Light canvas" /><span style={{ background: theme.modes.dark.canvas }} title="Dark canvas" /><span style={{ background: accents[theme.defaultAccent as AccentName].base }} title="Default accent" /></div></article>;
     })}</div>
     <section className="docs-section"><div className="docs-section-heading"><h2>Set a style</h2><span>PROVIDER</span></div><CodeBlock code={`<ThemeProvider theme="poster" mode="dark" accent="red">\n  <Button accent="turquoise">Override this button</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Choose a style and mode at the provider. The accent prop changes the default highlight; components with an accent prop can override it locally.</p></section>
+    <section className="docs-section"><div className="docs-section-heading"><h2>Motion</h2><span>ON BY DEFAULT</span></div><CodeBlock code={`<ThemeProvider theme="paper" motion={false}>\n  <Button>Instant action</Button>\n  <Button motion>Animated override</Button>\n</ThemeProvider>`} /><p className="docs-body-copy">Motion is enabled by default. Set <code>motion={'{false}'}</code> on ThemeProvider for a whole subtree, or on an animated component for one control. Device reduced-motion settings take precedence over both. The motion toggle above lets you inspect the live examples.</p></section>
     <section className="docs-section"><div className="docs-section-heading"><h2>Token source</h2><span>ONE FILE</span></div><p className="docs-body-copy">Color, spacing, type, radius, border, sizing, and breakpoint values come from <code>packages/tokens/src/tokens.json</code>. The web package uses generated CSS custom properties; React Native reads the same values as JavaScript. Edit the JSON source and rebuild to change the system.</p></section>
   </>;
 }
@@ -132,6 +133,7 @@ function App() {
   const [theme, setTheme] = React.useState<ThemeName>(readTheme);
   const [mode, setMode] = React.useState<ThemeMode>(readMode);
   const [accent, setAccent] = React.useState<AccentName | 'default'>(readAccent);
+  const [motion, setMotion] = React.useState(true);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
   const [path, setPath] = React.useState(() => window.location.pathname.replace(/\/$/, '') || '/');
@@ -177,7 +179,7 @@ function App() {
   React.useEffect(() => { document.title = `${page?.name ?? (path === '/' ? 'Overview' : path === '/getting-started' ? 'Getting started' : path === '/themes' ? 'Themes & tokens' : 'Components')} — Ink UI`; }, [page, path]);
   React.useEffect(() => { const icon = document.getElementById('ink-ui-favicon') as HTMLLinkElement | null; if (icon) icon.href = mark; }, [mark]);
 
-  return <ThemeProvider theme={theme} mode={mode} accent={accent === 'default' ? undefined : accent} className="docs-app" onClickCapture={handleInternalLinkClick}>
+  return <ThemeProvider theme={theme} mode={mode} accent={accent === 'default' ? undefined : accent} motion={motion} className="docs-app" onClickCapture={handleInternalLinkClick}>
     <div className="docs-topline"><span>INK UI / COMPONENT SYSTEM</span><span>REACT + REACT NATIVE / 001</span></div>
     <header className="docs-masthead">
       <a className="docs-brand" href="/" aria-label="Ink UI home"><img className="docs-brand-mark" src={mark} alt="" /><span>INK UI<small>COMPONENT LIBRARY / DOCUMENTATION</small></span></a>
@@ -194,6 +196,7 @@ function App() {
             <Select label="Style" options={themeOptions} value={theme} onValueChange={value => setTheme(value as ThemeName)} />
             <Select label="Accent" options={accentOptions} value={accent} onValueChange={value => setAccent(value as AccentName | 'default')} />
             <div className="docs-mode-control"><span>MODE</span><Button size="sm" variant="secondary" onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>{mode === 'light' ? 'Light / ☀' : 'Dark / ◐'}</Button></div>
+            <div className="docs-mode-control"><span>MOTION</span><Button size="sm" variant="secondary" aria-pressed={motion} onClick={() => setMotion(!motion)}>{motion ? 'On' : 'Off'}</Button></div>
           </div>
         </div>
         <div className="docs-content">

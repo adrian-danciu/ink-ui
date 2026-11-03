@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Animated } from 'react-native';
 import { tokens } from '@adrian-danciu/ink-ui-tokens';
 
-export function useEdgeSlide(open: boolean, offset: number) {
+export function useEdgeSlide(open: boolean, offset: number, motion = true) {
   const [visible, setVisible] = React.useState(false);
   const visibleRef = React.useRef(false);
   const progress = React.useRef(new Animated.Value(0)).current;
@@ -11,6 +11,12 @@ export function useEdgeSlide(open: boolean, offset: number) {
 
   React.useEffect(() => {
     progress.stopAnimation();
+    if (!motion) {
+      progress.setValue(open ? 1 : 0);
+      visibleRef.current = open;
+      setVisible(open);
+      return;
+    }
     if (open) {
       if (visibleRef.current) {
         Animated.timing(progress, { toValue: 1, duration: tokens.motionDuration.fast, useNativeDriver: true }).start();
@@ -27,10 +33,10 @@ export function useEdgeSlide(open: boolean, offset: number) {
       });
     }
     return () => progress.stopAnimation();
-  }, [open, progress]);
+  }, [open, motion, progress]);
 
   function onShow() {
-    if (openRef.current) {
+    if (openRef.current && motion) {
       Animated.timing(progress, { toValue: 1, duration: tokens.motionDuration.fast, useNativeDriver: true }).start();
     }
   }
