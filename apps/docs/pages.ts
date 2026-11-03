@@ -365,7 +365,7 @@ export const componentPages: readonly ComponentPage[] = [
   },
   {
     slug: 'dropdown-menu', name: 'DropdownMenu', category: 'Actions',
-    description: 'A compact menu of actions with arrow-key navigation on web and a native modal on mobile.',
+    description: 'A compact action menu with trigger and item keyboard navigation on web and a dismissible native modal.',
     code: `<DropdownMenu label="Actions" items={[{ id: 'edit', label: 'Edit' }, { id: 'delete', label: 'Delete', destructive: true }]} onItemSelect={handleAction} />`,
     props: [
       { name: 'label', type: 'string', description: 'Menu trigger label.' },
@@ -376,7 +376,7 @@ export const componentPages: readonly ComponentPage[] = [
   },
   {
     slug: 'sheet', name: 'Sheet', category: 'Navigation',
-    description: 'An edge-anchored modal panel for supplemental content.',
+    description: 'An edge-anchored modal panel with Escape and close controls for supplemental content.',
     code: `<Sheet open={open} onOpenChange={setOpen} title="Collection details" side="right"><p>Details here.</p></Sheet>`,
     props: [
       { name: 'open / onOpenChange', type: 'boolean / callback', description: 'Controlled visibility and close callback.' },
@@ -398,7 +398,7 @@ export const componentPages: readonly ComponentPage[] = [
   },
   {
     slug: 'combobox', name: 'Combobox', category: 'Forms',
-    description: 'A searchable, controlled single-select list for larger option sets.',
+    description: 'A searchable, controlled single-select list with keyboard navigation that skips disabled options.',
     code: `<Combobox label="Category" options={categories} value={category} onValueChange={setCategory} />`,
     props: [
       { name: 'label', type: 'string', description: 'Visible and accessible field name.' },
