@@ -4,3 +4,5 @@
 ---
 
 Improve keyboard selection and focus behavior for web Combobox and DropdownMenu, keep modal and mobile Sidebar state in sync with browser dismissal and viewport changes, and improve native navigation and modal accessibility controls.
+
+Slide the native mobile Sidebar from the left and the native Sheet from its selected edge instead of sliding the entire modal upward.

@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Modal, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
+import { Animated, Modal, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { tokens } from '@adrian-danciu/ink-ui-tokens';
 import { blackWeight, boldWeight, useAccent, useTheme } from '../../theme';
+import { useEdgeSlide } from '../../internal/useEdgeSlide';
 
 export interface SidebarLink { label: string; href: string; icon?: React.ReactNode; iconPosition?: 'left' | 'right' }
 export interface SidebarGroup { title: string; links: readonly SidebarLink[] }
@@ -28,6 +29,8 @@ export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', hea
   const [internalCollapsed, setInternalCollapsed] = React.useState(defaultCollapsed);
   const isCollapsed = collapsible && (collapsed ?? internalCollapsed);
   const drawer = mobileOpen !== undefined;
+  const drawerWidth = Math.min(tokens.componentSize.lg * 6, screenWidth - tokens.space[8]);
+  const slide = useEdgeSlide(!!mobileOpen, -drawerWidth);
 
   function toggleCollapsed() {
     const next = !isCollapsed;
@@ -58,10 +61,10 @@ export function Sidebar({ groups, currentPath, label = 'Sidebar navigation', hea
   </View>;
 
   if (!drawer) return content;
-  return <Modal visible={!!mobileOpen} transparent animationType="slide" onRequestClose={() => onMobileOpenChange?.(false)}>
-    <View style={{ flex: 1, flexDirection: 'row' }}>
-      <View style={{ width: Math.min(tokens.componentSize.lg * 6, screenWidth - tokens.space[8]) }}>{content}</View>
-      <Pressable accessibilityRole="button" accessibilityLabel="Close navigation" onPress={() => onMobileOpenChange?.(false)} style={{ backgroundColor: colors.border, flex: 1, opacity: tokens.opacity.overlay }} />
+  return <Modal visible={slide.visible} transparent animationType="none" onShow={slide.onShow} onRequestClose={() => onMobileOpenChange?.(false)}>
+    <View style={{ flex: 1 }}>
+      <Pressable accessibilityRole="button" accessibilityLabel="Close navigation" onPress={() => onMobileOpenChange?.(false)} style={{ backgroundColor: colors.shadow, bottom: 0, left: 0, opacity: tokens.opacity.overlay, position: 'absolute', right: 0, top: 0 }} />
+      <Animated.View style={{ height: '100%', width: drawerWidth, transform: [{ translateX: slide.translate }] }}>{content}</Animated.View>
     </View>
   </Modal>;
 }
