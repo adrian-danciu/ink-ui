@@ -7,11 +7,12 @@ export interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLBut
   size?: 'sm' | 'md' | 'lg';
   variant?: 'primary' | 'secondary';
   accent?: AccentName;
+  motion?: boolean;
 }
 
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
-  { label, icon, size = 'md', variant = 'secondary', accent, className, type = 'button', ...props },
+  { label, icon, size = 'md', variant = 'secondary', accent, motion, className, type = 'button', ...props },
   ref,
 ) {
-  return <button ref={ref} type={type} aria-label={label} title={label} className={['ui-icon-button', className].filter(Boolean).join(' ')} data-size={size} data-variant={variant} data-ui-accent={accent} {...props}><span aria-hidden="true">{icon}</span></button>;
+  return <button ref={ref} type={type} aria-label={label} title={label} className={['ui-icon-button', className].filter(Boolean).join(' ')} data-size={size} data-variant={variant} data-ui-accent={accent} data-ui-motion={motion === undefined ? undefined : motion ? 'on' : 'off'} {...props}><span aria-hidden="true">{icon}</span></button>;
 });

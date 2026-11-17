@@ -8,10 +8,11 @@ export interface SheetProps {
   description?: string;
   side?: 'left' | 'right' | 'top' | 'bottom';
   accent?: AccentName;
+  motion?: boolean;
   children?: React.ReactNode;
 }
 
-export function Sheet({ open, onOpenChange, title, description, side = 'right', accent, children }: SheetProps) {
+export function Sheet({ open, onOpenChange, title, description, side = 'right', accent, motion, children }: SheetProps) {
   const ref = React.useRef<HTMLDialogElement>(null);
   const id = React.useId();
   React.useEffect(() => {
@@ -20,7 +21,7 @@ export function Sheet({ open, onOpenChange, title, description, side = 'right', 
     if (open && !sheet.open) sheet.showModal();
     else if (!open && sheet.open) sheet.close();
   }, [open]);
-  return <dialog ref={ref} className="ui-sheet" data-side={side} data-ui-accent={accent} aria-labelledby={`${id}-title`} aria-describedby={description ? `${id}-description` : undefined} onCancel={event => { event.preventDefault(); onOpenChange(false); }} onClose={() => { if (open) onOpenChange(false); }} onClick={event => { if (event.target === event.currentTarget) onOpenChange(false); }}>
+  return <dialog ref={ref} className="ui-sheet" data-side={side} data-ui-accent={accent} data-ui-motion={motion === undefined ? undefined : motion ? 'on' : 'off'} aria-labelledby={`${id}-title`} aria-describedby={description ? `${id}-description` : undefined} onCancel={event => { event.preventDefault(); onOpenChange(false); }} onClose={() => { if (open) onOpenChange(false); }} onClick={event => { if (event.target === event.currentTarget) onOpenChange(false); }}>
     <div className="ui-sheet-inner">
       <div className="ui-sheet-heading"><span className="ui-sheet-kicker">PANEL / 001</span><button type="button" aria-label="Close panel" onClick={() => onOpenChange(false)}>×</button></div>
       <h2 id={`${id}-title`}>{title}</h2>

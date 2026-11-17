@@ -26,7 +26,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .theme-choice span { font: 700 11px 'Courier New', monospace; }
 .theme-choice[aria-selected='true'] { background: #161616; color: #fff; }
 .theme-choice:focus-visible, .theme-stage:focus-visible { outline: 3px solid #7853de; outline-offset: 3px; }
-.preview-controls { align-items: start; display: grid; gap: 16px; grid-template-columns: auto 1fr; margin-top: 20px; }
+.preview-controls { align-items: start; display: grid; gap: 16px; grid-template-columns: auto auto 1fr; margin-top: 20px; }
 .control-group { border: 2px solid #161616; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; min-width: 0; padding: 9px 10px 11px; }
 .control-group legend { font: 700 11px 'Courier New', monospace; padding: 0 5px; }
 .control-choice { background: #f7f3ea; border: 2px solid #161616; color: #161616; cursor: pointer; font: 700 11px Arial, sans-serif; min-height: 32px; padding: 5px 10px; text-transform: uppercase; }

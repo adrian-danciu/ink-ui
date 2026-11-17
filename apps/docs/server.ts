@@ -7,6 +7,8 @@ const server = serve({
   routes: {
     '/': page,
     '/getting-started': page,
+    '/react-next': page,
+    '/react-native': page,
     '/themes': page,
     '/components': page,
     '/components/:slug': page,

@@ -45,6 +45,7 @@ The root `package.json` is private and is not published. The three packages unde
 
 ## Branches and releases
 
+- Never use `codex` or `claude` (in any case) in a branch name. Use a descriptive prefix such as `feat/`, `fix/`, `docs/` or `chore/`. Commits and pull requests are authored by the repository owner under their own git identity: do not add `Co-Authored-By` trailers or "Generated with" lines naming Claude, Codex, or any other AI tool. The `Branch policy` workflow rejects pull requests that break either rule.
 - `develop` is the integration branch. `main` is protected: changes enter through pull requests, with zero required review approvals. Only merges to `main` can publish packages.
 - For a publishable package change, run `bun run changeset`, select affected packages and the appropriate patch/minor/major bump, and commit the generated Changeset with the PR into `develop`. A documentation-only or private-app change normally needs no Changeset.
 - After a Changeset reaches `develop`, `.github/workflows/version-develop.yml` consumes it and commits package version, changelog, and lockfile updates to `develop`. Wait for that workflow before opening or merging the `develop` → `main` release PR.

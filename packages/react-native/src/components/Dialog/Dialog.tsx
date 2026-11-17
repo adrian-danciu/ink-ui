@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Modal, Pressable, Text, View } from 'react-native';
 import { tokens, type AccentName } from '@adrian-danciu/ink-ui-tokens';
-import { useTheme, useAccent, blackWeight, boldWeight } from '../../theme';
+import { useTheme, useAccent, useMotion, blackWeight, boldWeight } from '../../theme';
 
 export interface DialogProps {
   open: boolean;
@@ -9,13 +9,15 @@ export interface DialogProps {
   title: string;
   description?: string;
   accent?: AccentName;
+  motion?: boolean;
   children?: React.ReactNode;
 }
 
-export function Dialog({ open, onOpenChange, title, description, accent, children }: DialogProps) {
+export function Dialog({ open, onOpenChange, title, description, accent, motion, children }: DialogProps) {
   const colors = useTheme();
   const selectedAccent = useAccent(accent);
-  return <Modal animationType="fade" transparent visible={open} onRequestClose={() => onOpenChange(false)}>
+  const motionEnabled = useMotion(motion);
+  return <Modal animationType={motionEnabled ? 'fade' : 'none'} transparent visible={open} onRequestClose={() => onOpenChange(false)}>
     <View style={{ flex: 1, justifyContent: 'center', padding: tokens.space[5] }}>
       <View pointerEvents="none" style={{ backgroundColor: colors.shadow, bottom: 0, left: 0, opacity: tokens.opacity.overlay, position: 'absolute', right: 0, top: 0 }} />
       <View accessibilityViewIsModal style={{ backgroundColor: colors.surface, borderColor: colors.border, borderWidth: tokens.borderWidth.strong, padding: tokens.space[5] }}>

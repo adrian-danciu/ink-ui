@@ -2,7 +2,7 @@
 
 .ui-switch-track { align-items: center; background: var(--ui-color-surface); border: var(--ui-border-width-md) solid var(--ui-color-border); border-radius: var(--ui-radius-sm); display: inline-flex; height: var(--ui-control-size-switch-height); width: var(--ui-control-size-switch-width); }
 
-.ui-switch-thumb { background: var(--ui-color-text); height: var(--ui-control-size-switch-thumb); margin-left: var(--ui-space-1); transition: transform var(--ui-motion-duration-fast) ease; width: var(--ui-control-size-switch-thumb); }
+.ui-switch-thumb { background: var(--ui-color-text); height: var(--ui-control-size-switch-thumb); margin-left: var(--ui-space-1); transition: transform var(--ui-motion-duration-effective-fast) ease; width: var(--ui-control-size-switch-thumb); }
 
 .ui-switch[aria-checked='true'] .ui-switch-track { background: var(--ui-color-accent); }
 
