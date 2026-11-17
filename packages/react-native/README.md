@@ -24,6 +24,23 @@ export function Example() {
 }
 ```
 
+## Motion
+
+Animations are enabled by default and follow the device's reduced-motion setting. Set `motion={false}` on `ThemeProvider` to disable them throughout its subtree. Animated components accept a local `motion` prop; `motion={true}` can re-enable one component when the provider is off, unless the device requests reduced motion.
+
+```tsx
+import { Text } from 'react-native';
+
+<ThemeProvider theme="electric" motion={false}>
+  <Button onPress={save}>Instant action</Button>
+  <Sheet open={open} onOpenChange={setOpen} title="Details" motion>
+    <Text>Details here</Text>
+  </Sheet>
+</ThemeProvider>
+```
+
+The motion prop is available on Button, IconButton, Checkbox, Switch, Spinner, Sidebar, Dialog, Sheet, DropdownMenu, Select, Combobox, and Tooltip. Disabling motion keeps their behavior and accessibility controls intact.
+
 ## Components
 
 Button, IconButton, DropdownMenu, TextField, TextArea, Select, Combobox, Slider, Checkbox, Switch, RadioGroup, Rating, ToggleGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Table, Breadcrumbs, Pagination, Stepper, Sidebar, Alert, ProgressBar, Spinner, Tooltip, Tabs, Accordion, Dialog, Sheet, Toast, and EmptyState. Native `Sidebar` uses an `onNavigate(href)` callback so the app can connect its router.

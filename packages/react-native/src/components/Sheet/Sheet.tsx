@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Animated, Modal, Pressable, ScrollView, Text, useWindowDimensions, View } from 'react-native';
 import { tokens, type AccentName } from '@adrian-danciu/ink-ui-tokens';
-import { blackWeight, boldWeight, useAccent, useTheme } from '../../theme';
+import { blackWeight, boldWeight, useAccent, useMotion, useTheme } from '../../theme';
 import { useEdgeSlide } from '../../internal/useEdgeSlide';
 
 export interface SheetProps {
@@ -11,16 +11,18 @@ export interface SheetProps {
   description?: string;
   side?: 'left' | 'right' | 'top' | 'bottom';
   accent?: AccentName;
+  motion?: boolean;
   children?: React.ReactNode;
 }
 
-export function Sheet({ open, onOpenChange, title, description, side = 'right', accent, children }: SheetProps) {
+export function Sheet({ open, onOpenChange, title, description, side = 'right', accent, motion, children }: SheetProps) {
   const colors = useTheme();
   const selectedAccent = useAccent(accent);
+  const motionEnabled = useMotion(motion);
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const vertical = side === 'left' || side === 'right';
   const offset = side === 'left' ? -screenWidth : side === 'right' ? screenWidth : side === 'top' ? -screenHeight : screenHeight;
-  const slide = useEdgeSlide(open, offset);
+  const slide = useEdgeSlide(open, offset, motionEnabled);
   const transform = vertical ? [{ translateX: slide.translate }] : [{ translateY: slide.translate }];
   return <Modal animationType="none" transparent visible={slide.visible} onShow={slide.onShow} onRequestClose={() => onOpenChange(false)}>
     <View style={{ flex: 1, flexDirection: vertical ? 'row' : 'column', justifyContent: side === 'right' || side === 'bottom' ? 'flex-end' : 'flex-start' }}>

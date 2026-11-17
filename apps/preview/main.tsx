@@ -13,7 +13,7 @@ const themeInfo: { id: ThemeName; number: string; title: string; description: st
 
 const accentNames = Object.keys(accents) as AccentName[];
 
-function ThemePanel({ id, number, title, description, mode, selectedAccent }: (typeof themeInfo)[number] & { mode: ThemeMode; selectedAccent: AccentName | 'default' }) {
+function ThemePanel({ id, number, title, description, mode, selectedAccent, motion }: (typeof themeInfo)[number] & { mode: ThemeMode; selectedAccent: AccentName | 'default'; motion: boolean }) {
   const [clicks, setClicks] = React.useState(0);
   const [checked, setChecked] = React.useState(false);
   const [switchChecked, setSwitchChecked] = React.useState(true);
@@ -45,7 +45,7 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
   ];
 
   return (
-    <ThemeProvider theme={id} mode={mode} accent={accent} className="theme-panel">
+    <ThemeProvider theme={id} mode={mode} accent={accent} motion={motion} className="theme-panel">
       <div className="panel-topline"><span>STYLE {number}</span><span>{mode.toUpperCase()} MODE</span></div>
       <header className="panel-header">
         <h2>{title}</h2>
@@ -82,6 +82,10 @@ function ThemePanel({ id, number, title, description, mode, selectedAccent }: (t
           <div className="button-row accent-row">
             {accentNames.map(name => <Button key={name} size="sm" accent={name} onClick={() => setClicks(value => value + 1)}>{name}</Button>)}
           </div>
+        </div>
+        <div className="sample-group">
+          <span className="sample-label">PER-BUTTON MOTION OVERRIDE</span>
+          <div className="button-row"><Button motion={!motion} onClick={() => setClicks(value => value + 1)}>{motion ? 'Motion off' : 'Motion on'}</Button></div>
         </div>
       </section>
       <div className="panel-rule" />
@@ -262,6 +266,7 @@ function App() {
   });
   const [mode, setMode] = React.useState<ThemeMode>('light');
   const [selectedAccent, setSelectedAccent] = React.useState<AccentName | 'default'>('default');
+  const [motion, setMotion] = React.useState(true);
   const activeTheme = themeInfo.find(theme => theme.id === selectedTheme)!;
 
   function selectTheme(theme: ThemeName) {
@@ -289,7 +294,7 @@ function App() {
   return <main className="preview-page">
     <div className="page-kicker"><span>INK UI / COMPONENT EXPERIMENT</span><span>WEB PREVIEW / SHARED SYSTEM</span></div>
     <h1>COMPONENT<br /><em>LAB.</em></h1>
-    <div className="page-intro"><p>Three styles. Two modes. Your accent.</p><span>Try the controls and use Tab to inspect focus states.</span></div>
+    <div className="page-intro"><p>Three styles. Two modes. Your accent and motion.</p><span>Try the controls and use Tab to inspect focus states.</span></div>
     <div className="theme-selector" role="tablist" aria-label="Preview style" onKeyDown={handleThemeKeyDown}>
       {themeInfo.map(theme => <button
         key={theme.id}
@@ -307,13 +312,17 @@ function App() {
       <fieldset className="control-group"><legend>MODE</legend>
         {(['light', 'dark'] as const).map(value => <button key={value} className="control-choice" aria-pressed={mode === value} onClick={() => setMode(value)}>{value}</button>)}
       </fieldset>
+      <fieldset className="control-group"><legend>MOTION</legend>
+        <button className="control-choice" aria-pressed={motion} onClick={() => setMotion(true)}>On</button>
+        <button className="control-choice" aria-pressed={!motion} onClick={() => setMotion(false)}>Off</button>
+      </fieldset>
       <fieldset className="control-group accent-controls"><legend>DEFAULT ACCENT</legend>
         <button className="control-choice" aria-pressed={selectedAccent === 'default'} onClick={() => setSelectedAccent('default')}>Style default</button>
         {accentNames.map(name => <button key={name} className="control-choice accent-choice" aria-pressed={selectedAccent === name} onClick={() => setSelectedAccent(name)}><span style={{ backgroundColor: accents[name].base }} />{name}</button>)}
       </fieldset>
     </div>
     <div className="theme-stage" id="theme-preview" role="tabpanel" aria-labelledby={`theme-tab-${selectedTheme}`} tabIndex={0}>
-      <ThemePanel key={selectedTheme} {...activeTheme} mode={mode} selectedAccent={selectedAccent} />
+      <ThemePanel key={selectedTheme} {...activeTheme} mode={mode} selectedAccent={selectedAccent} motion={motion} />
     </div>
     <p className="page-note">PROVISIONAL COLORS — BASED ON THE REFERENCE IMAGES</p>
   </main>;

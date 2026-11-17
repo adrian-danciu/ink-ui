@@ -25,6 +25,19 @@ export function Example() {
 }
 ```
 
+## Motion
+
+Animations are enabled by default and follow the device's reduced-motion preference. Set `motion={false}` on `ThemeProvider` to disable them throughout its subtree. Animated components accept their own `motion` prop, so `motion={true}` can re-enable one control when the provider is off. The device's reduced-motion preference still takes precedence.
+
+```tsx
+<ThemeProvider theme="paper" motion={false}>
+  <Button>Instant action</Button>
+  <Button motion>Animated action</Button>
+</ThemeProvider>
+```
+
+The motion prop is available on Button, IconButton, Checkbox, Switch, Spinner, Sidebar, Dialog, Sheet, DropdownMenu, Combobox, and Tooltip. It changes visual transitions only; interactions and callbacks remain available.
+
 ## Components
 
 Button, IconButton, DropdownMenu, TextField, TextArea, Select, Combobox, Slider, Checkbox, Switch, RadioGroup, Rating, ToggleGroup, Card, Badge, Avatar, Separator, Skeleton, Chip, List, Table, Breadcrumbs, Pagination, Stepper, Alert, ProgressBar, Spinner, Tooltip, Tabs, Accordion, Dialog, Sheet, Toast, EmptyState, and Sidebar.

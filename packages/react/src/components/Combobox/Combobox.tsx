@@ -11,9 +11,10 @@ export interface ComboboxProps {
   emptyMessage?: string;
   disabled?: boolean;
   accent?: AccentName;
+  motion?: boolean;
 }
 
-export function Combobox({ label, options, value, onValueChange, placeholder = 'Search options', emptyMessage = 'No matches', disabled = false, accent }: ComboboxProps) {
+export function Combobox({ label, options, value, onValueChange, placeholder = 'Search options', emptyMessage = 'No matches', disabled = false, accent, motion }: ComboboxProps) {
   const id = React.useId();
   const rootRef = React.useRef<HTMLDivElement>(null);
   const selected = options.find(option => option.value === value);
@@ -45,7 +46,7 @@ export function Combobox({ label, options, value, onValueChange, placeholder = '
       setActiveValue(candidates[next].value);
     } else if (event.key === 'Enter' && open && activeOption) { event.preventDefault(); choose(activeOption); }
   }
-  return <div ref={rootRef} className="ui-combobox" data-ui-accent={accent} onBlurCapture={event => { if (!rootRef.current?.contains(event.relatedTarget as Node)) setOpen(false); }}>
+  return <div ref={rootRef} className="ui-combobox" data-ui-accent={accent} data-ui-motion={motion === undefined ? undefined : motion ? 'on' : 'off'} onBlurCapture={event => { if (!rootRef.current?.contains(event.relatedTarget as Node)) setOpen(false); }}>
     <label htmlFor={`${id}-input`}>{label}</label>
     <input id={`${id}-input`} role="combobox" aria-autocomplete="list" aria-expanded={open} aria-controls={open ? `${id}-list` : undefined} aria-activedescendant={open && activeOption ? `${id}-option-${activeIndex}` : undefined} autoComplete="off" disabled={disabled} placeholder={placeholder} value={query} onFocus={openOptions} onClick={() => { if (!open) openOptions(); }} onChange={event => { const nextQuery = event.currentTarget.value; setQuery(nextQuery); setActiveValue(options.find(option => !option.disabled && option.label.toLocaleLowerCase().includes(nextQuery.toLocaleLowerCase()))?.value ?? null); setOpen(true); }} onKeyDown={onKeyDown} />
     {open && <div id={`${id}-list`} role="listbox" aria-label={label} className="ui-combobox-list">
