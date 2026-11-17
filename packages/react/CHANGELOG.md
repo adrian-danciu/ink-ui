@@ -1,5 +1,11 @@
 # @adrian-danciu/ink-ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 87500fe: Add provider-wide and per-component motion controls, respect reduced-motion preferences, and animate key controls and overlays on web and React Native.
+
 ## 0.2.1
 
 ### Patch Changes
