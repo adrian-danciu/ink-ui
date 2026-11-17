@@ -1,0 +1,35 @@
+name: Branch policy
+
+on:
+  pull_request:
+    branches: [develop, main]
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reject codex or claude in the branch name
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if printf '%s' "$HEAD_REF" | grep -qiE 'codex|claude'; then
+            echo "::error::Branch '$HEAD_REF' contains 'codex' or 'claude'. Rename it with a feat/, fix/, docs/ or chore/ prefix."
+            exit 1
+          fi
+
+      - name: Reject AI attribution in commit messages
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if git log --format=%B "$BASE_SHA..$HEAD_SHA" | grep -qiE '^co-authored-by:.*(claude|codex|anthropic|openai)|generated with .*(claude|codex)'; then
+            echo "::error::Commit messages must not credit Claude, Codex, or other AI tools. Remove the Co-Authored-By or 'Generated with' line."
+            exit 1
+          fi
